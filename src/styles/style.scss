@@ -1,0 +1,18 @@
+@import url('./review.scss');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'SF';
+}
+a{
+  text-decoration: none;
+}
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+body {
+  overflow-y: scroll;
+}
+
