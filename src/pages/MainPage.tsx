@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
 export default function MainPage() {
+  const {setNavTitle} = useContext(globalContext)
   const cards = [
     {
       title: 'Card',
@@ -54,6 +56,7 @@ export default function MainPage() {
     },
   ];
   useEffect(() => {
+    setNavTitle('Reviews')
     console.log('useEffect shut on');
   });
   function generateCards() {
@@ -74,7 +77,7 @@ export default function MainPage() {
   return (
     <div style={{padding: '50px 0'}}>
       <Link to='/new'>
-        <div className='review__btn-new'>Create your own post</div>
+        <div className='review__btn-new' onClick={()=>{setNavTitle('New post')}}>Create your own post</div>
       </Link>
       <div className="review__container">{generateCards()}</div>
     </div>
