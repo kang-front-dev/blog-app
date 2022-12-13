@@ -1,0 +1,31 @@
+$gray: #525252;
+
+.form{
+  &__wrapper{
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin: 0 auto;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  }
+  &__title{
+    margin-bottom: 14px;
+    color: $gray;
+    font-size: 30px;
+    text-align: center;
+  }
+  &__link{
+    color: blue;
+    &_block{
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  }
+  &__input{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

@@ -4,9 +4,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { globalContext } from './contexts/globalContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
-  const {navTitle} = useContext(globalContext)
+  const {navTitle,isAuth} = useContext(globalContext)
+  const navigate = useNavigate()
   return (
     <div className="nav">
       <div className="container">
@@ -18,7 +20,13 @@ export default function Nav() {
         </div>
         <div className="nav_right">
           <NavSearch />
-          <IconButton>
+          <IconButton onClick={()=>{
+            if(isAuth){
+              navigate('/profile')
+            }else{
+              navigate('/login')
+            }
+          }}>
             <AccountCircleIcon sx={{fontSize: 30}} />
           </IconButton>
         </div>

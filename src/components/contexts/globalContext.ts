@@ -1,3 +1,3 @@
-import React, {createContext, SetStateAction, Dispatch} from "react";
+import {createContext} from "react";
 
 export const globalContext = createContext(null)

@@ -7,19 +7,21 @@ interface IReviewCard {
   imgSrc: string;
   title: string;
   descr: string;
-  id: string;
+  _id: string;
 }
 interface ICardProps {
   cardInfo: IReviewCard;
 }
 
 export default function ReviewCard({ cardInfo }: ICardProps) {
+  console.log(cardInfo);
+
   return (
     <AnimationOnScroll animateIn="pop-up" duration={0.3}>
-      <Link to={`/review/${cardInfo.id}`}>
+      <Link to={`/review/${cardInfo._id}`}>
         <div className="review__card">
           {cardInfo.imgSrc ? (
-            <img src="" alt="" className="review__card_img" />
+            <img src={cardInfo.imgSrc} alt="" className="review__card_img" />
           ) : (
             <Skeleton
               variant="rounded"
@@ -29,13 +31,14 @@ export default function ReviewCard({ cardInfo }: ICardProps) {
           )}
 
           <div className="review__card_text">
-            <h3 className="review__card_title">Card</h3>
-
-            <p className="review__card_descr">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Necessitatibus id, iure voluptates delectus quod commodi vel quo
-              odio ratione neque.
-            </p>
+            <div className="review__card_title_block">
+              <h3 className="review__card_title">{cardInfo.title}</h3>
+              <span className="review__card_title_bordered">
+                {cardInfo.title}
+              </span>
+            </div>
+            <hr className="review__card_hr" />
+            <p className="review__card_descr">{cardInfo.descr}</p>
           </div>
         </div>
       </Link>

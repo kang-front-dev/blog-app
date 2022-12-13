@@ -11,10 +11,10 @@ $gray: #3a3a3a;
     &-new {
       padding: 8px 20px;
       color: white;
-      background: rgb(72, 72, 251);
+      background: linear-gradient(135deg, rgb(64, 64, 255), rgb(53, 143, 217));
       width: fit-content;
       border-radius: 5px;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 500;
       transition: 0.2s;
       &:hover {
@@ -45,10 +45,36 @@ $gray: #3a3a3a;
       padding: 10px;
       max-width: 50%;
     }
+    &_hr {
+      width: 100%;
+      color: rgb(231, 231, 231);
+      margin: 10px 0;
+    }
     &_title {
       font-size: 45px;
       font-weight: 700;
-      color: $gray;
+      text-transform: capitalize;
+
+      color: transparent;
+      background: -webkit-linear-gradient(60deg, #727272, #000000);
+      background-clip: text;
+      -webkit-background-clip: text;
+      position: relative;
+      &_block {
+        position: relative;
+        z-index: 5;
+      }
+      &_bordered {
+        position: absolute;
+        bottom: -1.2%;
+        left: -1.2%;
+        -webkit-text-stroke: 1px #000000;
+        text-transform: capitalize;
+        color: transparent;
+        font-size: 45px;
+        font-weight: 700;
+        z-index: -6;
+      }
     }
     &_descr {
       font-size: 18px;
@@ -86,14 +112,14 @@ $gray: #3a3a3a;
         gap: 10px;
       }
     }
-    &_input-file_block{
+    &_input-file_block {
       background-color: #ffffff;
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
     }
-    &_img{
+    &_img {
       max-width: 100%;
       width: 100%;
     }

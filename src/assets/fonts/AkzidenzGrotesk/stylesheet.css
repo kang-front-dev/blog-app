@@ -1,0 +1,360 @@
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-BoldCnIt.eot');
+    src: local('Akzidenz-Grotesk Pro BoldCndIt'), local('AkzidenzGroteskPro-BoldCnIt'),
+        url('AkzidenzGroteskPro-BoldCnIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-BoldCnIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-BoldCnIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-BoldCnIt.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-BoldExIt.eot');
+    src: local('Akzidenz-Grotesk Pro BoldExtIt'), local('AkzidenzGroteskPro-BoldExIt'),
+        url('AkzidenzGroteskPro-BoldExIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-BoldExIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-BoldExIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-BoldExIt.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-Cn.eot');
+    src: local('Akzidenz-Grotesk Pro Cnd'), local('AkzidenzGroteskPro-Cn'),
+        url('AkzidenzGroteskPro-Cn.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Cn.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Cn.woff') format('woff'),
+        url('AkzidenzGroteskPro-Cn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-Bold.eot');
+    src: local('Akzidenz-Grotesk Pro Bold'), local('AkzidenzGroteskPro-Bold'),
+        url('AkzidenzGroteskPro-Bold.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Bold.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Bold.woff') format('woff'),
+        url('AkzidenzGroteskPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-LightCnItalic.eot');
+    src: local('Akzidenz-Grotesk Pro LightCndIt'), local('AkzidenzGroteskPro-LightCnItalic'),
+        url('AkzidenzGroteskPro-LightCnItalic.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-LightCnItalic.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-LightCnItalic.woff') format('woff'),
+        url('AkzidenzGroteskPro-LightCnItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-LightEx.eot');
+    src: local('Akzidenz-Grotesk Pro Light Ext'), local('AkzidenzGroteskPro-LightEx'),
+        url('AkzidenzGroteskPro-LightEx.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-LightEx.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-LightEx.woff') format('woff'),
+        url('AkzidenzGroteskPro-LightEx.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-MdEx.eot');
+    src: local('Akzidenz-Grotesk Pro Med Ext'), local('AkzidenzGroteskPro-MdEx'),
+        url('AkzidenzGroteskPro-MdEx.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-MdEx.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-MdEx.woff') format('woff'),
+        url('AkzidenzGroteskPro-MdEx.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-CnIt.eot');
+    src: local('Akzidenz-Grotesk Pro CndIt'), local('AkzidenzGroteskPro-CnIt'),
+        url('AkzidenzGroteskPro-CnIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-CnIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-CnIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-CnIt.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-Light.eot');
+    src: local('Akzidenz-Grotesk Pro Light'), local('AkzidenzGroteskPro-Light'),
+        url('AkzidenzGroteskPro-Light.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Light.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Light.woff') format('woff'),
+        url('AkzidenzGroteskPro-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-BoldCn.eot');
+    src: local('Akzidenz-Grotesk Pro Bold Cnd'), local('AkzidenzGroteskPro-BoldCn'),
+        url('AkzidenzGroteskPro-BoldCn.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-BoldCn.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-BoldCn.woff') format('woff'),
+        url('AkzidenzGroteskPro-BoldCn.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-XBdCnIt.eot');
+    src: local('Akzidenz-Grotesk Pro XBdCndIt'), local('AkzidenzGroteskPro-XBdCnIt'),
+        url('AkzidenzGroteskPro-XBdCnIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-XBdCnIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-XBdCnIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-XBdCnIt.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-Super.eot');
+    src: local('Akzidenz-Grotesk Pro Super'), local('AkzidenzGroteskPro-Super'),
+        url('AkzidenzGroteskPro-Super.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Super.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Super.woff') format('woff'),
+        url('AkzidenzGroteskPro-Super.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-Md.eot');
+    src: local('Akzidenz-Grotesk Pro Med'), local('AkzidenzGroteskPro-Md'),
+        url('AkzidenzGroteskPro-Md.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Md.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Md.woff') format('woff'),
+        url('AkzidenzGroteskPro-Md.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-ExtItalic.eot');
+    src: local('Akzidenz-Grotesk Pro ExtItalic'), local('AkzidenzGroteskPro-ExtItalic'),
+        url('AkzidenzGroteskPro-ExtItalic.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-ExtItalic.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-ExtItalic.woff') format('woff'),
+        url('AkzidenzGroteskPro-ExtItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-MdIt.eot');
+    src: local('Akzidenz-Grotesk Pro MedItal'), local('AkzidenzGroteskPro-MdIt'),
+        url('AkzidenzGroteskPro-MdIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-MdIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-MdIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-MdIt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-It.eot');
+    src: local('Akzidenz-Grotesk Pro Italic'), local('AkzidenzGroteskPro-It'),
+        url('AkzidenzGroteskPro-It.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-It.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-It.woff') format('woff'),
+        url('AkzidenzGroteskPro-It.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-XBdIt.eot');
+    src: local('Akzidenz-Grotesk Pro ExtraBldIt'), local('AkzidenzGroteskPro-XBdIt'),
+        url('AkzidenzGroteskPro-XBdIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-XBdIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-XBdIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-XBdIt.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-BoldEx.eot');
+    src: local('Akzidenz-Grotesk Pro Bold Ext'), local('AkzidenzGroteskPro-BoldEx'),
+        url('AkzidenzGroteskPro-BoldEx.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-BoldEx.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-BoldEx.woff') format('woff'),
+        url('AkzidenzGroteskPro-BoldEx.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-MdCnIt.eot');
+    src: local('Akzidenz-Grotesk Pro MedCndIt'), local('AkzidenzGroteskPro-MdCnIt'),
+        url('AkzidenzGroteskPro-MdCnIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-MdCnIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-MdCnIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-MdCnIt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-BoldIt.eot');
+    src: local('Akzidenz-Grotesk Pro BoldIt'), local('AkzidenzGroteskPro-BoldIt'),
+        url('AkzidenzGroteskPro-BoldIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-BoldIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-BoldIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-BoldIt.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-XBd.eot');
+    src: local('Akzidenz-Grotesk Pro ExtraBold'), local('AkzidenzGroteskPro-XBd'),
+        url('AkzidenzGroteskPro-XBd.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-XBd.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-XBd.woff') format('woff'),
+        url('AkzidenzGroteskPro-XBd.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-LightCn.eot');
+    src: local('Akzidenz-Grotesk Pro Light Cnd'), local('AkzidenzGroteskPro-LightCn'),
+        url('AkzidenzGroteskPro-LightCn.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-LightCn.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-LightCn.woff') format('woff'),
+        url('AkzidenzGroteskPro-LightCn.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-MedExtIt.eot');
+    src: local('Akzidenz-Grotesk Pro MedExtIt'), local('AkzidenzGroteskPro-MedExtIt'),
+        url('AkzidenzGroteskPro-MedExtIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-MedExtIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-MedExtIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-MedExtIt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-SuperItalic.eot');
+    src: local('Akzidenz-Grotesk Pro SuperIt'), local('AkzidenzGroteskPro-SuperItalic'),
+        url('AkzidenzGroteskPro-SuperItalic.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-SuperItalic.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-SuperItalic.woff') format('woff'),
+        url('AkzidenzGroteskPro-SuperItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-Ext.eot');
+    src: local('Akzidenz-Grotesk Pro Ext'), local('AkzidenzGroteskPro-Ext'),
+        url('AkzidenzGroteskPro-Ext.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Ext.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Ext.woff') format('woff'),
+        url('AkzidenzGroteskPro-Ext.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-XBdCn.eot');
+    src: local('Akzidenz-Grotesk Pro XBd Cnd'), local('AkzidenzGroteskPro-XBdCn'),
+        url('AkzidenzGroteskPro-XBdCn.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-XBdCn.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-XBdCn.woff') format('woff'),
+        url('AkzidenzGroteskPro-XBdCn.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-Regular.eot');
+    src: local('Akzidenz-Grotesk Pro Regular'), local('AkzidenzGroteskPro-Regular'),
+        url('AkzidenzGroteskPro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-Regular.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-Regular.woff') format('woff'),
+        url('AkzidenzGroteskPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-MdCn.eot');
+    src: local('Akzidenz-Grotesk Pro Med Cnd'), local('AkzidenzGroteskPro-MdCn'),
+        url('AkzidenzGroteskPro-MdCn.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-MdCn.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-MdCn.woff') format('woff'),
+        url('AkzidenzGroteskPro-MdCn.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk';
+    src: url('AkzidenzGroteskPro-LightIt.eot');
+    src: local('Akzidenz-Grotesk Pro LightIt'), local('AkzidenzGroteskPro-LightIt'),
+        url('AkzidenzGroteskPro-LightIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-LightIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-LightIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-LightIt.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk Ext';
+    src: url('AkzidenzGroteskPro-LigExtIt.eot');
+    src: local('Akzidenz-Grotesk Pro LightExtIt'), local('AkzidenzGroteskPro-LigExtIt'),
+        url('AkzidenzGroteskPro-LigExtIt.eot?#iefix') format('embedded-opentype'),
+        url('AkzidenzGroteskPro-LigExtIt.woff2') format('woff2'),
+        url('AkzidenzGroteskPro-LigExtIt.woff') format('woff'),
+        url('AkzidenzGroteskPro-LigExtIt.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+

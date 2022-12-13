@@ -4,6 +4,8 @@ import { uploadFile } from '../components/api/firebase';
 
 import { TextField, Autocomplete, Button } from '@mui/material';
 import { FileUploader } from 'react-drag-drop-files';
+import { Review } from '../components/classes/ReviewClass';
+import { insertReview } from '../components/api/insertReview';
 
 const groupsValues = [
   {
@@ -30,19 +32,17 @@ const tagsValues = [
 
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
-type ITag = { label?: string } | string;
-
 export default function NewPost() {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
-  const [group, setGroup] = useState({label:''});
+  const [group, setGroup] = useState({ label: '' });
   const [rating, setRating] = useState(0);
   const [tags, setTags] = useState([]);
   const [imgPath, setImgPath] = useState(null);
 
   const handleChange = async (file: any) => {
     console.log(file, 'file');
-    setImgPath(await uploadFile(file));
+    // setImgPath(await uploadFile(file));
   };
 
   const handleInput = (value: string | Array<Object>, callback: Function) => {
@@ -93,7 +93,7 @@ export default function NewPost() {
             style={{ gridColumn: '1 span' }}
             size="small"
             renderInput={(params) => {
-              return <TextField {...params} label="Groups" />;
+              return <TextField {...params} label="Group" />;
             }}
             onChange={(event, value) => {
               handleInput(value, setGroup);
@@ -131,16 +131,21 @@ export default function NewPost() {
             variant="contained"
             size="large"
             style={{ gridColumn: '2 span' }}
-            onClick={() => {
-              console.log({
+            onClick={async () => {
+              const newReview = new Review({
                 title: title,
                 descr: descr,
                 imgPath: imgPath,
-                groups: group.label,
+                group: group.label,
                 tags: tags.map((item) => {
                   return item.label;
                 }),
-              });
+                rating: rating.toString(),
+              })
+              console.log(newReview);
+              const response = await insertReview(newReview)
+              console.log(response,'response');
+              
             }}
           >
             Publish
