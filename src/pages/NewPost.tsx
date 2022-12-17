@@ -1,11 +1,17 @@
-import React, { FormEvent, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { uploadFile } from '../components/api/firebase';
 
-import { TextField, Autocomplete, Button } from '@mui/material';
+import { TextField, Autocomplete, Button, Icon } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import { FileUploader } from 'react-drag-drop-files';
 import { Review } from '../components/classes/ReviewClass';
 import { insertReview } from '../components/api/insertReview';
+import { globalContext } from '../components/contexts/globalContext';
+import { getToday } from '../components/lib/TimeFuncs';
 
 const groupsValues = [
   {
@@ -33,6 +39,10 @@ const tagsValues = [
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
 export default function NewPost() {
+  const { userName, isAuth, setOpen, setSeverity, setAlertMessage } =
+    useContext(globalContext);
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [group, setGroup] = useState({ label: '' });
@@ -42,14 +52,50 @@ export default function NewPost() {
 
   const handleChange = async (file: any) => {
     console.log(file, 'file');
-    // setImgPath(await uploadFile(file));
+    setImgPath(await uploadFile(file));
+  };
+
+  const handleClick = async () => {
+    const newReview = new Review({
+      title: title,
+      descr: descr,
+      imgPath: imgPath,
+      group: group.label,
+      tags: tags.map((item) => {
+        return item.label;
+      }),
+      rating: rating.toString(),
+      author: userName,
+      views: [],
+      likes: [],
+      dislikes: [],
+      createDate: getToday(),
+    });
+    console.log(newReview);
+    const response = await insertReview(newReview);
+    console.log(response, 'response');
+    if (response.success) {
+      navigate(`/review/${response.reviewId}`);
+    }
   };
 
   const handleInput = (value: string | Array<Object>, callback: Function) => {
     callback(value);
   };
 
-  return (
+  const handleOpen = (severityState: string, alertMessageValue: string) => {
+    setOpen(true);
+    setSeverity(severityState);
+    setAlertMessage(alertMessageValue);
+  };
+
+  useEffect(() => {
+    if (!isAuth) {
+      handleOpen('error', 'You have to sign in to create your own posts');
+    }
+  }, []);
+
+  return isAuth ? (
     <div className="review__new">
       <div className="review__new_left">
         <img src={imgPath} alt="" className="review__new_img" />
@@ -106,10 +152,10 @@ export default function NewPost() {
             type="number"
             style={{ gridColumn: '1 span' }}
             onInput={(e) => {
-              handleInput(
-                (e.target as HTMLInputElement).value.toString(),
-                setRating
-              );
+              let thisInput = e.target as HTMLInputElement;
+              thisInput.value =
+                Number(thisInput.value) > 100 ? '100' : thisInput.value;
+              handleInput(thisInput.value.toString(), setRating);
             }}
           />
           <Autocomplete
@@ -132,25 +178,30 @@ export default function NewPost() {
             size="large"
             style={{ gridColumn: '2 span' }}
             onClick={async () => {
-              const newReview = new Review({
-                title: title,
-                descr: descr,
-                imgPath: imgPath,
-                group: group.label,
-                tags: tags.map((item) => {
-                  return item.label;
-                }),
-                rating: rating.toString(),
-              })
-              console.log(newReview);
-              const response = await insertReview(newReview)
-              console.log(response,'response');
-              
+              if (title && descr && group && tags && rating && imgPath) {
+                handleClick();
+              }else{
+                handleOpen('error',`Please, fill out the entire form`)
+              }
             }}
           >
             Publish
           </Button>
         </div>
+      </div>
+    </div>
+  ) : (
+    <div className="auth_error_block">
+      <div className="auth_error">
+        <IconButton
+          onClick={() => {
+            navigate('/');
+          }}
+          style={{ padding: '7px' }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+        You have to sign in to create your own posts
       </div>
     </div>
   );

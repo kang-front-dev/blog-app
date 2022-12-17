@@ -8,6 +8,8 @@ interface IReviewCard {
   title: string;
   descr: string;
   _id: string;
+  author: string;
+  selectorId?: string;
 }
 interface ICardProps {
   cardInfo: IReviewCard;
@@ -19,9 +21,20 @@ export default function ReviewCard({ cardInfo }: ICardProps) {
   return (
     <AnimationOnScroll animateIn="pop-up" duration={0.3}>
       <Link to={`/review/${cardInfo._id}`}>
-        <div className="review__card">
+        <div
+          className="review__card"
+          id={cardInfo.selectorId ? cardInfo.selectorId : null}
+        >
           {cardInfo.imgSrc ? (
-            <img src={cardInfo.imgSrc} alt="" className="review__card_img" />
+            <div className="review__card_img_wrapper">
+              <div className="review__card_img_block">
+                <img
+                  src={cardInfo.imgSrc}
+                  alt=""
+                  className="review__card_img"
+                />
+              </div>
+            </div>
           ) : (
             <Skeleton
               variant="rounded"
@@ -31,14 +44,25 @@ export default function ReviewCard({ cardInfo }: ICardProps) {
           )}
 
           <div className="review__card_text">
-            <div className="review__card_title_block">
-              <h3 className="review__card_title">{cardInfo.title}</h3>
-              <span className="review__card_title_bordered">
-                {cardInfo.title}
-              </span>
+            <div className="review__card_upper">
+              <div className="review__card_title_block">
+                <h3 className="review__card_title">{cardInfo.title}</h3>
+                <span className="review__card_title_bordered">
+                  {cardInfo.title}
+                </span>
+              </div>
+              <p className="review__card_descr">{cardInfo.descr}</p>
             </div>
-            <hr className="review__card_hr" />
-            <p className="review__card_descr">{cardInfo.descr}</p>
+            <div className="review__card_bottom">
+              <span className="review__card_author">
+                by <span>{cardInfo.author}</span>
+              </span>
+              <div className="review__card_stats">
+                <span className="review__card_stats_views"></span>
+                <span className="review__card_stats_likes"></span>
+                <span className="review__card_stats_dislikes"></span>
+              </div>
+            </div>
           </div>
         </div>
       </Link>

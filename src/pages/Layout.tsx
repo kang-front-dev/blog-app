@@ -35,7 +35,7 @@ export default function Layout() {
         <a href="https://github.com/kang-front-dev" target='_blank' className="footer__link" rel="noreferrer">kang</a>
       </footer>
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%'}}>
           {alertMessage}
         </Alert>
       </Snackbar>

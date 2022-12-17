@@ -1,5 +1,7 @@
 import TextField from '@mui/material/TextField/TextField';
 import Button from '@mui/material/Button/Button';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,7 +17,7 @@ export const formStyles = {
 };
 
 export default function RegPage() {
-  const { setOpen, setSeverity, setAlertMessage } = useContext(globalContext);
+  const { setOpen, setSeverity, setAlertMessage,setUserEmail,setUserName,setIsAuth } = useContext(globalContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +40,9 @@ export default function RegPage() {
       console.log(response);
       
       if (response.success) {
+        setIsAuth(true)
+        setUserName(name)
+        setUserEmail(email)
         handleOpen('success', 'Welcome!');
         navigate('/')
       } else {
@@ -52,6 +57,9 @@ export default function RegPage() {
   };
   return (
     <form className="form__wrapper">
+      <IconButton onClick={()=>{navigate('/')}} style={{position: 'absolute',top: '10px',left: '10px'}}>
+        <ArrowBackIcon/>
+      </IconButton>
       <h3 className="form__title">Sign Up</h3>
       <TextField
         autoComplete="true"

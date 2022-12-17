@@ -1,24 +1,49 @@
-export interface IReview {
-  title: string,
-  descr: string,
-  group: string,
-  rating: string,
-  tags: Array<string>,
-  imgPath: string,
+import { ITime } from '../lib/TimeFuncs';
+export interface IReviewStatProps {
+  _id: string;
+  username: string;
 }
-export class Review implements IReview{
+export interface IReview {
+  _id?: string;
+  title?: string;
+  descr?: string;
+  group?: string;
+  rating?: string;
+  tags?: Array<string>;
+  imgPath?: string;
+  views?: Array<string>;
+  likes?: Array<string>;
+  dislikes?: Array<string>;
+  author?: string;
+  createDate?: ITime;
+}
+export class Review implements IReview {
+  _id?: string;
   title: string;
   descr: string;
   group: string;
   rating: string;
   tags: Array<string>;
   imgPath: string;
-  constructor(options:IReview){
-    this.title = options.title
-    this.descr = options.descr
-    this.group = options.group
-    this.rating = options.rating
-    this.tags = options.tags
-    this.imgPath = options.imgPath
+  views: Array<string>;
+  likes: Array<string>;
+  dislikes: Array<string>;
+  author: string;
+  createDate: ITime;
+  constructor(options: IReview) {
+    if (options._id) {
+      this._id = options._id;
+    }
+    this.title = options.title;
+    this.descr = options.descr;
+    this.group = options.group;
+    this.rating = options.rating;
+    this.tags = options.tags;
+    this.imgPath = options.imgPath;
+    this.views = options.views;
+    this.likes = options.likes;
+    this.dislikes = options.dislikes;
+    this.author = options.author;
+    this.createDate = options.createDate;
   }
 }

@@ -1,23 +1,30 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllReviews } from '../components/api/getAllReviews';
 import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
 export default function MainPage() {
-  const { setNavTitle } = useContext(globalContext);
-  const [reviews,setReviews] = useState([])
+  const { setNavTitle, isAuth,setOpen,setSeverity,setAlertMessage } = useContext(globalContext);
+  const [reviews, setReviews] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     setNavTitle('Reviews');
-    handleUpdate()
+    handleUpdate();
     console.log('useEffect shut on');
-  },[]);
+  }, []);
 
-  const handleUpdate = async ()=>{
-    const response = await getAllReviews()
-    setReviews(response.reviews)
+  const handleUpdate = async () => {
+    const response = await getAllReviews();
+    setReviews(response.reviews);
     console.log(response);
-  }
+  };
+
+  const handleOpen = (severityState: string, alertMessageValue: string) => {
+    setOpen(true);
+    setSeverity(severityState);
+    setAlertMessage(alertMessageValue);
+  };
 
   function generateCards() {
     return reviews
@@ -30,6 +37,7 @@ export default function MainPage() {
                 title: item.title,
                 descr: item.descr,
                 _id: item._id,
+                author: item.author
               }}
             />
           );
@@ -38,16 +46,19 @@ export default function MainPage() {
   }
   return (
     <div style={{ padding: '50px 0' }}>
-      <Link to="/new">
-        <div
-          className="review__btn-new"
-          onClick={() => {
+      <div
+        className="review__btn-new"
+        onClick={() => {
+          if (isAuth) {
             setNavTitle('New post');
-          }}
-        >
-          Create your own post
-        </div>
-      </Link>
+            navigate('/new')
+          }else{
+            handleOpen('error','You have to Sign In/Sign Up to create your posts')
+          }
+        }}
+      >
+        Create your own post
+      </div>
       <div className="review__container">{generateCards()}</div>
     </div>
   );

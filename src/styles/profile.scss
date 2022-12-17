@@ -1,0 +1,110 @@
+$mainColor: #ffffff;
+$gray: #626262;
+
+.profile {
+  padding: 50px 0;
+  display: flex;
+  &__about {
+    width: 30%;
+
+    display: flex;
+    flex-direction: column;
+    &_avatar {
+      width: 300px;
+      height: 300px;
+      clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+      background: rgb(221, 221, 221);
+    }
+    &_name {
+      font-size: 35px;
+      font-family: 'Akzidenz-Grotesk Ext';
+      color: $gray;
+    }
+  }
+  &__reviews {
+    width: 70%;
+    &_title {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      font-size: 25px;
+      margin-bottom: 20px;
+      padding: 5px 10px;
+      color: $gray;
+      & > svg {
+        color: $gray;
+      }
+    }
+    &_container {
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+    }
+  }
+}
+
+#profile-review-card {
+  
+  column-gap: 20px;
+  &::before,&::after{
+    width: 60px;
+    height: 30px;
+  }
+  &::before{
+    border-right: 2px $gray solid;
+    border-top: 2px $gray solid;
+  }
+  &::after{
+    border-right: 2px $gray solid;
+    border-bottom: 2px $gray solid;
+  }
+
+  &:hover {
+    .review__card_img_wrapper {
+      &::before,
+      &::after {
+        width: 40px;
+        height: 40px;
+        opacity: 1;
+      }
+    }
+  }
+
+  .review__card_img_wrapper {
+    max-width: 40%;
+    height: 180px;
+    &::before {
+      bottom: -10px;
+      left: -10px;
+      border-left: 2px $gray solid;
+      border-bottom: 2px $gray solid;
+    }
+    &::after {
+      top: -10px;
+      right: -10px;
+      border-right: 2px $gray solid;
+      border-top: 2px $gray solid;
+    }
+  }
+  .review__card_text {
+    max-width: 60%;
+    padding: 10px;
+  }
+
+  .review__card_author {
+    font-size: 12px;
+    & > span {
+      font-size: 14px;
+    }
+  }
+  .review__card_title {
+    font-size: 30px;
+    &_bordered {
+      font-size: 30px;
+    }
+  }
+  .review__card_descr {
+    font-size: 15px;
+    margin-top: 0px;
+  }
+}

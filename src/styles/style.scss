@@ -1,13 +1,19 @@
 @import url('./review.scss');
 @import url('./form.scss');
 @import url('./loading.scss');
+@import url('./profile.scss');
+
+$gray: #626262;
+$black: #252525;
+$white: #f0f0f0;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Akzidenz-Grotesk Ext';
+  font-family: 'Gilroy';
 }
-a{
+a {
   text-decoration: none;
 }
 .container {
@@ -18,27 +24,42 @@ body {
   overflow-y: scroll;
 }
 
-.global__wrapper{
+.global__wrapper {
   position: relative;
   min-height: 100vh;
+  background: $white;
 }
 
-.footer{
+.footer {
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(32, 32, 32);
-  &__text,&__link{
-    color: #d3d3d3;
+  background-color: $black;
+  &__text,
+  &__link {
+    color: $white;
   }
-  &__link{
+  &__link {
     text-decoration: underline;
     margin-left: 5px;
     font-weight: 700;
   }
 }
 
-.page__content{
-  min-height: 87vh;
+.page__content {
+  min-height: 95vh;
+  padding-top: 67px;
+}
+
+.auth_error{
+  padding: 7px 14px 7px 7px;
+  
+  border: 1px $gray solid;
+  &_block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
 }

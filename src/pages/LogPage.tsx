@@ -1,5 +1,7 @@
 import TextField from '@mui/material/TextField/TextField';
 import Button from '@mui/material/Button/Button';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,8 +14,15 @@ export const formStyles = {
   },
 };
 export default function LogPage() {
-  const { setOpen, setSeverity, setAlertMessage } = useContext(globalContext);
-  const navigate = useNavigate()
+  const {
+    setOpen,
+    setSeverity,
+    setAlertMessage,
+    setUserEmail,
+    setUserName,
+    setIsAuth,
+  } = useContext(globalContext);
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,9 +35,14 @@ export default function LogPage() {
   const handleClick = async () => {
     if (email && password) {
       const response = await logUser({ email: email, password: password });
+      console.log(response, 'login response');
+
       if (response.success) {
+        setIsAuth(true);
+        setUserName(response.userData.name);
+        setUserEmail(email);
         handleOpen('success', 'Welcome back!');
-        navigate('/')
+        navigate('/');
       } else {
         handleOpen('error', response.message);
       }
@@ -38,6 +52,14 @@ export default function LogPage() {
   };
   return (
     <form className="form__wrapper">
+      <IconButton
+        onClick={() => {
+          navigate('/');
+        }}
+        style={{ position: 'absolute', top: '10px', left: '10px' }}
+      >
+        <ArrowBackIcon />
+      </IconButton>
       <h3 className="form__title">Sign In</h3>
       <TextField
         autoComplete="true"
