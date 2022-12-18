@@ -26,8 +26,14 @@ interface IHasMyLikeOrDislike {
 
 export default function ReviewPage() {
   const { id } = useParams();
-  const { userName, isAuth, setOpen, setSeverity, setAlertMessage } =
-    useContext(globalContext);
+  const {
+    userName,
+    isAuth,
+    setOpen,
+    setSeverity,
+    setAlertMessage,
+    setIsLoading,
+  } = useContext(globalContext);
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
   const [reviewData, setReviewData] = useState<IReview>({
@@ -120,8 +126,9 @@ export default function ReviewPage() {
         <div className="review__about">
           <p className="review__date">{reviewData.createDate.dayMonthYear}</p>
           <p className="review__author">
-            by
+            
             <Link to={`/profiles/${reviewData.author}`}>
+              <img src="" alt="" />
               <span>{reviewData.author}</span>
             </Link>
           </p>

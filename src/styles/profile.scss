@@ -88,9 +88,15 @@ $gray: #626262;
   }
   .review__card_text {
     max-width: 60%;
+    max-height: 180px;
     padding: 10px;
+    
   }
-
+  .review__card_upper{
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+  }
   .review__card_author {
     font-size: 12px;
     & > span {
@@ -98,13 +104,19 @@ $gray: #626262;
     }
   }
   .review__card_title {
-    font-size: 30px;
+    font-size: 26px;
     &_bordered {
-      font-size: 30px;
+      font-size: 26px;
     }
   }
   .review__card_descr {
     font-size: 15px;
+    line-height: 15px;
     margin-top: 0px;
+    max-height: 4em;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
   }
 }

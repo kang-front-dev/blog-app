@@ -5,7 +5,7 @@ import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
 export default function MainPage() {
-  const { setNavTitle, isAuth,setOpen,setSeverity,setAlertMessage } = useContext(globalContext);
+  const { setNavTitle, isAuth,setOpen,setSeverity,setAlertMessage,setIsLoading } = useContext(globalContext);
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -32,13 +32,7 @@ export default function MainPage() {
           return (
             <ReviewCard
               key={index}
-              cardInfo={{
-                imgSrc: item.imgPath,
-                title: item.title,
-                descr: item.descr,
-                _id: item._id,
-                author: item.author
-              }}
+              cardInfo={{...item}}
             />
           );
         })

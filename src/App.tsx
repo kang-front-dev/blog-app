@@ -19,7 +19,11 @@ function App() {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
-  //SNACKBAR STATES
+  ////////
+  //LOADING STATES
+  const [isLoading,setIsLoading] = useState(false)
+  ///////
+  
   const contextValueNav = {
     navTitle: navTitle,
     setNavTitle: setNavTitle,
@@ -40,6 +44,10 @@ function App() {
     userName: userName,
     setUserName: setUserName,
   };
+  const contextLoading = {
+    isLoading: isLoading,
+    setIsLoading: setIsLoading
+  };
   return (
     <div className="App">
       <globalContext.Provider
@@ -47,6 +55,7 @@ function App() {
           ...contextValueNav,
           ...contextValueUser,
           ...contextValueSnackbar,
+          ...contextLoading,
         }}
       >
         <Routes>

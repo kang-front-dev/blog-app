@@ -2,7 +2,7 @@ $mainColor: #ffffff;
 
 .loading {
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -13,9 +13,10 @@ $mainColor: #ffffff;
   opacity: 0;
   transition: 0.3s;
   font-family: 'Akzidenz-Grotesk';
+  pointer-events: none;
   &__wrapper {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
   }
 
@@ -23,7 +24,7 @@ $mainColor: #ffffff;
     &-upper,
     &-bottom {
       position: absolute;
-      transition: 0.5s;
+      transition: 0.3s;
       height: 50%;
       background-color: #000000;
     }
@@ -40,7 +41,7 @@ $mainColor: #ffffff;
         background-size: cover;
         background-repeat: no-repeat;
         opacity: 0;
-        transition: 3s;
+        transition: 1s;
       }
     }
     &-bottom {
@@ -70,6 +71,7 @@ $mainColor: #ffffff;
     transform: translate(-50%, -50%);
     font-size: 200px;
     font-weight: 900;
+    font-family: 'Akzidenz-Grotesk Ext';
     font-style: italic;
     text-transform: uppercase;
     z-index: 5;

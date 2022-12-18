@@ -55,14 +55,7 @@ export default function Profile() {
             return (
               <ReviewCard
                 key={index}
-                cardInfo={{
-                  imgSrc: review.imgPath,
-                  title: review.title,
-                  descr: review.descr,
-                  _id: review._id,
-                  author: review.author,
-                  selectorId: 'profile-review-card'
-                }}
+                cardInfo={{...review,selectorId: 'profile-review-card'}}
               ></ReviewCard>
             );
           })}

@@ -16,6 +16,7 @@ export interface IReview {
   dislikes?: Array<string>;
   author?: string;
   createDate?: ITime;
+  selectorId?: string;
 }
 export class Review implements IReview {
   _id?: string;
@@ -30,10 +31,9 @@ export class Review implements IReview {
   dislikes: Array<string>;
   author: string;
   createDate: ITime;
+  selectorId?: string;
   constructor(options: IReview) {
-    if (options._id) {
-      this._id = options._id;
-    }
+    this._id = options._id;
     this.title = options.title;
     this.descr = options.descr;
     this.group = options.group;
@@ -45,5 +45,6 @@ export class Review implements IReview {
     this.dislikes = options.dislikes;
     this.author = options.author;
     this.createDate = options.createDate;
+    this.selectorId = options.selectorId;
   }
 }
