@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import Loading from '../components/Loading';
 import Nav from '../components/Nav';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';

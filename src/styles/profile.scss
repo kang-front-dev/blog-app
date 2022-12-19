@@ -1,5 +1,6 @@
-$mainColor: #ffffff;
-$gray: #626262;
+$gray: #1e2224;
+$black: #161b1d;
+$white: #ffffff;
 
 .profile {
   padding: 50px 0;
@@ -17,7 +18,7 @@ $gray: #626262;
     }
     &_name {
       font-size: 35px;
-      font-family: 'Akzidenz-Grotesk Ext';
+
       color: $gray;
     }
   }

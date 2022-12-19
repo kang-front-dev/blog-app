@@ -1,4 +1,7 @@
-$gray: #525252;
+$gray: #828081;
+$darkgray: #1e2224;
+$black: #161b1d;
+$white: #ffffff;
 
 .form{
   &__wrapper{
@@ -11,16 +14,30 @@ $gray: #525252;
     border-radius: 10px;
     box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
     position: relative;
+    background: $white;
+    color: $darkgray;
+    & > button.form__btn-back{
+      color: $darkgray;
+    }
+    & > div{
+      & > label{
+        color: $darkgray;
+      }
+      & fieldset{
+        border-color: $darkgray;
+      }
+    }
+    
   }
   &__title{
     margin-bottom: 14px;
-    color: $gray;
+    color: $darkgray;
     font-size: 30px;
     text-align: center;
-    font-family: 'Akzidenz-Grotesk Ext';
+
   }
   &__link{
-    color: blue;
+    color: rgb(135, 135, 255);
     &_block{
       margin-top: 10px;
       font-size: 14px;
@@ -29,5 +46,6 @@ $gray: #525252;
   &__input{
     width: 100%;
     margin-bottom: 10px;
+    
   }
 }

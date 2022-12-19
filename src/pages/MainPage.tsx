@@ -39,7 +39,7 @@ export default function MainPage() {
       : [];
   }
   return (
-    <div style={{ padding: '50px 0' }}>
+    <div style={{ padding: '50px 0',width: '100%' }}>
       <div
         className="review__btn-new"
         onClick={() => {

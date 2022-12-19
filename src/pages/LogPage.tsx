@@ -57,6 +57,7 @@ export default function LogPage() {
           navigate('/');
         }}
         style={{ position: 'absolute', top: '10px', left: '10px' }}
+        className='form__btn-back'
       >
         <ArrowBackIcon />
       </IconButton>
@@ -86,6 +87,7 @@ export default function LogPage() {
         onClick={() => {
           handleClick();
         }}
+        className='form__btn'
       >
         Login
       </Button>

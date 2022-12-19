@@ -7,18 +7,21 @@ import { globalContext } from './contexts/globalContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
-  const { navTitle, isAuth, userName } = useContext(globalContext);
+  const { isAuth, userName } = useContext(globalContext);
   const navigate = useNavigate();
   return (
     <div className="nav">
       <div className="container">
-        <div className="nav_left">
+        <div className="nav__left">
           <IconButton>
-            <MenuIcon sx={{ fontSize: 30 }} />
+            <MenuIcon />
           </IconButton>
-          <h2 className="nav_title">{navTitle}</h2>
+          <div className="nav__logo">
+            <img src={require('../assets/images/logo.png')} alt="" />
+            <span className="nav__logo_text">FrontView</span>
+          </div>
         </div>
-        <div className="nav_right">
+        <div className="nav__right">
           <NavSearch />
           <IconButton
             onClick={() => {
@@ -29,7 +32,7 @@ export default function Nav() {
               }
             }}
           >
-            <AccountCircleIcon sx={{ fontSize: 30 }} />
+            <AccountCircleIcon />
           </IconButton>
         </div>
       </div>

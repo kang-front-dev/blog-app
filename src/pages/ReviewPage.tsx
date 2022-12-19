@@ -10,6 +10,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { globalContext } from '../components/contexts/globalContext';
 import { addLike, removeLike } from '../components/api/addOrRemoveLike';
@@ -18,6 +19,7 @@ import {
   removeDislike,
 } from '../components/api/addOrRemoveDislike';
 import { addView } from '../components/api/addView';
+import { getUserAvatar } from '../components/api/getUserAvatar';
 
 interface IHasMyLikeOrDislike {
   hasMyLike: boolean;
@@ -26,14 +28,8 @@ interface IHasMyLikeOrDislike {
 
 export default function ReviewPage() {
   const { id } = useParams();
-  const {
-    userName,
-    isAuth,
-    setOpen,
-    setSeverity,
-    setAlertMessage,
-    setIsLoading,
-  } = useContext(globalContext);
+  const { userName, isAuth, setOpen, setSeverity, setAlertMessage } =
+    useContext(globalContext);
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
   const [reviewData, setReviewData] = useState<IReview>({
@@ -46,6 +42,7 @@ export default function ReviewPage() {
     dislikes: [],
     views: [],
   });
+  const [authorAvatar, setAuthorAvatar] = useState('');
 
   async function getReviewData() {
     const response = await getReview({ _id: id }).catch((err) => {
@@ -53,9 +50,15 @@ export default function ReviewPage() {
     });
     console.log(response);
     setReviewData(response.reviewData);
+    getAuthorAvatar(response.reviewData.author);
     handleView();
   }
-
+  async function getAuthorAvatar(name: string) {
+    console.log(name);
+    
+    const authorAvatarSrc = await getUserAvatar({ name: name });
+    setAuthorAvatar(authorAvatarSrc.imgPath);
+  }
   function checkLikeAndDislike(): IHasMyLikeOrDislike {
     const hasMyLike = reviewData.likes.indexOf(userName);
     const hasMyDislike = reviewData.dislikes.indexOf(userName);
@@ -126,9 +129,12 @@ export default function ReviewPage() {
         <div className="review__about">
           <p className="review__date">{reviewData.createDate.dayMonthYear}</p>
           <p className="review__author">
-            
             <Link to={`/profiles/${reviewData.author}`}>
-              <img src="" alt="" />
+              {authorAvatar ? (
+                <img src={authorAvatar} alt="" />
+              ) : (
+                <AccountCircleIcon />
+              )}
               <span>{reviewData.author}</span>
             </Link>
           </p>
@@ -150,9 +156,9 @@ export default function ReviewPage() {
               }}
             >
               {isLiked ? (
-                <ThumbUpAltIcon style={{ color: '#252525' }} />
+                <ThumbUpAltIcon/>
               ) : (
-                <ThumbUpOffAltIcon style={{ color: '#252525' }} />
+                <ThumbUpOffAltIcon />
               )}
               <span className="review__likes_amount">
                 {reviewData.likes.length}
@@ -171,9 +177,9 @@ export default function ReviewPage() {
               }}
             >
               {isDisliked ? (
-                <ThumbDownAltIcon style={{ color: '#252525' }} />
+                <ThumbDownAltIcon/>
               ) : (
-                <ThumbDownOffAltIcon style={{ color: '#252525' }} />
+                <ThumbDownOffAltIcon/>
               )}
               <span className="review__likes_amount">
                 {reviewData.dislikes.length}
@@ -181,7 +187,7 @@ export default function ReviewPage() {
             </Button>
           </div>
           <span className="review__views">
-            <RemoveRedEyeIcon style={{ color: '#626262' }} />
+            <RemoveRedEyeIcon/>
             {reviewData.views.length}
           </span>
         </div>

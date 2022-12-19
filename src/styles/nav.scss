@@ -1,6 +1,7 @@
-$gray: #626262;
-$black: #252525;
-$white: #f0f0f0;
+$gray: #828081;
+$darkgray: #1e2224;
+$black: #161b1d;
+$white: #ffffff;
 
 .nav {
   position: fixed;
@@ -9,28 +10,51 @@ $white: #f0f0f0;
   left: 0;
   z-index: 10;
   padding: 10px 0;
-  background: $white;
+  background: $darkgray;
   box-shadow: 0px 0px 2px 2px #25252525;
   & > .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  &_left{
+  &__logo{
     display: flex;
     align-items: center;
     column-gap: 10px;
+    & > img{
+      width: 40px;
+      height: 40px;
+    }
+    &_text{
+      font-family: 'Peace-Sans';
+      font-weight: 700;
+      color: $white;
+      font-size: 35px;
+    }
   }
-  &_right{
+  &__left{
     display: flex;
     align-items: center;
     column-gap: 10px;
+    & svg{
+      font-size: 30px;
+      color: $white;
+    }
+  }
+  &__right{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    & svg{
+      color: $white;
+      font-size: 30px;
+    }
   }
   &_title{
     font-size: 30px;
     font-weight: 500;
-    color: $gray;
-    font-family: 'Akzidenz-Grotesk Ext';
+    color: $white;
+
     font-weight: 400;
   }
   &_search{
@@ -42,6 +66,7 @@ $white: #f0f0f0;
     align-items: center;
 
     padding: 5px 10px;
+    color: $white;
     &_input{
       background: none;
       padding: 7px 10px;
@@ -49,7 +74,7 @@ $white: #f0f0f0;
       outline: none;
       font-size: 18px;
       font-weight: 400;
-      color: $gray;
+      color: $white;
     }
   }
 }

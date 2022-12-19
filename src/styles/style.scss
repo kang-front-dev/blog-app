@@ -1,11 +1,11 @@
 @import url('./review.scss');
 @import url('./form.scss');
-@import url('./loading.scss');
 @import url('./profile.scss');
 
-$gray: #626262;
-$black: #252525;
-$white: #f0f0f0;
+$gray: #1e2224;
+$darkgray: #1e2224;
+$black: #161b1d;
+$white: #ffffff;
 
 * {
   margin: 0;
@@ -17,7 +17,7 @@ a {
   text-decoration: none;
 }
 .container {
-  max-width: 1140px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 body {
@@ -27,7 +27,8 @@ body {
 .global__wrapper {
   position: relative;
   min-height: 100vh;
-  background: $white;
+  background-color: $black;
+
 }
 
 .footer {
@@ -35,7 +36,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $black;
+  background-color: $darkgray;
   &__text,
   &__link {
     color: $white;
