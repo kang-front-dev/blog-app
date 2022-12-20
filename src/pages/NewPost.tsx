@@ -12,29 +12,7 @@ import { Review } from '../components/classes/ReviewClass';
 import { insertReview } from '../components/api/insertReview';
 import { globalContext } from '../components/contexts/globalContext';
 import { getToday } from '../components/lib/TimeFuncs';
-
-const groupsValues = [
-  {
-    label: 'Games',
-  },
-  {
-    label: 'Movies',
-  },
-  {
-    label: 'Series',
-  },
-];
-const tagsValues = [
-  {
-    label: 'Shooter',
-  },
-  {
-    label: 'Action',
-  },
-  {
-    label: 'Rpg',
-  },
-];
+import { groupsValues, tagsValues } from '../components/lib/GroupsAndTags';
 
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
@@ -97,96 +75,99 @@ export default function NewPost() {
 
   return isAuth ? (
     <div className="review__new">
-      <div className="review__new_left">
-        <img src={imgPath} alt="" className="review__new_img" />
-        <div className="review__new_input-file_block">
-          <FileUploader
-            handleChange={handleChange}
-            name="file"
-            multiple={false}
-            types={fileTypes}
-          />
+      <h2 className="review__new_title">Create post</h2>
+      <div className="review__new_container">
+        <div className="review__new_left">
+          <img src={imgPath} alt="" className="review__new_img" />
+          <div className="review__new_input-file_block">
+            <FileUploader
+              handleChange={handleChange}
+              name="file"
+              multiple={false}
+              types={fileTypes}
+            />
+          </div>
         </div>
-      </div>
-      <div className="review__new_right">
-        <div className="review__new_right_container">
-          <TextField
-            label="Title"
-            id="outlined-size-small"
-            size="small"
-            style={{ gridColumn: '2 span' }}
-            value={title}
-            onInput={(e) => {
-              handleInput((e.target as HTMLInputElement).value, setTitle);
-            }}
-          />
-          <TextField
-            label="Description"
-            id="outlined-size-small"
-            size="medium"
-            multiline={true}
-            style={{ gridColumn: '2 span' }}
-            value={descr}
-            onInput={(e) => {
-              handleInput((e.target as HTMLInputElement).value, setDescr);
-            }}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            autoComplete={true}
-            options={groupsValues}
-            style={{ gridColumn: '1 span' }}
-            size="small"
-            renderInput={(params) => {
-              return <TextField {...params} label="Group" />;
-            }}
-            onChange={(event, value) => {
-              handleInput(value, setGroup);
-            }}
-          />
-          <TextField
-            label="Rating"
-            id="outlined-size-small"
-            size="small"
-            type="number"
-            style={{ gridColumn: '1 span' }}
-            onInput={(e) => {
-              let thisInput = e.target as HTMLInputElement;
-              thisInput.value =
-                Number(thisInput.value) > 100 ? '100' : thisInput.value;
-              handleInput(thisInput.value.toString(), setRating);
-            }}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            autoComplete={true}
-            multiple={true}
-            options={tagsValues}
-            style={{ gridColumn: '2 span' }}
-            size="small"
-            renderInput={(params) => {
-              return <TextField {...params} label="Tags" />;
-            }}
-            onChange={(event, value) => {
-              handleInput(value, setTags);
-            }}
-          />
-          <Button
-            variant="contained"
-            size="large"
-            style={{ gridColumn: '2 span' }}
-            onClick={async () => {
-              if (title && descr && group && tags && rating && imgPath) {
-                handleClick();
-              }else{
-                handleOpen('error',`Please, fill out the entire form`)
-              }
-            }}
-          >
-            Publish
-          </Button>
+        <div className="review__new_right">
+          <div className="review__new_right_container">
+            <TextField
+              label="Title"
+              id="outlined-size-small"
+              size="small"
+              style={{ gridColumn: '2 span' }}
+              value={title}
+              onInput={(e) => {
+                handleInput((e.target as HTMLInputElement).value, setTitle);
+              }}
+            />
+            <TextField
+              label="Description"
+              id="outlined-size-small"
+              size="medium"
+              multiline={true}
+              style={{ gridColumn: '2 span' }}
+              value={descr}
+              onInput={(e) => {
+                handleInput((e.target as HTMLInputElement).value, setDescr);
+              }}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              autoComplete={true}
+              options={groupsValues}
+              style={{ gridColumn: '1 span' }}
+              size="small"
+              renderInput={(params) => {
+                return <TextField {...params} label="Group" />;
+              }}
+              onChange={(event, value) => {
+                handleInput(value, setGroup);
+              }}
+            />
+            <TextField
+              label="Rating"
+              id="outlined-size-small"
+              size="small"
+              type="number"
+              style={{ gridColumn: '1 span' }}
+              onInput={(e) => {
+                let thisInput = e.target as HTMLInputElement;
+                thisInput.value =
+                  Number(thisInput.value) > 100 ? '100' : thisInput.value;
+                handleInput(thisInput.value.toString(), setRating);
+              }}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              autoComplete={true}
+              multiple={true}
+              options={tagsValues}
+              style={{ gridColumn: '2 span' }}
+              size="small"
+              renderInput={(params) => {
+                return <TextField {...params} label="Tags" />;
+              }}
+              onChange={(event, value) => {
+                  handleInput(value, setTags);
+              }}
+            />
+            <Button
+              variant="contained"
+              size="large"
+              style={{ gridColumn: '2 span' }}
+              onClick={async () => {
+                if (title && descr && group && tags && rating && imgPath) {
+                  handleClick();
+                } else {
+                  handleOpen('error', `Please, fill out the entire form`);
+                }
+              }}
+            >
+              Publish
+            </Button>
+          </div>
         </div>
       </div>
     </div>

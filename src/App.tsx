@@ -10,7 +10,7 @@ import RegPage from './pages/RegPage';
 import Profile from './pages/Profile';
 
 function App() {
-  const [navTitle, setNavTitle] = useState('Reviews');
+  const [isBurgerOpen,setIsBurgerOpen] = useState(false)
   const [isAuth, setIsAuth] = useState(false);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -25,8 +25,8 @@ function App() {
   ///////
   
   const contextValueNav = {
-    navTitle: navTitle,
-    setNavTitle: setNavTitle,
+    isBurgerOpen: isBurgerOpen,
+    setIsBurgerOpen: setIsBurgerOpen,
   };
   const contextValueSnackbar = {
     open: open,

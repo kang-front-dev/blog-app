@@ -2,7 +2,8 @@ $gray: #828081;
 $darkgray: #1e2224;
 $black: #161b1d;
 $white: #ffffff;
-
+$lightwhite: #e1e1e1;
+/////////////////////////////REVIEW PAGE///////////////////////////
 .review {
   padding: 50px 0;
   animation: fade 0.3s ease-in-out;
@@ -23,8 +24,7 @@ $white: #ffffff;
     color: $gray;
   }
   &__author {
-    
-    & > a{
+    & > a {
       display: flex;
       align-items: center;
       & > span {
@@ -33,7 +33,8 @@ $white: #ffffff;
         color: $white;
         text-decoration: underline;
       }
-      & > svg,& > img{
+      & > svg,
+      & > img {
         width: 25px;
         height: 25px;
         border-radius: 50%;
@@ -64,10 +65,12 @@ $white: #ffffff;
     }
   }
   &__descr {
-    font-size: 22px;
+    font-size: 20px;
+    line-height: 30px;
     font-weight: 400;
     margin-bottom: 40px;
-    color: $white;
+    letter-spacing: 1px;
+    color: $lightwhite;
   }
   &__container {
     width: 100%;
@@ -76,7 +79,7 @@ $white: #ffffff;
     column-gap: 20px;
     row-gap: 20px;
     margin-top: 40px;
-    border-radius: 30px;
+    border-radius: 35px;
     padding: 30px;
     background-color: $darkgray;
   }
@@ -89,7 +92,7 @@ $white: #ffffff;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
       border: 1px $white solid;
-      & svg{
+      & svg {
         color: $white;
       }
     }
@@ -105,7 +108,7 @@ $white: #ffffff;
       border-bottom-right-radius: 20px;
       border: 1px $white solid;
       border-left: none;
-      & svg{
+      & svg {
         color: $white;
       }
     }
@@ -193,7 +196,6 @@ $white: #ffffff;
       transform: translate(-50%, -50%);
       z-index: 2;
       transition: 0.3s;
-
     }
 
     &_text {
@@ -261,10 +263,22 @@ $white: #ffffff;
   }
   /////////////////////////////////////////////////////
   &__new {
-    padding: 50px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 20px;
+    margin: 50px 0;
+    padding: 30px;
+    border-radius: 15px;
+    background: $white;
+    &_container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 20px;
+    }
+    &_title {
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 50px;
+      color: $darkgray;
+      margin-bottom: 15px;
+    }
     &_left {
       background-repeat: no-repeat;
       background-size: contain;
@@ -274,10 +288,10 @@ $white: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $white;
+      background-color: $gray;
       border-radius: 10px;
       overflow: hidden;
-      border: 1px $gray solid;
+      border: 2px $white solid;
 
       position: relative;
     }
@@ -288,6 +302,9 @@ $white: #ffffff;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        & > button {
+          background: linear-gradient(135deg, #eb8a28, #ab5c0e);
+        }
       }
     }
     &_input-file_block {

@@ -58,8 +58,6 @@ $white: #ffffff;
     font-weight: 400;
   }
   &_search{
-    border: 1px rgb(188, 188, 188) solid;
-    border-radius: 5px;
     overflow: hidden;
 
     display: flex;
@@ -67,6 +65,9 @@ $white: #ffffff;
 
     padding: 5px 10px;
     color: $white;
+    background: $darkgray;
+    border-bottom: 1px $gray solid;
+    cursor: pointer;
     &_input{
       background: none;
       padding: 7px 10px;
@@ -79,4 +80,32 @@ $white: #ffffff;
   }
 }
 
+.burger{
+  &__menu{
+    width: 250px;
+    height: 100%;
+    transition: 0.3s;
+    transform: translateX(-100%);
+    background: $white;
+    &_wrapper{
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      &.active{
+        opacity: 1;
+        pointer-events: all;
+        & > .burger__menu{
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+}
 

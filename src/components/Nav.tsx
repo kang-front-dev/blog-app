@@ -4,22 +4,26 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { globalContext } from './contexts/globalContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Nav() {
-  const { isAuth, userName } = useContext(globalContext);
+  const { isAuth, userName, setIsBurgerOpen, isBurgerOpen } =
+    useContext(globalContext);
   const navigate = useNavigate();
+  const handleClick = () => {
+    setIsBurgerOpen(!isBurgerOpen);
+  };
   return (
     <div className="nav">
       <div className="container">
         <div className="nav__left">
-          <IconButton>
+          <IconButton onClick={handleClick}>
             <MenuIcon />
           </IconButton>
-          <div className="nav__logo">
+          <Link to="/" className="nav__logo">
             <img src={require('../assets/images/logo.png')} alt="" />
             <span className="nav__logo_text">FrontView</span>
-          </div>
+          </Link>
         </div>
         <div className="nav__right">
           <NavSearch />

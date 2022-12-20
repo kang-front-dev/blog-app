@@ -5,11 +5,10 @@ import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
 export default function MainPage() {
-  const { setNavTitle, isAuth,setOpen,setSeverity,setAlertMessage,setIsLoading } = useContext(globalContext);
+  const { isAuth,setOpen,setSeverity,setAlertMessage } = useContext(globalContext);
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    setNavTitle('Reviews');
     handleUpdate();
     console.log('useEffect shut on');
   }, []);
@@ -44,7 +43,6 @@ export default function MainPage() {
         className="review__btn-new"
         onClick={() => {
           if (isAuth) {
-            setNavTitle('New post');
             navigate('/new')
           }else{
             handleOpen('error','You have to Sign In/Sign Up to create your posts')

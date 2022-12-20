@@ -41,7 +41,9 @@ export default function Profile() {
   return (
     <div className="profile">
       <div className="profile__about">
-        <img src="" alt="" className="profile__about_avatar" />
+        <div className="profile__about_avatar_wrapper">
+          <img src="" alt="" className="profile__about_avatar" />
+        </div>
         <h2 className="profile__about_name">{userInfo.name}</h2>
         <p className="profile__about_email">{userInfo.email}</p>
       </div>
@@ -55,7 +57,7 @@ export default function Profile() {
             return (
               <ReviewCard
                 key={index}
-                cardInfo={{...review,selectorId: 'profile-review-card'}}
+                cardInfo={{ ...review, selectorId: 'profile-review-card' }}
               ></ReviewCard>
             );
           })}
