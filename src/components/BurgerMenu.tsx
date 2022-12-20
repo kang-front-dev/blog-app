@@ -19,16 +19,28 @@ import StyleIcon from '@mui/icons-material/Style';
 
 import { globalContext } from './contexts/globalContext';
 
-export default function BurgerMenu() {
-  const { isBurgerOpen,setIsBurgerOpen } = useContext(globalContext);
+export default function SideBar() {
+  const { isSideBarOpen, setIsSideBarOpen } = useContext(globalContext);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
   return (
-    <div className={isBurgerOpen ? 'burger__menu_wrapper active' : 'burger__menu_wrapper'} onClick={()=>{setIsBurgerOpen(false)}}>
-      <div className='burger__menu' onClick={(e)=>{e.stopPropagation()}}>
+    <div
+      className={
+        isSideBarOpen ? 'sidebar__menu_wrapper active' : 'sidebar__menu_wrapper'
+      }
+      onClick={() => {
+        setIsSideBarOpen(false);
+      }}
+    >
+      <div
+        className="sidebar__menu"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <List>
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
