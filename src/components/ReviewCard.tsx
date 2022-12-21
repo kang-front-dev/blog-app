@@ -15,7 +15,6 @@ interface ICardProps {
 }
 
 export default function ReviewCard({ cardInfo }: ICardProps) {
-  console.log(cardInfo);
   return (
     <AnimationOnScroll animateIn="pop-up" duration={0.3}>
       <Link to={`/review/${cardInfo._id}`}>

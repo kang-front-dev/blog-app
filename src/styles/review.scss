@@ -7,6 +7,12 @@ $lightwhite: #e1e1e1;
 .review {
   padding: 50px 0;
   animation: fade 0.3s ease-in-out;
+  & > .container{
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
   &__title {
     font-size: 40px;
 
@@ -57,6 +63,8 @@ $lightwhite: #e1e1e1;
     left: 50%;
     transform: translate(-50%, -50%);
     &_wrapper {
+      width: 115%;
+      align-self: center;
       position: relative;
       height: 600px;
       overflow: hidden;
@@ -67,10 +75,9 @@ $lightwhite: #e1e1e1;
   &__descr {
     font-size: 20px;
     line-height: 30px;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 40px;
-    letter-spacing: 1px;
-    color: $lightwhite;
+    color: $white;
   }
   &__container {
     width: 100%;
@@ -125,6 +132,25 @@ $lightwhite: #e1e1e1;
     column-gap: 10px;
     color: $white;
   }
+  &__group{
+    margin-left: 20px;
+    padding: 5px 12px;
+    background: $white;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  &__tags{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+  &__tag{
+    color: $gray;
+  }
+
+//////////
   &__btn {
     &-new {
       padding: 8px 20px;
@@ -319,6 +345,14 @@ $lightwhite: #e1e1e1;
       width: 100%;
       transition: 0.3s;
     }
+  }
+  &__error{
+    color: $white;
+    font-size: 27px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    grid-column: 3 span;
   }
 }
 

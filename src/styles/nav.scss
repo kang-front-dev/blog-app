@@ -101,7 +101,7 @@ $white: #ffffff;
       &.active{
         opacity: 1;
         pointer-events: all;
-        & > .burger__menu{
+        & > .sidebar__menu{
           transform: translateX(0);
         }
       }

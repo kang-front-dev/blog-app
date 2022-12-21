@@ -10,7 +10,6 @@ export default function MainPage() {
   const navigate = useNavigate();
   useEffect(() => {
     handleUpdate();
-    console.log('useEffect shut on');
   }, []);
 
   const handleUpdate = async () => {

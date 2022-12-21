@@ -8,6 +8,7 @@ import { useState } from 'react';
 import LogPage from './pages/LogPage';
 import RegPage from './pages/RegPage';
 import Profile from './pages/Profile';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
   const [isSideBarOpen,setIsSideBarOpen] = useState(false)
@@ -66,6 +67,7 @@ function App() {
             <Route index path="/login" element={<LogPage />}></Route>
             <Route index path="/register" element={<RegPage />}></Route>
             <Route index path="/profiles/:name" element={<Profile />}></Route>
+            <Route index path="/reviews/category/:category" element={<CategoryPage />}></Route>
           </Route>
         </Routes>
       </globalContext.Provider>

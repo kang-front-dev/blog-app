@@ -18,10 +18,35 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import StyleIcon from '@mui/icons-material/Style';
 
 import { globalContext } from './contexts/globalContext';
+import { Link, useNavigate } from 'react-router-dom';
+
+const categories = [
+  {
+    content: 'Movies',
+    icon: <MovieIcon />,
+  },
+  {
+    content: 'Games',
+    icon: <VideogameAssetIcon />,
+  },
+  {
+    content: 'Series',
+    icon: <LocalMoviesIcon />,
+  },
+  {
+    content: 'Development',
+    icon: <CodeIcon />,
+  },
+  {
+    content: 'Society',
+    icon: <GroupsIcon />,
+  },
+];
 
 export default function SideBar() {
   const { isSideBarOpen, setIsSideBarOpen } = useContext(globalContext);
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setOpen(!open);
@@ -51,45 +76,47 @@ export default function SideBar() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <MovieIcon />
-                </ListItemIcon>
-                <ListItemText primary="Movies" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <VideogameAssetIcon />
-                </ListItemIcon>
-                <ListItemText primary="Games" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <LocalMoviesIcon />
-                </ListItemIcon>
-                <ListItemText primary="Series" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <CodeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Development" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <GroupsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Society" />
-              </ListItemButton>
+              {categories.map((category, index) => {
+                return (
+                  <ListItemButton
+                    key={index}
+                    onClick={() => {
+                      navigate(
+                        `/reviews/category/${category.content.toLowerCase()}`
+                      );
+                      setIsSideBarOpen(false);
+                    }}
+                    sx={{ pl: 4 }}
+                    style={{ color: '#252525' }}
+                  >
+                    <ListItemIcon>{category.icon}</ListItemIcon>
+                    <ListItemText primary={category.content} />
+                  </ListItemButton>
+                );
+              })}
             </List>
           </Collapse>
-          <ListItemButton>
+
+          <ListItemButton
+            onClick={() => {
+              navigate('/reviews/tags');
+              setIsSideBarOpen(false);
+            }}
+            style={{ color: '#252525' }}
+          >
             <ListItemIcon>
               <StyleIcon />
             </ListItemIcon>
             <ListItemText>Tags</ListItemText>
           </ListItemButton>
-          <ListItemButton>
+
+          <ListItemButton
+            onClick={() => {
+              navigate('/new');
+              setIsSideBarOpen(false);
+            }}
+            style={{ color: '#252525' }}
+          >
             <ListItemIcon>
               <AddBoxIcon />
             </ListItemIcon>

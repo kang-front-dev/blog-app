@@ -57,6 +57,8 @@ body {
   padding: 7px 14px 7px 7px;
   
   border: 1px $gray solid;
+  border-radius: 10px;
+  background: $white;
   &_block{
     display: flex;
     align-items: center;

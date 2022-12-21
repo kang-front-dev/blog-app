@@ -7,11 +7,11 @@ import { globalContext } from './contexts/globalContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Nav() {
-  const { isAuth, userName, setIsBurgerOpen, isBurgerOpen } =
+  const { isAuth, userName, setIsSideBarOpen, isSideBarOpen } =
     useContext(globalContext);
   const navigate = useNavigate();
   const handleClick = () => {
-    setIsBurgerOpen(!isBurgerOpen);
+    setIsSideBarOpen(!isSideBarOpen);
   };
   return (
     <div className="nav">

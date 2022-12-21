@@ -41,6 +41,8 @@ export default function ReviewPage() {
     likes: [],
     dislikes: [],
     views: [],
+    group: '',
+    tags: [],
   });
   const [authorAvatar, setAuthorAvatar] = useState('');
 
@@ -55,7 +57,7 @@ export default function ReviewPage() {
   }
   async function getAuthorAvatar(name: string) {
     console.log(name);
-    
+
     const authorAvatarSrc = await getUserAvatar({ name: name });
     setAuthorAvatar(authorAvatarSrc.imgPath);
   }
@@ -155,11 +157,7 @@ export default function ReviewPage() {
                 }
               }}
             >
-              {isLiked ? (
-                <ThumbUpAltIcon/>
-              ) : (
-                <ThumbUpOffAltIcon />
-              )}
+              {isLiked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
               <span className="review__likes_amount">
                 {reviewData.likes.length}
               </span>
@@ -176,20 +174,28 @@ export default function ReviewPage() {
                 }
               }}
             >
-              {isDisliked ? (
-                <ThumbDownAltIcon/>
-              ) : (
-                <ThumbDownOffAltIcon/>
-              )}
+              {isDisliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
               <span className="review__likes_amount">
                 {reviewData.dislikes.length}
               </span>
             </Button>
           </div>
           <span className="review__views">
-            <RemoveRedEyeIcon/>
+            <RemoveRedEyeIcon />
             {reviewData.views.length}
           </span>
+          <Link to={`/reviews/category/${reviewData.group.toLowerCase()}`}>
+            <span className="review__group">{reviewData.group}</span>
+          </Link>
+          <div className="review__tags">
+            {reviewData.tags.map((tag, index) => {
+              return (
+                <span className="review__tag" key={index}>
+                  {tag}
+                </span>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
