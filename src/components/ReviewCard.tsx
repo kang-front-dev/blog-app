@@ -54,7 +54,7 @@ export default function ReviewCard({ cardInfo }: ICardProps) {
                 </span>
                 <span className="review__card_stats_dislikes">
                   <RemoveRedEyeIcon style={{ color: '#626262' }} />
-                  {cardInfo.views.length}
+                  {cardInfo.views}
                 </span>
               </div>
             </div>

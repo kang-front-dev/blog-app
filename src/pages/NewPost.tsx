@@ -44,7 +44,7 @@ export default function NewPost() {
       }),
       rating: rating.toString(),
       author: userName,
-      views: [],
+      views: 0,
       likes: [],
       dislikes: [],
       createDate: getToday(),

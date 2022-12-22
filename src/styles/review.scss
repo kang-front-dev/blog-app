@@ -7,7 +7,7 @@ $lightwhite: #e1e1e1;
 .review {
   padding: 50px 0;
   animation: fade 0.3s ease-in-out;
-  & > .container{
+  & > .container {
     max-width: 1100px;
     display: flex;
     flex-direction: column;
@@ -85,10 +85,17 @@ $lightwhite: #e1e1e1;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 20px;
     row-gap: 20px;
-    margin-top: 40px;
+
     border-radius: 35px;
     padding: 30px;
     background-color: $darkgray;
+    &_title {
+      margin-top: 40px;
+      color: $white;
+      font-size: 40px;
+      padding: 10px 30px;
+      font-weight: 700;
+    }
   }
   &__stats {
     display: flex;
@@ -132,7 +139,7 @@ $lightwhite: #e1e1e1;
     column-gap: 10px;
     color: $white;
   }
-  &__group{
+  &__group {
     margin-left: 20px;
     padding: 5px 12px;
     background: $white;
@@ -140,17 +147,17 @@ $lightwhite: #e1e1e1;
     border-radius: 10px;
     cursor: pointer;
   }
-  &__tags{
+  &__tags {
     margin-left: 20px;
     display: flex;
     align-items: center;
     column-gap: 5px;
   }
-  &__tag{
+  &__tag {
     color: $gray;
   }
 
-//////////
+  //////////
   &__btn {
     &-new {
       padding: 8px 20px;
@@ -346,7 +353,7 @@ $lightwhite: #e1e1e1;
       transition: 0.3s;
     }
   }
-  &__error{
+  &__error {
     color: $white;
     font-size: 27px;
     font-weight: 500;

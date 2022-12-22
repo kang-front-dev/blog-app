@@ -11,7 +11,7 @@ export interface IReview {
   rating?: string;
   tags?: Array<string>;
   imgPath?: string;
-  views?: Array<string>;
+  views?: number;
   likes?: Array<string>;
   dislikes?: Array<string>;
   author?: string;
@@ -26,7 +26,7 @@ export class Review implements IReview {
   rating: string;
   tags: Array<string>;
   imgPath: string;
-  views: Array<string>;
+  views: number;
   likes: Array<string>;
   dislikes: Array<string>;
   author: string;

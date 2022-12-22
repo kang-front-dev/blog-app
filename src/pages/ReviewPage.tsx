@@ -40,7 +40,7 @@ export default function ReviewPage() {
     },
     likes: [],
     dislikes: [],
-    views: [],
+    views: 0,
     group: '',
     tags: [],
   });
@@ -182,7 +182,7 @@ export default function ReviewPage() {
           </div>
           <span className="review__views">
             <RemoveRedEyeIcon />
-            {reviewData.views.length}
+            {reviewData.views}
           </span>
           <Link to={`/reviews/category/${reviewData.group.toLowerCase()}`}>
             <span className="review__group">{reviewData.group}</span>
