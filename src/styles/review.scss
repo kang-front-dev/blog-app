@@ -95,6 +95,7 @@ $lightwhite: #e1e1e1;
       font-size: 40px;
       padding: 10px 30px;
       font-weight: 700;
+      text-transform: capitalize;
     }
   }
   &__stats {
@@ -340,12 +341,19 @@ $lightwhite: #e1e1e1;
         }
       }
     }
-    &_input-file_block {
-      background-color: $white;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    &_input {
+      &-file_block {
+        background-color: $white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      &_note {
+        font-size: 14px;
+        color: $gray;
+        grid-column: 2 span;
+      }
     }
     &_img {
       max-width: 100%;

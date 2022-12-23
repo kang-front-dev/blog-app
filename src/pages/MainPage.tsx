@@ -18,14 +18,17 @@ export default function MainPage() {
   const handleUpdate = async () => {
     const response = await getAllReviews();
     const reviews = response.reviews;
-    const recentSorted = [...reviews.reverse()];
+    const recentSorted = [...reviews.reverse().slice(0, 9)];
 
     const mostPopular = [
-      ...reviews.sort((a: IReview, b: IReview) => {
-        console.log(a.views, b.views);
+      ...reviews
+        .sort((a: IReview, b: IReview) => {
+          console.log(a.views, b.views);
 
-        return a.views - b.views;
-      }).reverse(),
+          return a.views - b.views;
+        })
+        .reverse()
+        .slice(0, 9),
     ];
     setRecentReviews(recentSorted);
     setPopularReviews(mostPopular);

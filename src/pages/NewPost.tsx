@@ -13,6 +13,7 @@ import { insertReview } from '../components/api/insertReview';
 import { globalContext } from '../components/contexts/globalContext';
 import { getToday } from '../components/lib/TimeFuncs';
 import { groupsValues, tagsValues } from '../components/lib/GroupsAndTags';
+import { updateTags } from '../components/api/updateTags';
 
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
@@ -40,7 +41,7 @@ export default function NewPost() {
       imgPath: imgPath,
       group: group.label,
       tags: tags.map((item) => {
-        return item.label;
+        return typeof item == 'object' ? item.label : item;
       }),
       rating: rating.toString(),
       author: userName,
@@ -49,10 +50,15 @@ export default function NewPost() {
       dislikes: [],
       createDate: getToday(),
     });
+    console.log(tags,'tags');
     console.log(newReview);
     const response = await insertReview(newReview);
     console.log(response, 'response');
-    if (response.success) {
+    const updateTagsResponse = await updateTags(newReview.tags);
+    console.log(updateTagsResponse, 'updateTagsResponse');
+    
+    
+    if (response.success && updateTagsResponse.success) {
       navigate(`/review/${response.reviewId}`);
     }
   };
@@ -146,13 +152,15 @@ export default function NewPost() {
               options={tagsValues}
               style={{ gridColumn: '2 span' }}
               size="small"
+              freeSolo={true}
               renderInput={(params) => {
                 return <TextField {...params} label="Tags" />;
               }}
               onChange={(event, value) => {
-                  handleInput(value, setTags);
+                handleInput(value, setTags);
               }}
             />
+            <p className="review__new_input_note">*Press "Enter" to add the tag to the field*</p>
             <Button
               variant="contained"
               size="large"

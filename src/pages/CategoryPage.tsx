@@ -12,11 +12,28 @@ export default function CategoryPage() {
     const response = await getAllReviews();
     console.log(response);
 
-    const result = response.reviews.filter((review: IReview) => {
-      return review.group.toLowerCase() === categoryParam ? review : null;
-    });
-    console.log(result);
-    setCategoryReviews(result);
+    if (category !== 'popular' && category !== 'recent') {
+      const result = response.reviews.filter((review: IReview) => {
+        return review.group.toLowerCase() === categoryParam ? review : null;
+      });
+      setCategoryReviews(result);
+    } else if (category === 'popular') {
+      const reviews = [...response.reviews];
+      const result = [
+        ...reviews
+          .sort((a: IReview, b: IReview) => {
+            console.log(a.views, b.views);
+
+            return a.views - b.views;
+          })
+          .reverse(),
+      ];
+      setCategoryReviews(result);
+    } else if (category === 'recent') {
+      const reviews = [...response.reviews];
+      const result = [...reviews.reverse()];
+      setCategoryReviews(result);
+    }
   }
 
   useEffect(() => {
@@ -25,13 +42,16 @@ export default function CategoryPage() {
 
   return (
     <div className="review__category">
+      <div className="review__container_title">{category}</div>
       <div className="review__container">
         {categoryReviews.length > 0 ? (
           categoryReviews.map((review, index) => {
             return <ReviewCard key={index} cardInfo={{ ...review }} />;
           })
         ) : (
-          <div className="review__error">No reviews in category "{category}"</div>
+          <div className="review__error">
+            No reviews in category "{category}"
+          </div>
         )}
       </div>
     </div>

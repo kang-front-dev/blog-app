@@ -1,9 +1,7 @@
 .fade-in{
   animation: fade 0.3s ease-in-out;
 }
-.pop-up{
-  animation: pop 0.3s ease-in-out;
-}
+
 @keyframes fade {
   0% {
     opacity: 0;
@@ -12,13 +10,4 @@
     opacity: 1;
   }
 }
-@keyframes pop {
-  0% {
-    opacity: 0;
-    transform: translateY(70px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
+

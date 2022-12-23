@@ -4,7 +4,7 @@ import Nav from '../components/Nav';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { globalContext } from '../components/contexts/globalContext';
-import BurgerMenu from '../components/BurgerMenu';
+import BurgerMenu from '../components/SideBar';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,

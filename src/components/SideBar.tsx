@@ -16,6 +16,8 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import CategoryIcon from '@mui/icons-material/Category';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import StyleIcon from '@mui/icons-material/Style';
+import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 
 import { globalContext } from './contexts/globalContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -67,6 +69,32 @@ export default function SideBar() {
         }}
       >
         <List>
+          <ListItemButton
+            onClick={() => {
+              navigate('/reviews/category/popular');
+              setIsSideBarOpen(false);
+            }}
+            style={{ color: '#252525' }}
+          >
+            <ListItemIcon>
+              <AutoGraphOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText>Most Popular</ListItemText>
+          </ListItemButton>
+
+          <ListItemButton
+            onClick={() => {
+              navigate('/reviews/category/recent');
+              setIsSideBarOpen(false);
+            }}
+            style={{ color: '#252525' }}
+          >
+            <ListItemIcon>
+              <AccessTimeOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText>Recent</ListItemText>
+          </ListItemButton>
+
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
               <CategoryIcon />

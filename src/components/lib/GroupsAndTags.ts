@@ -44,6 +44,9 @@ export const tagsValues = [
     label: 'Horror',
   },
   {
+    label: 'Nature'
+  },
+  {
     label: 'Programming',
   },
   {
