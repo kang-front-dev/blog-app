@@ -15,22 +15,14 @@ export const formStyles = {
 };
 export default function LogPage() {
   const {
-    setOpen,
-    setSeverity,
-    setAlertMessage,
     setUserEmail,
     setUserName,
     setIsAuth,
+    handleSnackbarOpen,
   } = useContext(globalContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleOpen = (severityState: string, alertMessageValue: string) => {
-    setOpen(true);
-    setSeverity(severityState);
-    setAlertMessage(alertMessageValue);
-  };
 
   const handleClick = async () => {
     if (email && password) {
@@ -41,13 +33,16 @@ export default function LogPage() {
         setIsAuth(true);
         setUserName(response.userData.name);
         setUserEmail(email);
-        handleOpen('success', 'Welcome back!');
+        handleSnackbarOpen('success', 'Welcome back!');
         navigate('/');
       } else {
-        handleOpen('error', response.message);
+        handleSnackbarOpen('error', response.message);
       }
     } else {
-      handleOpen('error', email ? 'Password required.' : 'Email required.');
+      handleSnackbarOpen(
+        'error',
+        email ? 'Password required.' : 'Email required.'
+      );
     }
   };
   return (
@@ -57,7 +52,7 @@ export default function LogPage() {
           navigate('/');
         }}
         style={{ position: 'absolute', top: '10px', left: '10px' }}
-        className='form__btn-back'
+        className="form__btn-back"
       >
         <ArrowBackIcon />
       </IconButton>
@@ -87,7 +82,7 @@ export default function LogPage() {
         onClick={() => {
           handleClick();
         }}
-        className='form__btn'
+        className="form__btn"
       >
         Login
       </Button>

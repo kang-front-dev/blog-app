@@ -12,7 +12,10 @@ import CategoryPage from './pages/CategoryPage';
 import { checkAuth } from './components/api/checkAuth';
 
 function App() {
+  //NAV STATES
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+  ////////////
   const [isAuth, setIsAuth] = useState(false);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -21,34 +24,43 @@ function App() {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
-  ////////
+  ////////////
   //LOADING STATES
   const [isLoading, setIsLoading] = useState(false);
-  ///////
+  ////////////
+
+  const handleSnackbarOpen = (severityState: string, alertMessageValue: string) => {
+    setOpen(true);
+    setSeverity(severityState);
+    setAlertMessage(alertMessageValue);
+  };
 
   const contextValueNav = {
-    isSideBarOpen: isSideBarOpen,
-    setIsSideBarOpen: setIsSideBarOpen,
+    isSideBarOpen,
+    setIsSideBarOpen,
+    progress,
+    setProgress,
   };
   const contextValueSnackbar = {
-    open: open,
-    setOpen: setOpen,
-    severity: severity,
-    setSeverity: setSeverity,
-    alertMessage: alertMessage,
-    setAlertMessage: setAlertMessage,
+    open,
+    setOpen,
+    severity,
+    setSeverity,
+    alertMessage,
+    setAlertMessage,
+    handleSnackbarOpen,
   };
   const contextValueUser = {
-    isAuth: isAuth,
-    setIsAuth: setIsAuth,
-    userEmail: userEmail,
-    setUserEmail: setUserEmail,
-    userName: userName,
-    setUserName: setUserName,
+    isAuth,
+    setIsAuth,
+    userEmail,
+    setUserEmail,
+    userName,
+    setUserName,
   };
   const contextLoading = {
-    isLoading: isLoading,
-    setIsLoading: setIsLoading,
+    isLoading,
+    setIsLoading,
   };
   async function checkToken() {
     const response = await checkAuth();

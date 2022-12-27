@@ -1,15 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { globalContext } from './contexts/globalContext';
 import NavSearch from './NavSearch';
+
+import LinearProgress from '@mui/material/LinearProgress';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { globalContext } from './contexts/globalContext';
-import { Link, useNavigate } from 'react-router-dom';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Chip from '@mui/material/Chip';
 
 export default function Nav() {
-  const { isAuth, userName, setIsSideBarOpen, isSideBarOpen } =
-    useContext(globalContext);
+  const {
+    isAuth,
+    userName,
+    setIsSideBarOpen,
+    isSideBarOpen,
+    progress,
+    handleSnackbarOpen,
+  } = useContext(globalContext);
+
   const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const dropdownOpen = Boolean(anchorEl);
+
+  const setAnchor = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleDropdownClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleClick = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
@@ -27,19 +55,64 @@ export default function Nav() {
         </div>
         <div className="nav__right">
           <NavSearch />
-          <IconButton
-            onClick={() => {
-              if (isAuth) {
-                navigate(`/profiles/${userName}`);
-              } else {
-                navigate('/login');
-              }
-            }}
-          >
+          {isAuth ? (
+            <Chip label={userName} style={{ color: '#FFFFFF',background: '#444444' }} />
+          ) : null}
+          <IconButton onClick={setAnchor}>
             <AccountCircleIcon />
           </IconButton>
+          <Menu
+            className="nav__menu"
+            anchorEl={anchorEl}
+            open={dropdownOpen}
+            onClose={handleDropdownClose}
+          >
+            <MenuItem
+              onClick={() => {
+                if (isAuth) {
+                  navigate(`/profiles/${userName}`);
+                } else {
+                  navigate('/login');
+                }
+                handleDropdownClose();
+              }}
+            >
+              <PersonOutlineIcon />
+              Profile
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                if (isAuth) {
+                  navigate('/new');
+                } else {
+                  handleSnackbarOpen(
+                    'error',
+                    'You have to Sign In/Sign Up to create your posts'
+                  );
+                }
+                handleDropdownClose();
+              }}
+            >
+              <AddOutlinedIcon />
+              Create post
+            </MenuItem>
+            <MenuItem>
+              <LogoutIcon />
+              Logout
+            </MenuItem>
+          </Menu>
         </div>
       </div>
+      <LinearProgress
+        variant="determinate"
+        className={
+          progress === 0 || progress === 100
+            ? 'nav__progress'
+            : 'nav__progress active'
+        }
+        value={progress}
+        style={{ position: 'fixed', top: '0', width: '100%' }}
+      />
     </div>
   );
 }

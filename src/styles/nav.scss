@@ -12,6 +12,16 @@ $white: #ffffff;
   padding: 10px 0;
   background: $darkgray;
   box-shadow: 0px 0px 2px 2px #25252525;
+  &__progress{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    transition: 0.2s;
+    &.active{
+      opacity: 1;
+    }
+  }
   & > .container {
     display: flex;
     align-items: center;
@@ -44,12 +54,23 @@ $white: #ffffff;
   &__right{
     display: flex;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 16px;
     & svg{
       color: $white;
       font-size: 30px;
     }
   }
+
+  &__menu{
+    & li{
+      column-gap: 10px;
+      & svg{
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
   &_title{
     font-size: 30px;
     font-weight: 500;

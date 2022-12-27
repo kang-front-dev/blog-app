@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getReview } from '../components/api/getReview';
-import { IReview, Review } from '../components/classes/ReviewClass';
+import { IReview } from '../components/classes/ReviewClass';
 import { getBgFromRating } from '../components/lib/RatingBackground';
 
 import Button from '@mui/material/Button';
@@ -28,8 +28,12 @@ interface IHasMyLikeOrDislike {
 
 export default function ReviewPage() {
   const { id } = useParams();
-  const { userName, isAuth, setOpen, setSeverity, setAlertMessage } =
-    useContext(globalContext);
+  const {
+    userName,
+    isAuth,
+    setProgress,
+    handleSnackbarOpen,
+  } = useContext(globalContext);
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
   const [reviewData, setReviewData] = useState<IReview>({
@@ -104,14 +108,15 @@ export default function ReviewPage() {
     addView({ _id: id, username: userName });
   };
 
-  const handleOpen = (severityState: string, alertMessageValue: string) => {
-    setOpen(true);
-    setSeverity(severityState);
-    setAlertMessage(alertMessageValue);
-  };
-
   useEffect(() => {
-    getReviewData();
+    setProgress(20);
+    getReviewData().then(() => {
+      setProgress(90);
+      setTimeout(() => {
+        setProgress(100);
+      }, 300);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -153,7 +158,10 @@ export default function ReviewPage() {
                 if (isAuth) {
                   handleLike();
                 } else {
-                  handleOpen('error', 'You have to sign in to rate reviews');
+                  handleSnackbarOpen(
+                    'error',
+                    'You have to sign in to rate reviews'
+                  );
                 }
               }}
             >
@@ -170,7 +178,10 @@ export default function ReviewPage() {
                 if (isAuth) {
                   handleDislike();
                 } else {
-                  handleOpen('error', 'You have to sign in to rate reviews');
+                  handleSnackbarOpen(
+                    'error',
+                    'You have to sign in to rate reviews'
+                  );
                 }
               }}
             >

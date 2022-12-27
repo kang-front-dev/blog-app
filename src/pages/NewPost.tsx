@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { uploadFile } from '../components/api/firebase';
 
-import { TextField, Autocomplete, Button, Icon } from '@mui/material';
+import { TextField, Autocomplete, Button} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -18,8 +18,11 @@ import { updateTags } from '../components/api/updateTags';
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
 export default function NewPost() {
-  const { userName, isAuth, setOpen, setSeverity, setAlertMessage } =
-    useContext(globalContext);
+  const {
+    userName,
+    isAuth,
+    handleSnackbarOpen,
+  } = useContext(globalContext);
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -50,14 +53,13 @@ export default function NewPost() {
       dislikes: [],
       createDate: getToday(),
     });
-    console.log(tags,'tags');
+    console.log(tags, 'tags');
     console.log(newReview);
     const response = await insertReview(newReview);
     console.log(response, 'response');
     const updateTagsResponse = await updateTags(newReview.tags);
     console.log(updateTagsResponse, 'updateTagsResponse');
-    
-    
+
     if (response.success && updateTagsResponse.success) {
       navigate(`/review/${response.reviewId}`);
     }
@@ -67,16 +69,14 @@ export default function NewPost() {
     callback(value);
   };
 
-  const handleOpen = (severityState: string, alertMessageValue: string) => {
-    setOpen(true);
-    setSeverity(severityState);
-    setAlertMessage(alertMessageValue);
-  };
-
   useEffect(() => {
     if (!isAuth) {
-      handleOpen('error', 'You have to sign in to create your own posts');
+      handleSnackbarOpen(
+        'error',
+        'You have to sign in to create your own posts'
+      );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isAuth ? (
@@ -160,7 +160,9 @@ export default function NewPost() {
                 handleInput(value, setTags);
               }}
             />
-            <p className="review__new_input_note">*Press "Enter" to add the tag to the field*</p>
+            <p className="review__new_input_note">
+              *Press "Enter" to add the tag to the field*
+            </p>
             <Button
               variant="contained"
               size="large"
@@ -169,7 +171,10 @@ export default function NewPost() {
                 if (title && descr && group && tags && rating && imgPath) {
                   handleClick();
                 } else {
-                  handleOpen('error', `Please, fill out the entire form`);
+                  handleSnackbarOpen(
+                    'error',
+                    `Please, fill out the entire form`
+                  );
                 }
               }}
             >

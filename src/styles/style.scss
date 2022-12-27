@@ -21,14 +21,16 @@ a {
   margin: 0 auto;
 }
 body {
-  overflow-y: scroll;
+  overflow-y: scroll !important;
+  padding: 0 !important;
 }
+//!important in this case is necessary to fix the "menu" component from Material UI.
+//The menu component continues to add inline styles to the body
 
 .global__wrapper {
   position: relative;
   min-height: 100vh;
   background-color: $black;
-
 }
 
 .footer {
@@ -53,13 +55,13 @@ body {
   padding-top: 67px;
 }
 
-.auth_error{
+.auth_error {
   padding: 7px 14px 7px 7px;
-  
+
   border: 1px $gray solid;
   border-radius: 10px;
   background: $white;
-  &_block{
+  &_block {
     display: flex;
     align-items: center;
     justify-content: center;

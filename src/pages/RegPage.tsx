@@ -17,18 +17,17 @@ export const formStyles = {
 };
 
 export default function RegPage() {
-  const { setOpen, setSeverity, setAlertMessage,setUserEmail,setUserName,setIsAuth } = useContext(globalContext);
+  const {
+    setUserEmail,
+    setUserName,
+    setIsAuth,
+    handleSnackbarOpen,
+  } = useContext(globalContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate()
-
-  const handleOpen = (severityState: string, alertMessageValue: string) => {
-    setOpen(true);
-    setSeverity(severityState);
-    setAlertMessage(alertMessageValue);
-  };
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     if (name && email && password) {
@@ -38,18 +37,18 @@ export default function RegPage() {
         password: password,
       });
       console.log(response);
-      
+
       if (response.success) {
-        setIsAuth(true)
-        setUserName(name)
-        setUserEmail(email)
-        handleOpen('success', 'Welcome!');
-        navigate('/')
+        setIsAuth(true);
+        setUserName(name);
+        setUserEmail(email);
+        handleSnackbarOpen('success', 'Welcome!');
+        navigate('/');
       } else {
-        handleOpen('error', response.message);
+        handleSnackbarOpen('error', response.message);
       }
     } else {
-      handleOpen(
+      handleSnackbarOpen(
         'error',
         name && email ? 'Password required.' : 'Please fill in the form fields.'
       );
@@ -57,8 +56,13 @@ export default function RegPage() {
   };
   return (
     <form className="form__wrapper">
-      <IconButton onClick={()=>{navigate('/')}} style={{position: 'absolute',top: '10px',left: '10px'}}>
-        <ArrowBackIcon/>
+      <IconButton
+        onClick={() => {
+          navigate('/');
+        }}
+        style={{ position: 'absolute', top: '10px', left: '10px' }}
+      >
+        <ArrowBackIcon />
       </IconButton>
       <h3 className="form__title">Sign Up</h3>
       <TextField
