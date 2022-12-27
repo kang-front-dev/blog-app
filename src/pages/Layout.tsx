@@ -21,11 +21,8 @@ export default function Layout() {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
     setOpen(false);
+    return;
   };
 
   return (
@@ -50,7 +47,7 @@ export default function Layout() {
           {alertMessage}
         </Alert>
       </Snackbar>
-      <BurgerMenu/>
+      <BurgerMenu />
     </div>
   );
 }

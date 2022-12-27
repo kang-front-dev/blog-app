@@ -14,11 +14,15 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Chip from '@mui/material/Chip';
+import { logout } from './api/logout';
 
 export default function Nav() {
   const {
     isAuth,
+    setIsAuth,
     userName,
+    setUserName,
+    setUserEmail,
     setIsSideBarOpen,
     isSideBarOpen,
     progress,
@@ -56,7 +60,10 @@ export default function Nav() {
         <div className="nav__right">
           <NavSearch />
           {isAuth ? (
-            <Chip label={userName} style={{ color: '#FFFFFF',background: '#444444' }} />
+            <Chip
+              label={userName}
+              style={{ color: '#FFFFFF', background: '#444444' }}
+            />
           ) : null}
           <IconButton onClick={setAnchor}>
             <AccountCircleIcon />
@@ -96,10 +103,23 @@ export default function Nav() {
               <AddOutlinedIcon />
               Create post
             </MenuItem>
-            <MenuItem>
-              <LogoutIcon />
-              Logout
-            </MenuItem>
+            {isAuth ? (
+              <MenuItem
+                onClick={async () => {
+                  const response = await logout({ name: userName });
+                  if (response.success) {
+                    setIsAuth(false);
+                    setUserName('');
+                    setUserEmail('');
+                  } else {
+                    handleSnackbarOpen('error', response.message);
+                  }
+                }}
+              >
+                <LogoutIcon />
+                Logout
+              </MenuItem>
+            ) : null}
           </Menu>
         </div>
       </div>

@@ -64,6 +64,7 @@ $white: #ffffff;
   &__menu{
     & li{
       column-gap: 10px;
+      padding-right: 20px;
       & svg{
         width: 24px;
         height: 24px;

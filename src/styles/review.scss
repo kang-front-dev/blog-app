@@ -89,8 +89,8 @@ $lightwhite: #e1e1e1;
     border-radius: 35px;
     padding: 30px;
     background-color: $darkgray;
+    margin-bottom: 20px;
     &_title {
-      margin-top: 40px;
       color: $white;
       font-size: 40px;
       padding: 10px 30px;
@@ -225,9 +225,12 @@ $lightwhite: #e1e1e1;
         opacity: 1;
       }
     }
-    &_img {
+    &_img_block {
       width: 100%;
-
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       position: absolute;
       top: 50%;
       left: 50%;

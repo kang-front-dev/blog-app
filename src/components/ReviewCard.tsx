@@ -22,11 +22,10 @@ export default function ReviewCard({ cardInfo }: ICardProps) {
           className="review__card"
           id={cardInfo.selectorId ? cardInfo.selectorId : ''}
         >
-          <div className="review__card_img_wrapper">
-            <div className="review__card_img_block">
-              <img src={cardInfo.imgPath} alt="" className="review__card_img" />
-            </div>
-          </div>
+          <div
+            className="review__card_img_block"
+            style={{ backgroundImage: `url(${cardInfo.imgPath})` }}
+          ></div>
 
           <div className="review__card_text">
             <h3 className="review__card_title">
