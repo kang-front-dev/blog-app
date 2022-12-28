@@ -5,6 +5,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { globalContext } from '../components/contexts/globalContext';
 import BurgerMenu from '../components/SideBar';
+import Background from '../components/Background';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -24,6 +25,8 @@ export default function Layout() {
     setOpen(false);
     return;
   };
+  
+
 
   return (
     <div className="global__wrapper">
@@ -48,6 +51,10 @@ export default function Layout() {
         </Alert>
       </Snackbar>
       <BurgerMenu />
+      <div className="background__wrapper">
+        <Background />
+        <Background />
+      </div>
     </div>
   );
 }

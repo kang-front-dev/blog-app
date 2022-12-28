@@ -1,0 +1,79 @@
+import React, { useState, useEffect } from 'react';
+import '../assets/images/lines.png';
+
+interface IBackground {
+  size: number;
+  xAmount: number;
+  yAmount: number;
+}
+
+export default function Background() {
+  const [bgProps, setBgProps] = useState({
+    size: 0,
+    xAmount: 1,
+    yAmount: 1,
+  });
+  const [bgArray, setBgArray] = useState<Array<IBackground>>([]);
+
+  function setBg() {
+    let size = (window.innerWidth - 1270) / 2;
+    console.log(size, 'size');
+
+    let xAmount = 1;
+    if (size >= 1200) {
+      xAmount = 4;
+    } else if (size < 1200 && size >= 900) {
+      xAmount = 3;
+    } else if (size < 900 && size >= 600) {
+      xAmount = 2;
+    }
+
+    size = size / xAmount;
+
+    const yAmount = Math.ceil(window.innerHeight / size);
+
+    console.log(yAmount, 'yAmount');
+    console.log(xAmount, 'xAmount');
+    console.log(size, 'size after adaptive');
+
+    setBgProps({
+      size,
+      xAmount,
+      yAmount,
+    });
+    const arr = [];
+    for (let i = 0; i < xAmount * yAmount; i++) {
+      arr.push(bgProps);
+    }
+
+    setBgArray(arr);
+    console.log(bgArray);
+  }
+
+  useEffect(() => {
+    setBg();
+    window.addEventListener('resize', () => {
+      setBg();
+    });
+  }, []);
+
+  return (
+    <div
+      className="background"
+      style={{
+        gridTemplateColumns: `repeat(${bgProps.xAmount},${bgProps.size}px)`,
+      }}
+    >
+      {bgArray.map((item, index) => {
+        return (
+          <img
+            key={index}
+            src={require('../assets/images/lines.png')}
+            alt=""
+            style={{ width: `${bgProps.size}px`, height: `${bgProps.size}px` }}
+          />
+        );
+      })}
+    </div>
+  );
+}
