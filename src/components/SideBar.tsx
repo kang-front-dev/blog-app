@@ -71,7 +71,7 @@ export default function SideBar() {
         <List>
           <ListItemButton
             onClick={() => {
-              navigate('/reviews/category/popular');
+              navigate('/category/popular');
               setIsSideBarOpen(false);
             }}
             style={{ color: '#252525' }}
@@ -110,7 +110,7 @@ export default function SideBar() {
                     key={index}
                     onClick={() => {
                       navigate(
-                        `/reviews/category/${category.content.toLowerCase()}`
+                        `/category/${category.content.toLowerCase()}`
                       );
                       setIsSideBarOpen(false);
                     }}
@@ -127,7 +127,7 @@ export default function SideBar() {
 
           <ListItemButton
             onClick={() => {
-              navigate('/reviews/tags');
+              navigate('/tags');
               setIsSideBarOpen(false);
             }}
             style={{ color: '#252525' }}

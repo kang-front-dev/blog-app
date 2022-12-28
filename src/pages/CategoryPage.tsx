@@ -41,9 +41,9 @@ export default function CategoryPage() {
   }, [category]);
 
   return (
-    <div className="review__category">
-      <div className="review__container_title">{category}</div>
-      <div className="review__container">
+    <section className="review__main_category">
+      <div className="review__main_container_title">{category}</div>
+      <div className="review__main_container">
         {categoryReviews.length > 0 ? (
           categoryReviews.map((review, index) => {
             return <ReviewCard key={index} cardInfo={{ ...review }} />;
@@ -54,6 +54,6 @@ export default function CategoryPage() {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

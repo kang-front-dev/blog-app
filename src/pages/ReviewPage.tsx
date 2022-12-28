@@ -58,6 +58,8 @@ export default function ReviewPage() {
     setReviewData(response.reviewData);
     getAuthorAvatar(response.reviewData.author);
     handleView();
+    console.log(response.reviewData.descr);
+    
   }
   async function getAuthorAvatar(name: string) {
     console.log(name);
@@ -120,7 +122,7 @@ export default function ReviewPage() {
   }, []);
 
   return (
-    <div className="review">
+    <section className="review">
       <div className="container">
         <div className="review__title">
           {reviewData.title}
@@ -195,7 +197,7 @@ export default function ReviewPage() {
             <RemoveRedEyeIcon />
             {reviewData.views}
           </span>
-          <Link to={`/reviews/category/${reviewData.group.toLowerCase()}`}>
+          <Link to={`/category/${reviewData.group.toLowerCase()}`}>
             <span className="review__group">{reviewData.group}</span>
           </Link>
           <div className="review__tags">
@@ -209,6 +211,6 @@ export default function ReviewPage() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

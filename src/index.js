@@ -8,7 +8,6 @@ import './assets/fonts/PeaceSans/stylesheet.css'
 import './assets/fonts/Gilroy/stylesheet.css'
 
 import './styles/style.scss'
-import './styles/nav.scss'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

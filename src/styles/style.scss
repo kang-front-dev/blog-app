@@ -1,6 +1,8 @@
+@import url('./nav.scss');
 @import url('./review.scss');
 @import url('./form.scss');
 @import url('./profile.scss');
+@import url('./tags.scss');
 
 $gray: #1e2224;
 $darkgray: #1e2224;
@@ -19,6 +21,9 @@ a {
 .container {
   max-width: 1240px;
   margin: 0 auto;
+}
+section{
+  padding: 50px 0;
 }
 body {
   overflow-y: scroll !important;

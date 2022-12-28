@@ -5,9 +5,7 @@ import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
 export default function MainPage() {
-  const {
-    setProgress,
-  } = useContext(globalContext);
+  const { setProgress } = useContext(globalContext);
   const [recentReviews, setRecentReviews] = useState([]);
   const [popularReviews, setPopularReviews] = useState([]);
 
@@ -20,7 +18,7 @@ export default function MainPage() {
         setProgress(0);
       }, 500);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleUpdate = async () => {
@@ -46,18 +44,31 @@ export default function MainPage() {
   };
 
   return (
-    <div style={{ padding: '50px 0', width: '100%' }}>
-      <h2 className="review__container_title">Recently added</h2>
-      <div className="review__container">
-        {recentReviews.map((item, index) => {
-          return <ReviewCard key={index} cardInfo={{ ...item }} />;
-        })}
+    <div
+      style={{ padding: '50px 0', width: '100%' }}
+      className="review__main_container_wrapper"
+    >
+      <div className="review__main_category_block">
+        <h2 className="review__main_container_title">Recently added</h2>
+        <div className="review__main_container">
+          {recentReviews.map((item, index) => {
+            return <ReviewCard key={index} cardInfo={{ ...item }} />;
+          })}
+        </div>
+        <a href="/category/recent" className="review__main_container_link">
+          View more
+        </a>
       </div>
-      <h2 className="review__container_title">Most Popular</h2>
-      <div className="review__container">
-        {popularReviews.map((item, index) => {
-          return <ReviewCard key={index} cardInfo={{ ...item }} />;
-        })}
+      <div className="review__main_category_block">
+        <h2 className="review__main_container_title">Most Popular</h2>
+        <div className="review__main_container">
+          {popularReviews.map((item, index) => {
+            return <ReviewCard key={index} cardInfo={{ ...item }} />;
+          })}
+        </div>
+        <a href="/category/popular" className="review__main_container_link">
+          View more
+        </a>
       </div>
     </div>
   );

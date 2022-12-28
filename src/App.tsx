@@ -10,6 +10,7 @@ import RegPage from './pages/RegPage';
 import Profile from './pages/Profile';
 import CategoryPage from './pages/CategoryPage';
 import { checkAuth } from './components/api/checkAuth';
+import TagsPage from './pages/TagsPage';
 
 function App() {
   //NAV STATES
@@ -97,8 +98,13 @@ function App() {
             <Route index path="/profiles/:name" element={<Profile />}></Route>
             <Route
               index
-              path="/reviews/category/:category"
+              path="/category/:category"
               element={<CategoryPage />}
+            ></Route>
+            <Route
+              index
+              path="/tags"
+              element={<TagsPage />}
             ></Route>
           </Route>
         </Routes>
