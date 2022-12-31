@@ -13,6 +13,7 @@ $lightwhite: #e1e1e1;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    margin-bottom: 20px;
   }
   &__item {
     color: $white;
@@ -29,32 +30,49 @@ $lightwhite: #e1e1e1;
     border: none;
     overflow: hidden;
 
+    box-shadow: inset 0px 1px 2px rgb(239 232 232 / 40%);
+
     transition: 0.2s;
-    &::after{
+    user-select: none;
+    &::after {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      background: $white;
-      width: 0px;
-      height: 0px;
-      border-radius: 50%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        transparent,
+        rgb(204, 204, 204),
+        transparent,
+        transparent
+      );
+      transform: translateX(-100%);
       transition: 0.4s;
-      opacity: 0;
+      animation: slideToRight 0.6s;
+      animation-delay: 0.1s;
     }
     &.active {
-      color: $black;
-      &::after{
-        width: 200px;
-        height: 200px;
-        opacity: 1;
-      }
+      background-color: rgb(239 232 232 / 20%);
+      box-shadow: inset 0px 1px 2px $white;
+
+      transform: translateY(-7px);
     }
     &_text {
       pointer-events: none;
       position: relative;
       z-index: 3;
     }
+  }
+}
+
+@keyframes slideToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }

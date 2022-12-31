@@ -44,7 +44,7 @@ export default function NewPost() {
       imgPath: imgPath,
       group: group.label,
       tags: tags.map((item) => {
-        return typeof item == 'object' ? item.label : item;
+        return typeof item == 'object' ? item.label.toLowerCase() : item.toLowerCase();
       }),
       rating: rating.toString(),
       author: userName,

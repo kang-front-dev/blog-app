@@ -17,7 +17,6 @@ export default function Background() {
 
   function setBg() {
     let size = (window.innerWidth - 1270) / 2;
-    console.log(size, 'size');
 
     let xAmount = 1;
     if (size >= 1200) {
@@ -32,10 +31,6 @@ export default function Background() {
 
     const yAmount = Math.ceil(window.innerHeight / size);
 
-    console.log(yAmount, 'yAmount');
-    console.log(xAmount, 'xAmount');
-    console.log(size, 'size after adaptive');
-
     setBgProps({
       size,
       xAmount,
@@ -47,7 +42,6 @@ export default function Background() {
     }
 
     setBgArray(arr);
-    console.log(bgArray);
   }
 
   useEffect(() => {
