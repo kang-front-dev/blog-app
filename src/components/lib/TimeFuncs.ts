@@ -9,7 +9,9 @@ export interface ITime {
 
 export function getToday() {
   const date = new Date();
-  const currentDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  const month = date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+  const currentDate = `${day}/${month}/${date.getFullYear()}`;
   const hours = date.getHours().toString();
   const minutes = date.getMinutes().toString();
   const seconds = date.getSeconds().toString();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getReview } from '../components/api/getReview';
-import { IReview } from '../components/classes/ReviewClass';
+import { IComment, IReview } from '../components/classes/ReviewClass';
 import { getBgFromRating } from '../components/lib/RatingBackground';
 
 import Button from '@mui/material/Button';
@@ -11,6 +11,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SendIcon from '@mui/icons-material/Send';
+import TextField from '@mui/material/TextField';
 
 import { globalContext } from '../components/contexts/globalContext';
 import { addLike, removeLike } from '../components/api/addOrRemoveLike';
@@ -20,6 +22,9 @@ import {
 } from '../components/api/addOrRemoveDislike';
 import { addView } from '../components/api/addView';
 import { getUserAvatar } from '../components/api/getUserAvatar';
+import { addComment } from '../components/api/addComment';
+import { getToday } from '../components/lib/TimeFuncs';
+import { getUserInfo } from '../components/api/getUserInfo';
 
 interface IHasMyLikeOrDislike {
   hasMyLike: boolean;
@@ -28,14 +33,13 @@ interface IHasMyLikeOrDislike {
 
 export default function ReviewPage() {
   const { id } = useParams();
-  const {
-    userName,
-    isAuth,
-    setProgress,
-    handleSnackbarOpen,
-  } = useContext(globalContext);
+  const { userName, isAuth, setProgress, handleSnackbarOpen } =
+    useContext(globalContext);
+
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
+  const [commentValue, setCommentValue] = useState('');
+  const [comments, setComments] = useState([]);
   const [reviewData, setReviewData] = useState<IReview>({
     _id: id,
     createDate: {
@@ -47,6 +51,7 @@ export default function ReviewPage() {
     views: 0,
     group: '',
     tags: [],
+    comments: [],
   });
   const [authorAvatar, setAuthorAvatar] = useState('');
 
@@ -55,11 +60,15 @@ export default function ReviewPage() {
       console.log(err);
     });
     console.log(response);
+    const commentsData: Array<IComment> = [];
+    response.reviewData.comments.forEach(async (comment: IComment) => {
+      const authorDataRes = await getUserInfo({ name: comment.author });
+      commentsData.push({ ...comment, authorData: authorDataRes.userData });
+    });
     setReviewData(response.reviewData);
+    setComments(commentsData);
     getAuthorAvatar(response.reviewData.author);
     handleView();
-    console.log(response.reviewData.descr);
-    
   }
   async function getAuthorAvatar(name: string) {
     console.log(name);
@@ -109,6 +118,17 @@ export default function ReviewPage() {
   const handleView = async () => {
     addView({ _id: id, username: userName });
   };
+  const handleComment = async () => {
+    const data = { author: userName, date: getToday(), content: commentValue };
+    addComment({ ...data, reviewId: id });
+    setReviewData({
+      ...reviewData,
+      comments: [
+        ...reviewData.comments,
+        { author: userName, date: getToday(), content: commentValue },
+      ],
+    });
+  };
 
   useEffect(() => {
     setProgress(20);
@@ -118,7 +138,7 @@ export default function ReviewPage() {
         setProgress(100);
       }, 300);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -208,6 +228,66 @@ export default function ReviewPage() {
                 </span>
               );
             })}
+          </div>
+        </div>
+        <div className="review__comments">
+          <div className="container">
+            <div className="review__comments_title">
+              {reviewData.comments.length}{' '}
+              {reviewData.comments.length === 1 ? 'Comment' : 'Comments'}
+            </div>
+            <div className="review__comments_input_block">
+              <TextField
+                multiline={true}
+                className="review__comments_input"
+                id="review-comments-input"
+                placeholder="Comment text..."
+                value={commentValue}
+                onInput={(e) => {
+                  const input = e.target as HTMLInputElement;
+                  setCommentValue(input.value);
+                }}
+              />
+              <button
+                className="review__comments_input_btn"
+                onClick={handleComment}
+              >
+                Отправить
+              </button>
+            </div>
+            <div className="review__comments_container">
+              {comments.map((comment: IComment, index) => {
+                console.log(comment);
+
+                return (
+                  <div className="review__comments_item" key={index}>
+                    <div className="review__comments_item_header">
+                      <div
+                        className="review__comments_item_avatar"
+                        style={{
+                          backgroundImage: `url(${comment.authorData.avatarImgPath})`,
+                        }}
+                      >
+                        {!comment.authorData.avatarImgPath ? (
+                          <AccountCircleIcon />
+                        ) : null}
+                      </div>
+                      <div className="review__comments_item_author">
+                        <div className="review__comments_item_name">
+                          {comment.author}
+                        </div>
+                        <div className="review__comments_item_date">
+                          {`${comment.date.dayMonthYear} ${comment.date.time.hours}:${comment.date.time.minutes}`}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="review__comments_item_descr">
+                      {comment.content}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

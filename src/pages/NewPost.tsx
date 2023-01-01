@@ -52,9 +52,8 @@ export default function NewPost() {
       likes: [],
       dislikes: [],
       createDate: getToday(),
+      comments: [],
     });
-    console.log(tags, 'tags');
-    console.log(newReview);
     const response = await insertReview(newReview);
     console.log(response, 'response');
     const updateTagsResponse = await updateTags(newReview.tags);

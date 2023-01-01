@@ -1,4 +1,5 @@
 import { ITime } from '../lib/TimeFuncs';
+import { IUser } from './userDataClass';
 export interface IReviewStatProps {
   _id: string;
   username: string;
@@ -17,6 +18,15 @@ export interface IReview {
   author?: string;
   createDate?: ITime;
   selectorId?: string;
+  comments?: Array<IComment>;
+}
+
+export interface IComment {
+  date: ITime;
+  content: string;
+  author: string;
+  reviewId?: string;
+  authorData?: IUser;
 }
 export class Review implements IReview {
   _id?: string;
@@ -32,6 +42,8 @@ export class Review implements IReview {
   author: string;
   createDate: ITime;
   selectorId?: string;
+  comments?: Array<IComment>;
+
   constructor(options: IReview) {
     this._id = options._id;
     this.title = options.title;
@@ -46,5 +58,6 @@ export class Review implements IReview {
     this.author = options.author;
     this.createDate = options.createDate;
     this.selectorId = options.selectorId;
+    this.comments = options.comments;
   }
 }
