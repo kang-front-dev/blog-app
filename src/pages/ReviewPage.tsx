@@ -11,8 +11,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import { globalContext } from '../components/contexts/globalContext';
 import { addLike, removeLike } from '../components/api/addOrRemoveLike';
@@ -22,8 +22,11 @@ import {
 } from '../components/api/addOrRemoveDislike';
 import { addView } from '../components/api/addView';
 import { getUserAvatar } from '../components/api/getUserAvatar';
-import { addComment } from '../components/api/addComment';
-import { getToday } from '../components/lib/TimeFuncs';
+import {
+  addComment,
+  removeComment,
+} from '../components/api/addOrRemoveComment';
+import { getTimeWeight, getToday } from '../components/lib/TimeFuncs';
 import { getUserInfo } from '../components/api/getUserInfo';
 
 interface IHasMyLikeOrDislike {
@@ -38,8 +41,12 @@ export default function ReviewPage() {
 
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
+  const [likesAmount, setLikesAmount] = useState(0);
+  const [dislikesAmount, setDislikesAmount] = useState(0);
+
   const [commentValue, setCommentValue] = useState('');
   const [comments, setComments] = useState([]);
+
   const [reviewData, setReviewData] = useState<IReview>({
     _id: id,
     createDate: {
@@ -61,73 +68,111 @@ export default function ReviewPage() {
     });
     console.log(response);
     const commentsData: Array<IComment> = [];
-    response.reviewData.comments.forEach(async (comment: IComment) => {
-      const authorDataRes = await getUserInfo({ name: comment.author });
-      commentsData.push({ ...comment, authorData: authorDataRes.userData });
-    });
+    if (response.reviewData.comments) {
+      response.reviewData.comments.forEach(async (comment: IComment) => {
+        const authorDataRes = await getUserInfo({ name: comment.author });
+        commentsData.push({ ...comment, authorData: authorDataRes.userData });
+      });
+    }
+    checkLikeAndDislike(response.reviewData);
+
     setReviewData(response.reviewData);
     setComments(commentsData);
     getAuthorAvatar(response.reviewData.author);
+
     handleView();
   }
+
   async function getAuthorAvatar(name: string) {
     console.log(name);
 
     const authorAvatarSrc = await getUserAvatar({ name: name });
     setAuthorAvatar(authorAvatarSrc.imgPath);
   }
-  function checkLikeAndDislike(): IHasMyLikeOrDislike {
-    const hasMyLike = reviewData.likes.indexOf(userName);
-    const hasMyDislike = reviewData.dislikes.indexOf(userName);
-    return {
-      hasMyLike: hasMyLike > 0 ? true : false,
-      hasMyDislike: hasMyDislike > 0 ? true : false,
-    };
+
+  async function checkLikeAndDislike(reviewData: IReview) {
+    const name = localStorage.getItem('username');
+    const hasMyLike = reviewData.likes.includes(name);
+    const hasMyDislike = reviewData.dislikes.includes(name);
+    setIsLiked(hasMyLike);
+    setIsDisliked(hasMyDislike);
+    setLikesAmount(reviewData.likes.length);
+    setDislikesAmount(reviewData.dislikes.length);
+    if (hasMyLike) {
+      setIsLiked(true);
+      console.log('i liked it', hasMyLike);
+    } else if (hasMyDislike) {
+      setIsDisliked(true);
+      console.log('i disliked it', hasMyDislike);
+    }
+    return;
   }
 
-  const handleLike = async () => {
-    const { hasMyLike, hasMyDislike } = checkLikeAndDislike();
-    if (!hasMyLike) {
+  const handleLike = () => {
+    if (!isLiked && !isDisliked) {
       addLike({ _id: id, username: userName });
       setIsLiked(true);
-      if (hasMyDislike) {
-        removeDislike({ _id: id, username: userName });
-        setIsDisliked(true);
-      }
-      getReviewData();
-    } else {
+      setLikesAmount(likesAmount + 1);
+    } else if (!isLiked && isDisliked) {
+      addLike({ _id: id, username: userName });
+      setIsLiked(true);
+      setLikesAmount(likesAmount + 1);
+
+      removeDislike({ _id: id, username: userName });
+      setIsDisliked(false);
+      setDislikesAmount(dislikesAmount - 1);
+    } else if (isLiked && !isDisliked) {
       removeLike({ _id: id, username: userName });
+      setIsLiked(false);
+      setLikesAmount(likesAmount - 1);
     }
   };
 
-  const handleDislike = async () => {
-    const { hasMyLike, hasMyDislike } = checkLikeAndDislike();
-    if (!hasMyDislike) {
+  const handleDislike = () => {
+    if (!isLiked && !isDisliked) {
       addDislike({ _id: id, username: userName });
       setIsDisliked(true);
-      if (hasMyLike) {
-        removeLike({ _id: id, username: userName });
-        setIsLiked(false);
-      }
-      getReviewData();
-    } else {
+      setDislikesAmount(dislikesAmount + 1);
+    } else if (isLiked && !isDisliked) {
+      addDislike({ _id: id, username: userName });
+      setIsDisliked(true);
+      setDislikesAmount(dislikesAmount + 1);
+
+      removeLike({ _id: id, username: userName });
+      setIsLiked(false);
+      setLikesAmount(likesAmount - 1);
+    } else if (isDisliked && !isLiked) {
       removeDislike({ _id: id, username: userName });
+      setIsDisliked(false);
+      setDislikesAmount(dislikesAmount - 1);
     }
   };
 
   const handleView = async () => {
     addView({ _id: id, username: userName });
   };
+
   const handleComment = async () => {
     const data = { author: userName, date: getToday(), content: commentValue };
+    const myData = await getUserInfo({ name: userName });
+    console.log(myData);
+
     addComment({ ...data, reviewId: id });
-    setReviewData({
-      ...reviewData,
-      comments: [
-        ...reviewData.comments,
-        { author: userName, date: getToday(), content: commentValue },
-      ],
+    setComments([...comments, { ...data, authorData: myData }]);
+  };
+  const handleCommentDelete = async (comment: IComment) => {
+    let itemIndex;
+    const newCommentsArr = comments.filter((item, index) => {
+      if (item === comment) {
+        itemIndex = index;
+      }
+      return item === comment ? false : true;
     });
+    console.log(newCommentsArr);
+    console.log(itemIndex);
+
+    removeComment({ ...comment, reviewId: id, itemIndex });
+    setComments([...newCommentsArr]);
   };
 
   useEffect(() => {
@@ -164,7 +209,7 @@ export default function ReviewPage() {
               ) : (
                 <AccountCircleIcon />
               )}
-              <span>{reviewData.author}</span>
+              <span>by {reviewData.author}</span>
             </Link>
           </p>
         </div>
@@ -188,9 +233,7 @@ export default function ReviewPage() {
               }}
             >
               {isLiked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
-              <span className="review__likes_amount">
-                {reviewData.likes.length}
-              </span>
+              <span className="review__likes_amount">{likesAmount}</span>
             </Button>
           </div>
           <div className="review__dislikes_block">
@@ -208,14 +251,12 @@ export default function ReviewPage() {
               }}
             >
               {isDisliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
-              <span className="review__likes_amount">
-                {reviewData.dislikes.length}
-              </span>
+              <span className="review__likes_amount">{dislikesAmount}</span>
             </Button>
           </div>
           <span className="review__views">
             <RemoveRedEyeIcon />
-            {reviewData.views}
+            {reviewData.views + 1}
           </span>
           <Link to={`/category/${reviewData.group.toLowerCase()}`}>
             <span className="review__group">{reviewData.group}</span>
@@ -252,34 +293,63 @@ export default function ReviewPage() {
                 className="review__comments_input_btn"
                 onClick={handleComment}
               >
-                Отправить
+                Upload
               </button>
             </div>
             <div className="review__comments_container">
               {comments.map((comment: IComment, index) => {
-                console.log(comment);
+                console.log(comment, 'rendering comment');
+
+                const dayWeight = 172800;
+                const currentDateWeight = getTimeWeight(getToday());
+                const commentDateWeight = getTimeWeight(comment.date);
+                let resultDate =
+                  currentDateWeight - commentDateWeight < dayWeight
+                    ? 'today'
+                    : 'yesterday';
+                if (currentDateWeight - commentDateWeight > dayWeight * 2) {
+                  resultDate = comment.date.dayMonthYear;
+                }
 
                 return (
                   <div className="review__comments_item" key={index}>
                     <div className="review__comments_item_header">
-                      <div
-                        className="review__comments_item_avatar"
-                        style={{
-                          backgroundImage: `url(${comment.authorData.avatarImgPath})`,
-                        }}
-                      >
-                        {!comment.authorData.avatarImgPath ? (
-                          <AccountCircleIcon />
-                        ) : null}
-                      </div>
-                      <div className="review__comments_item_author">
-                        <div className="review__comments_item_name">
-                          {comment.author}
+                      <div className="review__comments_item_header_about">
+                        <div
+                          className="review__comments_item_avatar"
+                          style={{
+                            backgroundImage: `url(${
+                              comment.authorData.avatarImgPath
+                                ? comment.authorData.avatarImgPath
+                                : ''
+                            })`,
+                          }}
+                        >
+                          {!comment.authorData.avatarImgPath ? (
+                            <AccountCircleIcon />
+                          ) : null}
                         </div>
-                        <div className="review__comments_item_date">
-                          {`${comment.date.dayMonthYear} ${comment.date.time.hours}:${comment.date.time.minutes}`}
+                        <div className="review__comments_item_author">
+                          <div className="review__comments_item_name">
+                            {comment.author}
+                          </div>
+                          <div className="review__comments_item_date">
+                            {`${resultDate} at ${comment.date.time.hours}:${comment.date.time.minutes}`}
+                          </div>
                         </div>
                       </div>
+                      {userName === comment.author ? (
+                        <div className="review__comments_item_header_controls">
+                          <button
+                            onClick={() => {
+                              handleCommentDelete(comment);
+                            }}
+                            className="review__comments_item_btn-delete"
+                          >
+                            <DeleteOutlineIcon />
+                          </button>
+                        </div>
+                      ) : null}
                     </div>
                     <div className="review__comments_item_descr">
                       {comment.content}

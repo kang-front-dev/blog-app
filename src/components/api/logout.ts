@@ -2,6 +2,10 @@ import { connectionUrl } from '../../connection';
 import { IUser } from '../classes/userDataClass';
 
 export function logout(body: IUser) {
+  localStorage.removeItem('_id')
+  localStorage.removeItem('name')
+  localStorage.removeItem('email')
+  localStorage.removeItem('token')
   return fetch(`${connectionUrl}/logout`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,

@@ -38,6 +38,9 @@ export default function RegPage() {
         setIsAuth(true);
         setUserName(name);
         setUserEmail(email);
+        localStorage.setItem('username',name)
+        localStorage.setItem('email',email)
+
         handleSnackbarOpen('success', 'Welcome!');
         navigate('/');
       } else {

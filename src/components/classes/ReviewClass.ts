@@ -27,6 +27,7 @@ export interface IComment {
   author: string;
   reviewId?: string;
   authorData?: IUser;
+  itemIndex?: number;
 }
 export class Review implements IReview {
   _id?: string;

@@ -14,3 +14,16 @@ export function addComment(body: IComment) {
     })
     .catch((err) => console.log(err));
 }
+export function removeComment(body: IComment) {
+  return fetch(`${connectionUrl}/removeComment`, {
+    headers: {
+      'Content-type': 'application/json',
+    },
+    method: 'DELETE',
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => console.log(err));
+}
