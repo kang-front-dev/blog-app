@@ -15,7 +15,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Layout() {
-  const { open, setOpen, alertMessage, severity, isLoading } =
+  const { open, setOpen, alertMessage, severity } =
     useContext(globalContext);
 
   const handleClose = (

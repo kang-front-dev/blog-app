@@ -84,7 +84,7 @@ export default function SideBar() {
 
           <ListItemButton
             onClick={() => {
-              navigate('/reviews/category/recent');
+              navigate('/category/recent');
               setIsSideBarOpen(false);
             }}
             style={{ color: '#252525' }}

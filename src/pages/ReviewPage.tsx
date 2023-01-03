@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getReview } from '../components/api/getReview';
 import { IComment, IReview } from '../components/classes/ReviewClass';
 import { getBgFromRating } from '../components/lib/RatingBackground';
@@ -13,6 +13,7 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Modal from '@mui/material/Modal';
 
 import { globalContext } from '../components/contexts/globalContext';
 import { addLike, removeLike } from '../components/api/addOrRemoveLike';
@@ -28,16 +29,14 @@ import {
 } from '../components/api/addOrRemoveComment';
 import { getTimeWeight, getToday } from '../components/lib/TimeFuncs';
 import { getUserInfo } from '../components/api/getUserInfo';
-
-interface IHasMyLikeOrDislike {
-  hasMyLike: boolean;
-  hasMyDislike: boolean;
-}
+import { deleteReview } from '../components/api/deleteReview';
 
 export default function ReviewPage() {
   const { id } = useParams();
   const { userName, isAuth, setProgress, handleSnackbarOpen } =
     useContext(globalContext);
+
+  const navigate = useNavigate();
 
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
@@ -67,17 +66,36 @@ export default function ReviewPage() {
       console.log(err);
     });
     console.log(response);
-    const commentsData: Array<IComment> = [];
+    let commentsData: Array<IComment> = [];
     if (response.reviewData.comments) {
-      response.reviewData.comments.forEach(async (comment: IComment) => {
-        const authorDataRes = await getUserInfo({ name: comment.author });
-        commentsData.push({ ...comment, authorData: authorDataRes.userData });
-      });
+      console.log(response.reviewData.comments, 'response comments');
+
+      response.reviewData.comments.forEach(
+        async (comment: IComment, index: number) => {
+          const { userData } = await getUserInfo({ name: comment.author });
+          commentsData = await [
+            ...commentsData,
+            {
+              ...comment,
+              authorData: {
+                name: userData.name,
+                avatarImgPath: userData.avatarImgPath,
+                email: userData.email,
+                _id: userData._id,
+              },
+            },
+          ].sort((a: IComment, b: IComment) => {
+            const aTimeWeight = getTimeWeight(a.date);
+            const bTimeWeight = getTimeWeight(b.date);
+            return aTimeWeight - bTimeWeight;
+          });
+          setComments(commentsData);
+        }
+      );
     }
     checkLikeAndDislike(response.reviewData);
 
     setReviewData(response.reviewData);
-    setComments(commentsData);
     getAuthorAvatar(response.reviewData.author);
 
     handleView();
@@ -107,6 +125,14 @@ export default function ReviewPage() {
     }
     return;
   }
+
+  const handleReviewDelete = async () => {
+    const deleteRes = await deleteReview(reviewData);
+    if (deleteRes.success) {
+      navigate('/');
+      handleSnackbarOpen('success', 'Review successfully deleted!');
+    }
+  };
 
   const handleLike = () => {
     if (!isLiked && !isDisliked) {
@@ -168,7 +194,8 @@ export default function ReviewPage() {
       }
       return item === comment ? false : true;
     });
-    console.log(newCommentsArr);
+    console.log(comments, 'old comments arr');
+    console.log(newCommentsArr, 'new comments arr');
     console.log(itemIndex);
 
     removeComment({ ...comment, reviewId: id, itemIndex });
@@ -186,19 +213,67 @@ export default function ReviewPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //////////////////////OPTIONS MODAL////////////////////////////
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
+  ///////////////////////////////////////////////////////////////
+
   return (
     <section className="review">
       <div className="container">
         <div className="review__title">
-          {reviewData.title}
-          <span
-            className="review__rating"
-            style={{
-              backgroundColor: getBgFromRating(Number(reviewData.rating)),
-            }}
-          >
-            {reviewData.rating}
-          </span>
+          <div className="review__title_content">
+            {reviewData.title}
+            <span
+              className="review__rating"
+              style={{
+                backgroundColor: getBgFromRating(Number(reviewData.rating)),
+              }}
+            >
+              {reviewData.rating}
+            </span>
+          </div>
+          <div className="review__options">
+            <button
+              className="review__options_btn-delete"
+              onClick={handleModalOpen}
+            >
+              <DeleteOutlineIcon />
+            </button>
+            <Modal
+              open={modalOpen}
+              onClose={handleModalClose}
+              aria-labelledby="model-title"
+              aria-describedby="modal-controls"
+            >
+              <div className="modal">
+                <div className="modal__title" id="model-title">
+                  Are you sure to delete review?
+                </div>
+                <div className="modal__controls" id="modal-controls">
+                  <Button
+                    variant="outlined"
+                    style={{ color: '#FFFFFF', borderColor: '#FFFFFF' }}
+                    onClick={handleModalClose}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      handleModalOpen();
+                      handleReviewDelete();
+                    }}
+                  >
+                    Yes, delete
+                  </Button>
+                </div>
+              </div>
+            </Modal>
+          </div>
         </div>
         <div className="review__about">
           <p className="review__date">{reviewData.createDate.dayMonthYear}</p>
@@ -277,37 +352,49 @@ export default function ReviewPage() {
               {reviewData.comments.length}{' '}
               {reviewData.comments.length === 1 ? 'Comment' : 'Comments'}
             </div>
-            <div className="review__comments_input_block">
-              <TextField
-                multiline={true}
-                className="review__comments_input"
-                id="review-comments-input"
-                placeholder="Comment text..."
-                value={commentValue}
-                onInput={(e) => {
-                  const input = e.target as HTMLInputElement;
-                  setCommentValue(input.value);
-                }}
-              />
-              <button
-                className="review__comments_input_btn"
-                onClick={handleComment}
-              >
-                Upload
-              </button>
-            </div>
+            {isAuth ? (
+              <div className="review__comments_input_block">
+                <TextField
+                  multiline={true}
+                  className="review__comments_input"
+                  id="review-comments-input"
+                  placeholder="Comment text..."
+                  value={commentValue}
+                  onInput={(e) => {
+                    const input = e.target as HTMLInputElement;
+                    setCommentValue(input.value);
+                  }}
+                />
+                <button
+                  className="review__comments_input_btn"
+                  onClick={handleComment}
+                >
+                  Upload
+                </button>
+              </div>
+            ) : (
+              <div className="review__comments_input_error">
+                You have to sign in to comment reviews
+              </div>
+            )}
             <div className="review__comments_container">
               {comments.map((comment: IComment, index) => {
-                console.log(comment, 'rendering comment');
+                const currentDate = getToday();
+                const currentDayWeight =
+                  Number(currentDate.time.hours) * 60 * 60 +
+                  Number(currentDate.time.minutes) * 60 +
+                  Number(currentDate.time.seconds);
 
-                const dayWeight = 172800;
-                const currentDateWeight = getTimeWeight(getToday());
+                const currentDateWeight = getTimeWeight(currentDate);
                 const commentDateWeight = getTimeWeight(comment.date);
                 let resultDate =
-                  currentDateWeight - commentDateWeight < dayWeight
+                  currentDateWeight - commentDateWeight < currentDayWeight
                     ? 'today'
                     : 'yesterday';
-                if (currentDateWeight - commentDateWeight > dayWeight * 2) {
+                if (
+                  currentDateWeight - commentDateWeight >
+                  currentDayWeight * 2
+                ) {
                   resultDate = comment.date.dayMonthYear;
                 }
 

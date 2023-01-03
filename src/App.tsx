@@ -59,10 +59,7 @@ function App() {
     userName,
     setUserName,
   };
-  const contextLoading = {
-    isLoading,
-    setIsLoading,
-  };
+
   async function checkToken() {
     const response = await checkAuth();
     if (response.success) {
@@ -85,7 +82,6 @@ function App() {
           ...contextValueNav,
           ...contextValueUser,
           ...contextValueSnackbar,
-          ...contextLoading,
         }}
       >
         <Routes>

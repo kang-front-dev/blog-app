@@ -1,0 +1,29 @@
+$gray: #828081;
+$darkgray: #1e2224;
+$black: #161b1d;
+$white: #ffffff;
+$lightwhite: #e1e1e1;
+
+.modal{
+  background: $darkgray;
+  border-radius: 10px;
+  padding: 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  
+  &__title{
+    font-size: 30px;
+    font-weight: 500;
+    color: $white;
+    margin-bottom: 24px;
+  }
+  &__controls{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+  }
+}
