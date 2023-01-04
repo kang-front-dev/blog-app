@@ -184,6 +184,7 @@ export default function ReviewPage() {
     console.log(myData);
 
     addComment({ ...data, reviewId: id });
+    setCommentValue('')
     setComments([...comments, { ...data, authorData: myData }]);
   };
   const handleCommentDelete = async (comment: IComment) => {
@@ -349,8 +350,8 @@ export default function ReviewPage() {
         <div className="review__comments">
           <div className="container">
             <div className="review__comments_title">
-              {reviewData.comments.length}{' '}
-              {reviewData.comments.length === 1 ? 'Comment' : 'Comments'}
+              {comments.length}{' '}
+              {comments.length === 1 ? 'Comment' : 'Comments'}
             </div>
             {isAuth ? (
               <div className="review__comments_input_block">

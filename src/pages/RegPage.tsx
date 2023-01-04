@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { regUser } from '../components/api/regUser';
 import { globalContext } from '../components/contexts/globalContext';
+import { validateEmail } from '../components/lib/ValidateEmail';
 
 export const formStyles = {
   input: {
@@ -26,7 +27,7 @@ export default function RegPage() {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    if (name && email && password) {
+    if (name && validateEmail(email) && password.length >= 6) {
       const response = await regUser({
         name: name,
         email: email,
@@ -38,21 +39,23 @@ export default function RegPage() {
         setIsAuth(true);
         setUserName(name);
         setUserEmail(email);
-        localStorage.setItem('username',name)
-        localStorage.setItem('email',email)
+        localStorage.setItem('username', name);
+        localStorage.setItem('email', email);
 
         handleSnackbarOpen('success', 'Welcome!');
         navigate('/');
       } else {
         handleSnackbarOpen('error', response.message);
       }
-    } else {
-      handleSnackbarOpen(
-        'error',
-        name && email ? 'Password required.' : 'Please fill in the form fields.'
-      );
+    } else if (!validateEmail(email)) {
+      handleSnackbarOpen('error', 'Please enter a valid email address');
+    } else if (password.length < 6) {
+      handleSnackbarOpen('error', 'Minimum password length is 6 characters');
+    } else{
+      handleSnackbarOpen('error', 'Please fill in all fields');
     }
   };
+
   return (
     <section>
       <form className="form__wrapper">

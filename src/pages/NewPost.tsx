@@ -160,7 +160,7 @@ export default function NewPost() {
               }}
             />
             <p className="review__new_input_note">
-              *Press "Enter" to add the tag to the field*
+              *Press "Enter" to add your personal tag to the field*
             </p>
             <Button
               variant="contained"

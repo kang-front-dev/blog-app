@@ -114,6 +114,7 @@ export default function Nav() {
                   } else {
                     handleSnackbarOpen('error', response.message);
                   }
+                  handleDropdownClose();
                 }}
               >
                 <LogoutIcon />

@@ -1,5 +1,6 @@
 .background{
   display: grid;
+  user-select: none;
   &__wrapper{
     position: fixed;
     z-index: -1;

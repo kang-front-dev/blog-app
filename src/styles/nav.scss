@@ -12,13 +12,13 @@ $white: #ffffff;
   padding: 10px 0;
   background: $darkgray;
   box-shadow: 0px 0px 2px 2px #25252525;
-  &__progress{
+  &__progress {
     position: fixed;
     top: 0;
     width: 100%;
     opacity: 0;
     transition: 0.2s;
-    &.active{
+    &.active {
       opacity: 1;
     }
   }
@@ -27,59 +27,59 @@ $white: #ffffff;
     align-items: center;
     justify-content: space-between;
   }
-  &__logo{
+  &__logo {
     display: flex;
     align-items: center;
     column-gap: 10px;
-    & > img{
+    & > img {
       width: 40px;
       height: 40px;
     }
-    &_text{
+    &_text {
       font-family: 'Peace-Sans';
       font-weight: 700;
       color: $white;
       font-size: 35px;
     }
   }
-  &__left{
+  &__left {
     display: flex;
     align-items: center;
     column-gap: 10px;
-    & svg{
+    & svg {
       font-size: 30px;
       color: $white;
     }
   }
-  &__right{
+  &__right {
     display: flex;
     align-items: center;
     column-gap: 16px;
-    & svg{
+    & svg {
       color: $white;
       font-size: 30px;
     }
   }
 
-  &__menu{
-    & li{
+  &__menu {
+    & li {
       column-gap: 10px;
       padding-right: 20px;
-      & svg{
+      & svg {
         width: 24px;
         height: 24px;
       }
     }
   }
 
-  &_title{
+  &_title {
     font-size: 30px;
     font-weight: 500;
     color: $white;
 
     font-weight: 400;
   }
-  &_search{
+  &_search {
     overflow: hidden;
 
     display: flex;
@@ -90,7 +90,11 @@ $white: #ffffff;
     background: $darkgray;
     border-bottom: 1px $gray solid;
     cursor: pointer;
-    &_input{
+    &_wrapper {
+      position: relative;
+      border-bottom: 10px;
+    }
+    &_input {
       background: none;
       padding: 7px 10px;
       border: none;
@@ -99,17 +103,69 @@ $white: #ffffff;
       font-weight: 400;
       color: $white;
     }
+    &_results {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      bottom: 0;
+      transform: translateY(100%);
+
+      max-height: 500px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar-thumb{
+
+      }
+      &::-webkit-scrollbar-track{
+        background: $darkgray;
+      }
+    }
+    &_card {
+      width: 100%;
+      height: 110px;
+      padding: 20px;
+
+      display: flex;
+      align-items: flex-end;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      cursor: pointer;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.85),
+          rgba(0, 0, 0, 0.1)
+        );
+      }
+      &_content{
+        position: relative;
+        z-index: 2;
+      }
+      &_title {
+        font-size: 16px;
+        color: $white;
+
+      }
+    }
   }
 }
 
-.sidebar{
-  &__menu{
+.sidebar {
+  &__menu {
     width: 250px;
     height: 100%;
     transition: 0.3s;
     transform: translateX(-100%);
     background: $white;
-    &_wrapper{
+    &_wrapper {
       position: fixed;
       top: 0;
       right: 0;
@@ -120,14 +176,13 @@ $white: #ffffff;
       opacity: 0;
       pointer-events: none;
       transition: 0.3s;
-      &.active{
+      &.active {
         opacity: 1;
         pointer-events: all;
-        & > .sidebar__menu{
+        & > .sidebar__menu {
           transform: translateX(0);
         }
       }
     }
   }
 }
-

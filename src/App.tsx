@@ -30,7 +30,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   ////////////
 
-  const handleSnackbarOpen = (severityState: string, alertMessageValue: string) => {
+  const handleSnackbarOpen = (
+    severityState: string,
+    alertMessageValue: string
+  ) => {
     setOpen(true);
     setSeverity(severityState);
     setAlertMessage(alertMessageValue);
@@ -64,9 +67,16 @@ function App() {
     const response = await checkAuth();
     if (response.success) {
       localStorage.setItem('token', response.accessToken);
+      console.log('refreshed');
       setIsAuth(true);
       setUserName(response.userData.name);
       setUserEmail(response.userData.email);
+    }else{
+      localStorage.removeItem('username')
+
+      localStorage.removeItem('email')
+      localStorage.removeItem('id')
+      localStorage.removeItem('token')
     }
   }
   useEffect(() => {
@@ -97,11 +107,7 @@ function App() {
               path="/category/:category"
               element={<CategoryPage />}
             ></Route>
-            <Route
-              index
-              path="/tags"
-              element={<TagsPage />}
-            ></Route>
+            <Route index path="/tags" element={<TagsPage />}></Route>
           </Route>
         </Routes>
       </globalContext.Provider>
