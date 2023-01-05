@@ -12,6 +12,7 @@ export default function NavSearchCard({ cardInfo, handleDelete }: ICardProps) {
       to={`review/${cardInfo._id}`}
       onClick={() => {
         handleDelete();
+        window.location.reload()
       }}
     >
       <div
