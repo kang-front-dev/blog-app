@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { IReview } from './classes/ReviewClass';
 
 interface ICardProps {
@@ -7,12 +7,14 @@ interface ICardProps {
   handleDelete: () => void;
 }
 export default function NavSearchCard({ cardInfo, handleDelete }: ICardProps) {
+  const navigate = useNavigate()
   return (
     <Link
       to={`review/${cardInfo._id}`}
       onClick={() => {
         handleDelete();
         window.location.reload()
+        navigate(`review/${cardInfo._id}`)
       }}
     >
       <div
