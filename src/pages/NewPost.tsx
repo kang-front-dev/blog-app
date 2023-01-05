@@ -33,7 +33,6 @@ export default function NewPost() {
   const [imgPath, setImgPath] = useState(null);
 
   const handleChange = async (file: any) => {
-    console.log(file, 'file');
     setImgPath(await uploadFile(file));
   };
 
@@ -55,9 +54,8 @@ export default function NewPost() {
       comments: [],
     });
     const response = await insertReview(newReview);
-    console.log(response, 'response');
+
     const updateTagsResponse = await updateTags(newReview.tags);
-    console.log(updateTagsResponse, 'updateTagsResponse');
 
     if (response.success && updateTagsResponse.success) {
       navigate(`/review/${response.reviewId}`);

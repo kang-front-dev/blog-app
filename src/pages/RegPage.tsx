@@ -18,7 +18,7 @@ export const formStyles = {
 };
 
 export default function RegPage() {
-  const { setUserEmail, setUserName, setIsAuth,setAvatarImgPath, handleSnackbarOpen } =
+  const { setUserEmail, setUserName, setIsAuth, handleSnackbarOpen } =
     useContext(globalContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ export default function RegPage() {
         email: email,
         password: password,
       });
-      console.log(response);
+
 
       if (response.success) {
         setIsAuth(true);

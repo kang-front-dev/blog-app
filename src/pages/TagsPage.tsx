@@ -13,7 +13,6 @@ export default function TagsPage() {
 
   async function getTags() {
     const response = await getAllTags();
-    console.log(response);
 
     if (response.success) {
       const sorted = response.tags
@@ -32,18 +31,14 @@ export default function TagsPage() {
   }
 
   function updateReviews(tagsArr: Array<string>) {
-    console.log(`//////////////////////////////////
-    updating
-    `);
-    console.log(tagsArr, 'tagsArr');
 
     const filteredArr = dbReviews.filter((item: IReview) => {
       let isContains = true;
       tagsArr.forEach((tag) => {
-        console.log(tag, 'in', item.title);
+
         if (item.tags.indexOf(tag) < 0) {
           isContains = false;
-          console.log(`"${item.title}"`, 'does not contain', `"${tag}"`);
+
         }
       });
       return isContains;
@@ -53,14 +48,11 @@ export default function TagsPage() {
 
   const handleClick = (value: string, el: HTMLButtonElement) => {
     const isActive = activeTags.includes(value);
-    console.log(activeTags, 'activeTags');
+
     let activeTagsTemp = activeTags;
     if (isActive) {
       const temp = activeTags;
       const tagIndex = temp.indexOf(value);
-      console.log(tagIndex);
-
-      console.log(temp, 'temp deleting');
 
       temp.splice(tagIndex, 1);
       activeTagsTemp.splice(tagIndex, 1);
@@ -69,7 +61,6 @@ export default function TagsPage() {
       el.classList.remove('active');
     } else {
       const temp = [...activeTags, value];
-      console.log(temp, 'temp add');
 
       setActiveTags([...temp]);
       activeTagsTemp = [...temp];

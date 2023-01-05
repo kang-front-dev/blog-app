@@ -65,10 +65,9 @@ export default function ReviewPage() {
     const response = await getReview({ _id: id }).catch((err) => {
       console.log(err);
     });
-    console.log(response);
+
     let commentsData: Array<IComment> = [];
     if (response.reviewData.comments) {
-      console.log(response.reviewData.comments, 'response comments');
 
       response.reviewData.comments.forEach(
         async (comment: IComment, index: number) => {
@@ -102,7 +101,6 @@ export default function ReviewPage() {
   }
 
   async function getAuthorAvatar(name: string) {
-    console.log(name);
 
     const authorAvatarSrc = await getUserAvatar({ name: name });
     setAuthorAvatar(authorAvatarSrc.imgPath);
@@ -118,10 +116,10 @@ export default function ReviewPage() {
     setDislikesAmount(reviewData.dislikes.length);
     if (hasMyLike) {
       setIsLiked(true);
-      console.log('i liked it', hasMyLike);
+
     } else if (hasMyDislike) {
       setIsDisliked(true);
-      console.log('i disliked it', hasMyDislike);
+
     }
     return;
   }
@@ -181,7 +179,6 @@ export default function ReviewPage() {
   const handleComment = async () => {
     const data = { author: userName, date: getToday(), content: commentValue };
     const myData = await getUserInfo({ name: userName });
-    console.log(myData);
 
     addComment({ ...data, reviewId: id });
     setCommentValue('')
@@ -195,9 +192,7 @@ export default function ReviewPage() {
       }
       return item === comment ? false : true;
     });
-    console.log(comments, 'old comments arr');
-    console.log(newCommentsArr, 'new comments arr');
-    console.log(itemIndex);
+
 
     removeComment({ ...comment, reviewId: id, itemIndex });
     setComments([...newCommentsArr]);

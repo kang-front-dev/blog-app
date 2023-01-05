@@ -1,5 +1,4 @@
 import { connectionUrl } from '../../connection';
-import { IUser } from '../classes/userDataClass';
 
 export function checkAuth() {
   return fetch(`${connectionUrl}/refresh`, {

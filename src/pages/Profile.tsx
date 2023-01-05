@@ -25,7 +25,6 @@ export default function Profile() {
   async function getUser() {
     getUserInfo({ name: name })
       .then((res) => {
-        console.log(res.userData);
 
         setUserInfo(res.userData);
         setAvatarImgPath(res.userData.avatarImgPath);
@@ -44,7 +43,6 @@ export default function Profile() {
   }
 
   const handleChange = async (file: any) => {
-    console.log(file, 'file');
     const filePath = await uploadFile(file);
     setAvatarImgPath(filePath);
     const response = await updateUserInfo({
@@ -60,6 +58,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

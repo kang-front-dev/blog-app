@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -13,15 +13,13 @@ const firebaseConfig = {
 };
 const storageUrl = 'gs://blog-app-kang.appspot.com';
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
 const storage = getStorage(app, storageUrl);
 const reviewsImgPath = 'reviews-img';
 export async function uploadFile(file: File) {
   const hashName = hashCode(file.name);
   const imageRef = ref(storage, `/${reviewsImgPath}/${hashName}`);
-  await uploadBytes(imageRef, file).then((snapshot) => {
-    console.log('File is uploaded!');
-  });
+  await uploadBytes(imageRef, file)
   const resultPath = await getDownloadURL(imageRef);
 
   return resultPath ? resultPath : '';

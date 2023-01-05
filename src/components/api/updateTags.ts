@@ -1,7 +1,6 @@
 import { connectionUrl } from '../../connection';
 
 export function updateTags(body: Array<string>) {
-  console.log(body);
 
   const tags = body.map((tag) => {
     return tag.toLowerCase();
@@ -21,7 +20,7 @@ export function updateTags(body: Array<string>) {
         return res.json();
       })
       .catch((err) => console.log(err));
-      console.log(response.success);
+  
       
     success = response.success ? true : false;
   });

@@ -10,7 +10,7 @@ export default function CategoryPage() {
 
   async function getFilteredReviews(categoryParam: string) {
     const response = await getAllReviews();
-    console.log(response);
+
 
     if (category !== 'popular' && category !== 'recent') {
       const result = response.reviews.filter((review: IReview) => {
@@ -22,7 +22,6 @@ export default function CategoryPage() {
       const result = [
         ...reviews
           .sort((a: IReview, b: IReview) => {
-            console.log(a.views, b.views);
 
             return a.views - b.views;
           })
@@ -38,6 +37,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     getFilteredReviews(category);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   return (

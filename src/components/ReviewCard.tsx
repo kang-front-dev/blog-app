@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import Skeleton from '@mui/material/Skeleton';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { Link } from 'react-router-dom';
-import { getUserAvatar } from './api/getUserAvatar';
+
 import { IReview } from './classes/ReviewClass';
 import { getBgFromRating } from './lib/RatingBackground';
 interface ICardProps {

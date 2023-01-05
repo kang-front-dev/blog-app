@@ -49,6 +49,7 @@ export default function Background() {
     window.addEventListener('resize', () => {
       setBg();
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

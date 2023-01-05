@@ -26,9 +26,7 @@ function App() {
   const [severity, setSeverity] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   ////////////
-  //LOADING STATES
-  const [isLoading, setIsLoading] = useState(false);
-  ////////////
+
 
   const handleSnackbarOpen = (
     severityState: string,
@@ -67,7 +65,6 @@ function App() {
     const response = await checkAuth();
     if (response.success) {
       localStorage.setItem('token', response.accessToken);
-      console.log('refreshed');
       setIsAuth(true);
       setUserName(response.userData.name);
       setUserEmail(response.userData.email);

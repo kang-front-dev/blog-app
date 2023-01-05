@@ -28,7 +28,6 @@ export default function LogPage() {
   const handleClick = async () => {
     if (validateEmail(email) && password) {
       const response = await logUser({ email: email, password: password });
-      console.log(response, 'login response');
 
       if (response.success) {
         setIsAuth(true);
