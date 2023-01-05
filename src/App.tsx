@@ -71,12 +71,12 @@ function App() {
       setIsAuth(true);
       setUserName(response.userData.name);
       setUserEmail(response.userData.email);
-    }else{
-      localStorage.removeItem('username')
+    } else {
+      localStorage.removeItem('username');
 
-      localStorage.removeItem('email')
-      localStorage.removeItem('id')
-      localStorage.removeItem('token')
+      localStorage.removeItem('email');
+      localStorage.removeItem('id');
+      localStorage.removeItem('token');
     }
   }
   useEffect(() => {

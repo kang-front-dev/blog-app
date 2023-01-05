@@ -1,14 +1,12 @@
 import { connectionUrl } from '../../connection';
 import { IUser } from '../classes/userDataClass';
 
-export function logout(body: IUser) {
-  return fetch(`${connectionUrl}/logout`, {
+export function updateUserInfo(body: IUser) {
+  return fetch(`${connectionUrl}/updateUserInfo`, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
     },
-    credentials: 'include',
-    method: 'DELETE',
+    method: 'PATCH',
     body: JSON.stringify(body),
   })
     .then((res) => {

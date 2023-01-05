@@ -15,8 +15,12 @@ export const formStyles = {
   },
 };
 export default function LogPage() {
-  const { setUserEmail, setUserName, setIsAuth, handleSnackbarOpen } =
-    useContext(globalContext);
+  const {
+    setUserEmail,
+    setUserName,
+    setIsAuth,
+    handleSnackbarOpen,
+  } = useContext(globalContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +34,8 @@ export default function LogPage() {
         setIsAuth(true);
         setUserName(response.userData.name);
         setUserEmail(email);
+
+        localStorage.setItem('avatarImgPath', response.userData.avatarImgPath);
         localStorage.setItem('username', response.userData.name);
         localStorage.setItem('email', email);
 

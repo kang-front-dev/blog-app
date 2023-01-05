@@ -65,9 +65,20 @@ export default function Nav() {
               style={{ color: '#FFFFFF', background: '#444444' }}
             />
           ) : null}
-          <IconButton onClick={setAnchor}>
-            <AccountCircleIcon />
-          </IconButton>
+          <button className='nav__btn' onClick={setAnchor}>
+            {localStorage.getItem('avatarImgPath') ? (
+              <div
+                className="nav__avatar"
+                style={{
+                  backgroundImage: `url(${localStorage.getItem(
+                    'avatarImgPath'
+                  )})`,
+                }}
+              ></div>
+            ) : (
+              <AccountCircleIcon />
+            )}
+          </button>
           <Menu
             className="nav__menu"
             anchorEl={anchorEl}
@@ -111,6 +122,10 @@ export default function Nav() {
                     setIsAuth(false);
                     setUserName('');
                     setUserEmail('');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('avatarImgPath');
                   } else {
                     handleSnackbarOpen('error', response.message);
                   }

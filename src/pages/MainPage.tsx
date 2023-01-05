@@ -29,7 +29,6 @@ export default function MainPage() {
     const mostPopular = [
       ...reviews
         .sort((a: IReview, b: IReview) => {
-          console.log(a.views, b.views);
 
           return a.views - b.views;
         })
@@ -40,7 +39,6 @@ export default function MainPage() {
     setRecentReviews(recentSorted);
     setPopularReviews(mostPopular);
 
-    console.log(recentSorted, mostPopular);
   };
 
   return (

@@ -18,7 +18,7 @@ export const formStyles = {
 };
 
 export default function RegPage() {
-  const { setUserEmail, setUserName, setIsAuth, handleSnackbarOpen } =
+  const { setUserEmail, setUserName, setIsAuth,setAvatarImgPath, handleSnackbarOpen } =
     useContext(globalContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

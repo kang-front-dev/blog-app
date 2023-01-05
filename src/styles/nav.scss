@@ -42,6 +42,24 @@ $white: #ffffff;
       font-size: 35px;
     }
   }
+  &__btn{
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    & svg{
+      font-size: 35px;
+      color: $white;
+    }
+  }
+  &__avatar{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+  }
   &__left {
     display: flex;
     align-items: center;
@@ -55,10 +73,6 @@ $white: #ffffff;
     display: flex;
     align-items: center;
     column-gap: 16px;
-    & svg {
-      color: $white;
-      font-size: 30px;
-    }
   }
 
   &__menu {
@@ -90,6 +104,9 @@ $white: #ffffff;
     background: $darkgray;
     border-bottom: 1px $gray solid;
     cursor: pointer;
+
+    position: relative;
+    z-index: 5;
     &_wrapper {
       position: relative;
       border-bottom: 10px;
@@ -103,21 +120,43 @@ $white: #ffffff;
       font-weight: 400;
       color: $white;
     }
+    &_backplate{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      &.active{
+        display: block;
+      }
+    }
     &_results {
       position: absolute;
       left: 0;
       right: 0;
       width: 100%;
       bottom: 0;
+      z-index: 5;
       transform: translateY(100%);
 
       max-height: 500px;
+      opacity: 0;
       overflow-y: scroll;
-      &::-webkit-scrollbar-thumb{
-
+      transition: 0.2s;
+      &.active{
+        opacity: 1;
+      }
+      &::-webkit-scrollbar{
+        width: 10px;
       }
       &::-webkit-scrollbar-track{
         background: $darkgray;
+      }
+      &::-webkit-scrollbar-thumb{
+        background: $gray;
+        width: 10px;
+        border-radius: 5px;
       }
     }
     &_card {
@@ -131,7 +170,25 @@ $white: #ffffff;
       background-repeat: no-repeat;
       background-size: cover;
       position: relative;
+      animation: fade 0.3s ease-in-out;
+      overflow: hidden;
       cursor: pointer;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.85),
+          rgba(0, 0, 0, 0.3)
+        );
+        transition: 0.2s;
+        opacity: 0;
+      }
       &::after {
         content: '';
         position: absolute;
@@ -144,6 +201,11 @@ $white: #ffffff;
           rgba(0, 0, 0, 0.85),
           rgba(0, 0, 0, 0.1)
         );
+      }
+      &:hover{
+        &::before{
+          opacity: 1;
+        }
       }
       &_content{
         position: relative;
@@ -184,5 +246,14 @@ $white: #ffffff;
         }
       }
     }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

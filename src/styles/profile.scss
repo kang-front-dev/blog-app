@@ -12,24 +12,45 @@ $white: #ffffff;
     display: flex;
     flex-direction: column;
     &_avatar {
-      width: 100%;
-      position: absolute;
-      &_wrapper {
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background-color: $darkgray;
-        overflow: hidden;
-        position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 2px $gray solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & > label {
+        z-index: 0;
+        max-width: 80%;
+        min-width: 0;
+        background: $white;
+        border: none;
+        transition: 0.2s;
+        & span.file-types {
+          display: none;
+        }
+      }
+      &.active {
+        & > label {
+          opacity: 0;
+          &:hover {
+            opacity: 1;
+            pointer-events: all;
+          }
+        }
       }
     }
     &_name {
       font-size: 35px;
 
       color: $white;
+      margin-bottom: 10px;
     }
-    &_email{
-      font-size: 20px;
+    &_email {
+      font-size: 18px;
 
       color: $gray;
     }
@@ -50,7 +71,7 @@ $white: #ffffff;
     }
     &_container {
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       padding: 20px;
       border-radius: 35px;
@@ -58,5 +79,3 @@ $white: #ffffff;
     }
   }
 }
-
-

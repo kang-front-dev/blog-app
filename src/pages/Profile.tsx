@@ -1,25 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { getUserInfo } from '../components/api/getUserInfo';
 import { getUserReviews } from '../components/api/getUserReviews';
-import { IUser, User } from '../components/classes/userDataClass';
+import { IUser } from '../components/classes/userDataClass';
 import { IReview } from '../components/classes/ReviewClass';
 import ReviewCard from '../components/ReviewCard';
 
+import { uploadFile } from '../components/api/firebase';
+
+import { FileUploader } from 'react-drag-drop-files';
+import { updateUserInfo } from '../components/api/updateUserInfo';
+import { globalContext } from '../components/contexts/globalContext';
+const fileTypes = ['JPG', 'PNG', 'JPEG'];
+
 export default function Profile() {
   const { name } = useParams();
+  const { handleSnackbarOpen, userName } = useContext(globalContext);
 
   const [userInfo, setUserInfo] = useState<IUser>({});
   const [userReviews, setUserReviews] = useState<Array<IReview>>([]);
-
+  const [avatarImgPath, setAvatarImgPath] = useState('');
   async function getUser() {
     getUserInfo({ name: name })
       .then((res) => {
+        console.log(res.userData);
+
         setUserInfo(res.userData);
+        setAvatarImgPath(res.userData.avatarImgPath);
       })
       .catch((err) => {
         console.log(err);
@@ -34,6 +43,21 @@ export default function Profile() {
       });
   }
 
+  const handleChange = async (file: any) => {
+    console.log(file, 'file');
+    const filePath = await uploadFile(file);
+    setAvatarImgPath(filePath);
+    const response = await updateUserInfo({
+      ...userInfo,
+      avatarImgPath: filePath,
+    });
+    if (response.success) {
+      handleSnackbarOpen('success', response.message);
+    } else {
+      handleSnackbarOpen('error', response.message);
+    }
+  };
+
   useEffect(() => {
     getUser();
   }, []);
@@ -41,8 +65,23 @@ export default function Profile() {
   return (
     <div className="profile">
       <div className="profile__about">
-        <div className="profile__about_avatar_wrapper">
-          <img src="" alt="" className="profile__about_avatar" />
+        <div
+          className={
+            avatarImgPath
+              ? 'profile__about_avatar active'
+              : 'profile__about_avatar'
+          }
+          style={{ backgroundImage: `url(${avatarImgPath})` }}
+        >
+          {userName === name ? (
+            <FileUploader
+              handleChange={handleChange}
+              name="file"
+              multiple={false}
+              types={fileTypes}
+              label={'Change avatar'}
+            />
+          ) : null}
         </div>
         <h2 className="profile__about_name">{userInfo.name}</h2>
         <p className="profile__about_email">{userInfo.email}</p>

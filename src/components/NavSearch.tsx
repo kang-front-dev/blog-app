@@ -9,24 +9,33 @@ import NavSearchCard from './NavSearchCard';
 export default function NavSearch() {
   const [searchValue, setSearchValue] = useState('');
   const [cards, setCards] = useState([]);
+  const [isSearchListOpen, setIsSearchListOpen] = useState(false);
 
   const handleInput = async (e: FormEvent) => {
+    setIsSearchListOpen(true);
     const searchValueTemp = (e.target as HTMLInputElement).value;
     setSearchValue(searchValueTemp);
     const { reviews } = await getAllReviews();
     if (reviews && searchValueTemp) {
+      const cleanString = searchValueTemp.trim().toLowerCase();
       const filteredArr = reviews.filter((review: IReview) => {
-        const isTitleIncludes = review.title.includes(searchValueTemp);
-        const isDescrIncludes = review.descr.includes(searchValueTemp);
+        const isTitleIncludes = review.title
+          .toLowerCase()
+          .includes(cleanString);
+        const isDescrIncludes = review.descr
+          .toLowerCase()
+          .includes(cleanString);
         return isTitleIncludes || isDescrIncludes ? true : false;
       });
       setCards(filteredArr);
     } else if (searchValueTemp === '') {
-      setCards(reviews);
+      setCards([]);
+      setIsSearchListOpen(false);
     }
   };
   const handleDelete = () => {
     setSearchValue('');
+    setIsSearchListOpen(false);
   };
   return (
     <div className="nav_search_wrapper">
@@ -44,11 +53,31 @@ export default function NavSearch() {
           <CloseIcon />
         </div>
       </label>
-      <div className="nav_search_results">
+      <div
+        className={
+          isSearchListOpen ? 'nav_search_results active' : 'nav_search_results'
+        }
+      >
         {cards.map((item: IReview, index: number) => {
-          return <NavSearchCard cardInfo={item} key={index} />;
+          return (
+            <NavSearchCard
+              handleDelete={handleDelete}
+              cardInfo={item}
+              key={index}
+            />
+          );
         })}
       </div>
+      <div
+        className={
+          isSearchListOpen
+            ? 'nav_search_backplate active'
+            : 'nav_search_backplate'
+        }
+        onClick={() => {
+          setIsSearchListOpen(false);
+        }}
+      ></div>
     </div>
   );
 }
