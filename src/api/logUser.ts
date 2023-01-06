@@ -1,8 +1,8 @@
-import { connectionUrl } from '../../connection';
-import { IUser } from '../classes/userDataClass';
+import { connectionUrl } from '../connection';
+import { IUser } from '../components/classes/userDataClass';
 
-export function regUser(body: IUser) {
-  return fetch(`${connectionUrl}/regUser`, {
+export function logUser(body: IUser) {
+  return fetch(`${connectionUrl}/logUser`, {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',

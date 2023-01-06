@@ -1,5 +1,5 @@
-import { connectionUrl } from '../../connection';
-import { IUser } from '../classes/userDataClass';
+import { connectionUrl } from '../connection';
+import { IUser } from '../components/classes/userDataClass';
 
 export function getUserReviews(body: IUser) {
   return fetch(`${connectionUrl}/getUserReviews`, {

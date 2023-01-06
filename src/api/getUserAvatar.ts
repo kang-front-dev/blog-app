@@ -1,8 +1,8 @@
-import { connectionUrl } from '../../connection';
-import { IUser } from '../classes/userDataClass';
+import { connectionUrl } from '../connection';
+import { IUser } from '../components/classes/userDataClass';
 
-export function getReview(body: IUser) {
-  return fetch(`${connectionUrl}/getReview`, {
+export function getUserAvatar(body: IUser) {
+  return fetch(`${connectionUrl}/getUserAvatar`, {
     headers: {
       'Content-type': 'application/json',
     },

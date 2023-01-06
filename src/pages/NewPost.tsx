@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { uploadFile } from '../components/api/firebase';
+import { uploadFile } from '../api/firebase';
 
 import { TextField, Autocomplete, Button} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -9,11 +9,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { FileUploader } from 'react-drag-drop-files';
 import { Review } from '../components/classes/ReviewClass';
-import { insertReview } from '../components/api/insertReview';
+import { insertReview } from '../api/insertReview';
 import { globalContext } from '../components/contexts/globalContext';
-import { getToday } from '../components/lib/TimeFuncs';
-import { groupsValues, tagsValues } from '../components/lib/GroupsAndTags';
-import { updateTags } from '../components/api/updateTags';
+import { getToday } from '../utils/TimeFuncs';
+import { groupsValues, tagsValues } from '../utils/GroupsAndTags';
+import { updateTags } from '../api/updateTags';
 
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 

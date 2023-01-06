@@ -15,18 +15,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Layout() {
-  const { open, setOpen, alertMessage, severity } =
+  const { open, alertMessage, severity, handleSnackbarClose } =
     useContext(globalContext);
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    setOpen(false);
-    return;
+  const handleClose = () => {
+    handleSnackbarClose();
   };
-  
-
 
   return (
     <div className="global__wrapper">

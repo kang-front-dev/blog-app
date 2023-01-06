@@ -1,5 +1,5 @@
-import { connectionUrl } from '../../connection';
-import { IReviewStatProps } from '../classes/ReviewClass';
+import { connectionUrl } from '../connection';
+import { IReviewStatProps } from '../components/classes/ReviewClass';
 
 export function addView(body: IReviewStatProps) {
   return fetch(`${connectionUrl}/addView`, {

@@ -8,7 +8,7 @@ import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { Link } from 'react-router-dom';
 
 import { IReview } from './classes/ReviewClass';
-import { getBgFromRating } from './lib/RatingBackground';
+import { getBgFromRating } from '../utils/RatingBackground';
 interface ICardProps {
   cardInfo: IReview;
 }

@@ -6,9 +6,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { regUser } from '../components/api/regUser';
+import { regUser } from '../api/regUser';
 import { globalContext } from '../components/contexts/globalContext';
-import { validateEmail } from '../components/lib/ValidateEmail';
+import { validateEmail } from '../utils/ValidateEmail';
 
 export const formStyles = {
   input: {
@@ -18,7 +18,7 @@ export const formStyles = {
 };
 
 export default function RegPage() {
-  const { setUserEmail, setUserName, setIsAuth, handleSnackbarOpen } =
+  const { handleAuth, handleSnackbarOpen } =
     useContext(globalContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,9 +36,11 @@ export default function RegPage() {
 
 
       if (response.success) {
-        setIsAuth(true);
-        setUserName(name);
-        setUserEmail(email);
+        handleAuth({
+          isAuth: true,
+          userName: name,
+          userEmail: email,
+        })
         localStorage.setItem('username', name);
         localStorage.setItem('email', email);
 

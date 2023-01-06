@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { getAllReviews } from './api/getAllReviews';
+import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from './classes/ReviewClass';
 import NavSearchCard from './NavSearchCard';
 

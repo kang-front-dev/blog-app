@@ -1,5 +1,5 @@
-import { connectionUrl } from '../../connection';
-import { IUser } from '../classes/userDataClass';
+import { connectionUrl } from '../connection';
+import { IUser } from '../components/classes/userDataClass';
 
 export function logout(body: IUser) {
   return fetch(`${connectionUrl}/logout`, {
@@ -7,7 +7,6 @@ export function logout(body: IUser) {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
     },
-    credentials: 'include',
     method: 'DELETE',
     body: JSON.stringify(body),
   })

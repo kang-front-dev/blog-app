@@ -1,7 +1,7 @@
-import { connectionUrl } from '../../connection';
+import { connectionUrl } from '../connection';
 
-export function getAllReviews() {
-  return fetch(`${connectionUrl}/getAllReviews`, {
+export function getAllTags() {
+  return fetch(`${connectionUrl}/getAllTags`, {
     headers: {
       'Content-type': 'application/json',
     },

@@ -14,15 +14,13 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Chip from '@mui/material/Chip';
-import { logout } from './api/logout';
+import { logout } from '../api/logout';
 
 export default function Nav() {
   const {
     isAuth,
-    setIsAuth,
     userName,
-    setUserName,
-    setUserEmail,
+    handleAuth,
     setIsSideBarOpen,
     isSideBarOpen,
     progress,
@@ -119,9 +117,11 @@ export default function Nav() {
                 onClick={async () => {
                   const response = await logout({ name: userName });
                   if (response.success) {
-                    setIsAuth(false);
-                    setUserName('');
-                    setUserEmail('');
+                    handleAuth({
+                      isAuth: false,
+                      userName: '',
+                      userEmail: '',
+                    })
                     localStorage.removeItem('username');
                     localStorage.removeItem('email');
                     localStorage.removeItem('token');

@@ -1,12 +1,12 @@
-import { connectionUrl } from '../../connection';
-import { IReviewStatProps } from '../classes/ReviewClass';
+import { connectionUrl } from '../connection';
+import { IComment } from '../components/classes/ReviewClass';
 
-export function addDislike(body: IReviewStatProps) {
-  return fetch(`${connectionUrl}/addDislike`, {
+export function addComment(body: IComment) {
+  return fetch(`${connectionUrl}/addComment`, {
     headers: {
       'Content-type': 'application/json',
     },
-    method: 'PATCH',
+    method: 'POST',
     body: JSON.stringify(body),
   })
     .then((res) => {
@@ -14,12 +14,12 @@ export function addDislike(body: IReviewStatProps) {
     })
     .catch((err) => console.log(err));
 }
-export function removeDislike(body: IReviewStatProps) {
-  return fetch(`${connectionUrl}/removeDislike`, {
+export function removeComment(body: IComment) {
+  return fetch(`${connectionUrl}/removeComment`, {
     headers: {
       'Content-type': 'application/json',
     },
-    method: 'PATCH',
+    method: 'DELETE',
     body: JSON.stringify(body),
   })
     .then((res) => {

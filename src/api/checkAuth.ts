@@ -1,4 +1,4 @@
-import { connectionUrl } from '../../connection';
+import { connectionUrl } from '../connection';
 
 export function checkAuth() {
   return fetch(`${connectionUrl}/refresh`, {

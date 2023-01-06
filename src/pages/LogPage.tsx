@@ -5,9 +5,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { logUser } from '../components/api/logUser';
+import { logUser } from '../api/logUser';
 import { globalContext } from '../components/contexts/globalContext';
-import { validateEmail } from '../components/lib/ValidateEmail';
+import { validateEmail } from '../utils/ValidateEmail';
 export const formStyles = {
   input: {
     width: '100%',
@@ -16,9 +16,7 @@ export const formStyles = {
 };
 export default function LogPage() {
   const {
-    setUserEmail,
-    setUserName,
-    setIsAuth,
+    handleAuth,
     handleSnackbarOpen,
   } = useContext(globalContext);
   const navigate = useNavigate();
@@ -30,10 +28,11 @@ export default function LogPage() {
       const response = await logUser({ email: email, password: password });
 
       if (response.success) {
-        setIsAuth(true);
-        setUserName(response.userData.name);
-        setUserEmail(email);
-
+        handleAuth({
+          isAuth: true,
+          userName: response.userData.name,
+          userEmail: response.userData.email,
+        })
         localStorage.setItem('avatarImgPath', response.userData.avatarImgPath);
         localStorage.setItem('username', response.userData.name);
         localStorage.setItem('email', email);

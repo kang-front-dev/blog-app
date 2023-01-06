@@ -9,33 +9,19 @@ import LogPage from './pages/LogPage';
 import RegPage from './pages/RegPage';
 import Profile from './pages/Profile';
 import CategoryPage from './pages/CategoryPage';
-import { checkAuth } from './components/api/checkAuth';
+import { checkAuth } from './api/checkAuth';
 import TagsPage from './pages/TagsPage';
+import { useSnackbar } from './hooks/useSnackbar';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
-  //NAV STATES
+
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [progress, setProgress] = useState(0);
-  ////////////
-  const [isAuth, setIsAuth] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
 
-  //SNACKBAR STATES
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
-  ////////////
+  const { isAuth, userName, userEmail, handleAuth } = useAuth();
 
-
-  const handleSnackbarOpen = (
-    severityState: string,
-    alertMessageValue: string
-  ) => {
-    setOpen(true);
-    setSeverity(severityState);
-    setAlertMessage(alertMessageValue);
-  };
+  const { open, severity, alertMessage, handleSnackbarOpen,handleSnackbarClose } = useSnackbar();
 
   const contextValueNav = {
     isSideBarOpen,
@@ -45,32 +31,29 @@ function App() {
   };
   const contextValueSnackbar = {
     open,
-    setOpen,
     severity,
-    setSeverity,
     alertMessage,
-    setAlertMessage,
     handleSnackbarOpen,
+    handleSnackbarClose,
   };
   const contextValueUser = {
     isAuth,
-    setIsAuth,
     userEmail,
-    setUserEmail,
     userName,
-    setUserName,
+    handleAuth,
   };
 
   async function checkToken() {
     const response = await checkAuth();
     if (response.success) {
       localStorage.setItem('token', response.accessToken);
-      setIsAuth(true);
-      setUserName(response.userData.name);
-      setUserEmail(response.userData.email);
+      handleAuth({
+        isAuth: true,
+        userName: response.userData.name,
+        userEmail: response.userData.email,
+      });
     } else {
       localStorage.removeItem('username');
-
       localStorage.removeItem('email');
       localStorage.removeItem('id');
       localStorage.removeItem('token');

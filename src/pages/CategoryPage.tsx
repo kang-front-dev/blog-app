@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAllReviews } from '../components/api/getAllReviews';
+import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from '../components/classes/ReviewClass';
 import ReviewCard from '../components/ReviewCard';
 

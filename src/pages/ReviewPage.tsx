@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { getReview } from '../components/api/getReview';
+import { getReview } from '../api/getReview';
 import { IComment, IReview } from '../components/classes/ReviewClass';
-import { getBgFromRating } from '../components/lib/RatingBackground';
+import { getBgFromRating } from '../utils/RatingBackground';
 
 import Button from '@mui/material/Button';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -17,20 +17,20 @@ import Modal from '@mui/material/Modal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { globalContext } from '../components/contexts/globalContext';
-import { addLike, removeLike } from '../components/api/addOrRemoveLike';
+import { addLike, removeLike } from '../api/addOrRemoveLike';
 import {
   addDislike,
   removeDislike,
-} from '../components/api/addOrRemoveDislike';
-import { addView } from '../components/api/addView';
-import { getUserAvatar } from '../components/api/getUserAvatar';
+} from '../api/addOrRemoveDislike';
+import { addView } from '../api/addView';
+import { getUserAvatar } from '../api/getUserAvatar';
 import {
   addComment,
   removeComment,
-} from '../components/api/addOrRemoveComment';
-import { getTimeWeight, getToday } from '../components/lib/TimeFuncs';
-import { getUserInfo } from '../components/api/getUserInfo';
-import { deleteReview } from '../components/api/deleteReview';
+} from '../api/addOrRemoveComment';
+import { getTimeWeight, getToday } from '../utils/TimeFuncs';
+import { getUserInfo } from '../api/getUserInfo';
+import { deleteReview } from '../api/deleteReview';
 
 export default function ReviewPage() {
   const { id } = useParams();

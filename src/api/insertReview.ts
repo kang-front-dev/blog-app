@@ -1,5 +1,5 @@
-import { connectionUrl } from '../../connection';
-import { IReview } from '../classes/ReviewClass';
+import { connectionUrl } from '../connection';
+import { IReview } from '../components/classes/ReviewClass';
 export function insertReview(body: IReview) {
   return fetch(`${connectionUrl}/insertReview`, {
     headers: {

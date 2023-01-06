@@ -1,4 +1,4 @@
-import { ITime } from '../lib/TimeFuncs';
+import { ITime } from '../../utils/TimeFuncs';
 import { IUser } from './userDataClass';
 export interface IReviewStatProps {
   _id: string;

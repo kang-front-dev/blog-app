@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getAllReviews } from '../components/api/getAllReviews';
-import { getAllTags } from '../components/api/getAllTags';
+import { getAllReviews } from '../api/getAllReviews';
+import { getAllTags } from '../api/getAllTags';
 import { IReview } from '../components/classes/ReviewClass';
 import { ITag } from '../components/classes/TagClass';
 import ReviewCard from '../components/ReviewCard';

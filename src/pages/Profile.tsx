@@ -4,16 +4,16 @@ import { useParams } from 'react-router-dom';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Skeleton from '@mui/material/Skeleton';
 
-import { getUserInfo } from '../components/api/getUserInfo';
-import { getUserReviews } from '../components/api/getUserReviews';
+import { getUserInfo } from '../api/getUserInfo';
+import { getUserReviews } from '../api/getUserReviews';
 import { IUser } from '../components/classes/userDataClass';
 import { IReview } from '../components/classes/ReviewClass';
 import ReviewCard from '../components/ReviewCard';
 
-import { uploadFile } from '../components/api/firebase';
+import { uploadFile } from '../api/firebase';
 
 import { FileUploader } from 'react-drag-drop-files';
-import { updateUserInfo } from '../components/api/updateUserInfo';
+import { updateUserInfo } from '../api/updateUserInfo';
 import { globalContext } from '../components/contexts/globalContext';
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 

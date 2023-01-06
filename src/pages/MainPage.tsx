@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getAllReviews } from '../components/api/getAllReviews';
+import { getAllReviews } from '../api/getAllReviews';
 import { IReview, Review } from '../components/classes/ReviewClass';
 import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
