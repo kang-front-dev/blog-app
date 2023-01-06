@@ -7,6 +7,7 @@ export function logUser(body: IUser) {
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
     },
+
     method: 'POST',
     body: JSON.stringify(body),
   })

@@ -115,6 +115,8 @@ export default function Nav() {
             {isAuth ? (
               <MenuItem
                 onClick={async () => {
+                  console.log(userName);
+                  
                   const response = await logout({ name: userName });
                   if (response.success) {
                     handleAuth({

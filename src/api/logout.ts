@@ -6,6 +6,7 @@ export function logout(body: IUser) {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
+      
     },
     method: 'DELETE',
     body: JSON.stringify(body),
