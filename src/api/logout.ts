@@ -3,13 +3,12 @@ import { IUser } from '../components/classes/userDataClass';
 
 export function logout(body: IUser) {
   return fetch(`${connectionUrl}/logout`, {
-    mode: 'no-cors',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
       
     },
-    method: 'PATCH',
+    method: 'DELETE',
     body: JSON.stringify(body),
   })
     .then((res) => {
