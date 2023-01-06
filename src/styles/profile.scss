@@ -11,6 +11,7 @@ $white: #ffffff;
 
     display: flex;
     flex-direction: column;
+    row-gap: 10px;
     &_avatar {
       width: 300px;
       height: 300px;
@@ -22,6 +23,7 @@ $white: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
+
       & > label {
         z-index: 0;
         max-width: 80%;
@@ -45,9 +47,9 @@ $white: #ffffff;
     }
     &_name {
       font-size: 35px;
-
+      line-height: 40px;
+      
       color: $white;
-      margin-bottom: 10px;
     }
     &_email {
       font-size: 18px;

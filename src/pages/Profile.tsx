@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Skeleton from '@mui/material/Skeleton';
+
 import { getUserInfo } from '../components/api/getUserInfo';
 import { getUserReviews } from '../components/api/getUserReviews';
 import { IUser } from '../components/classes/userDataClass';
@@ -21,11 +23,11 @@ export default function Profile() {
 
   const [userInfo, setUserInfo] = useState<IUser>({});
   const [userReviews, setUserReviews] = useState<Array<IReview>>([]);
+  const [userReviewsLoaded, setUserReviewsLoaded] = useState(false);
   const [avatarImgPath, setAvatarImgPath] = useState('');
   async function getUser() {
     getUserInfo({ name: name })
       .then((res) => {
-
         setUserInfo(res.userData);
         setAvatarImgPath(res.userData.avatarImgPath);
       })
@@ -36,6 +38,7 @@ export default function Profile() {
     getUserReviews({ name: name })
       .then((res) => {
         setUserReviews(res.reviews);
+        setUserReviewsLoaded(true);
       })
       .catch((err) => {
         console.log(err);
@@ -58,7 +61,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -82,8 +85,26 @@ export default function Profile() {
             />
           ) : null}
         </div>
-        <h2 className="profile__about_name">{userInfo.name}</h2>
-        <p className="profile__about_email">{userInfo.email}</p>
+        {userInfo.name ? (
+          <h2 className="profile__about_name">{userInfo.name}</h2>
+        ) : (
+          <Skeleton
+            variant="rounded"
+            width={120}
+            height={40}
+            animation="wave"
+          />
+        )}
+        {userInfo.email ? (
+          <p className="profile__about_email">{userInfo.email}</p>
+        ) : (
+          <Skeleton
+            variant="rounded"
+            width={220}
+            height={20}
+            animation="wave"
+          />
+        )}
       </div>
       <div className="profile__reviews">
         <h3 className="profile__reviews_title">
@@ -91,14 +112,31 @@ export default function Profile() {
           Reviews
         </h3>
         <div className="profile__reviews_container">
-          {userReviews.map((review, index) => {
-            return (
-              <ReviewCard
-                key={index}
-                cardInfo={{ ...review, selectorId: 'profile-review-card' }}
-              ></ReviewCard>
-            );
-          })}
+          {userReviews.length
+            ? userReviews.map((review, index) => {
+                return (
+                  <ReviewCard
+                    key={index}
+                    cardInfo={{ ...review, selectorId: 'profile-review-card' }}
+                  ></ReviewCard>
+                );
+              })
+            : [1, 2, 3, 4, 5, 6].map((item) => {
+                console.log('skeletonssss');
+
+                return (
+                  <Skeleton
+                    key={item}
+                    variant="rounded"
+                    height={220}
+                    animation="wave"
+                    style={{ borderRadius: '20px' }}
+                  />
+                );
+              })}
+          {!userReviews.length && userReviewsLoaded ? (
+            <div className="profile__reviews_error">No reviews</div>
+          ) : null}
         </div>
       </div>
     </div>
