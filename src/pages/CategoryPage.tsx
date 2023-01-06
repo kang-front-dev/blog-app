@@ -9,7 +9,7 @@ import Skeleton from '@mui/material/Skeleton';
 export default function CategoryPage() {
   const { category } = useParams();
   const [categoryReviews, setCategoryReviews] = useState<Array<IReview>>([]);
-
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   async function getFilteredReviews(categoryParam: string) {
     const response = await getAllReviews();
 
@@ -33,6 +33,29 @@ export default function CategoryPage() {
       const result = [...reviews.reverse()];
       setCategoryReviews(result);
     }
+    setIsDataLoaded(true);
+  }
+
+  function generateCards() {
+    if (isDataLoaded && categoryReviews.length) {
+      return categoryReviews.map((review, index) => {
+        return <ReviewCard key={index} cardInfo={{ ...review }} />;
+      });
+    } else if (!isDataLoaded && !categoryReviews.length) {
+      return [1, 2, 3, 4, 5, 6].map((item) => {
+        return (
+          <Skeleton
+            key={item}
+            variant="rounded"
+            height={220}
+            animation="wave"
+            style={{ borderRadius: '20px' }}
+          />
+        );
+      });
+    } else if (isDataLoaded && !categoryReviews.length) {
+      return <div className="review__error">No reviews</div>;
+    }
   }
 
   useEffect(() => {
@@ -43,23 +66,7 @@ export default function CategoryPage() {
   return (
     <section className="review__main_category">
       <div className="review__main_container_title">{category}</div>
-      <div className="review__main_container">
-        {categoryReviews.length
-          ? categoryReviews.map((review, index) => {
-              return <ReviewCard key={index} cardInfo={{ ...review }} />;
-            })
-          : [1, 2, 3, 4, 5, 6].map((item) => {
-              return (
-                <Skeleton
-                  key={item}
-                  variant="rounded"
-                  height={220}
-                  animation="wave"
-                  style={{ borderRadius: '20px' }}
-                />
-              );
-            })}
-      </div>
+      <div className="review__main_container">{generateCards()}</div>
     </section>
   );
 }

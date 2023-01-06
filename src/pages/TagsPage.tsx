@@ -51,7 +51,11 @@ export default function TagsPage() {
     setReviews(filteredArr);
   }
 
-  const handleClick = (value: string, el: HTMLButtonElement) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const el = event.target as HTMLButtonElement;
+    const value = el.textContent;
     const isActive = activeTags.includes(value);
 
     let activeTagsTemp = activeTags;
@@ -75,6 +79,28 @@ export default function TagsPage() {
     updateReviews(activeTagsTemp);
   };
 
+  function generateCards() {
+    if (reviews.length) {
+      return reviews.map((item, index) => {
+        return <ReviewCard key={index} cardInfo={item} />;
+      });
+    } else if (isNoResults) {
+      return <div className="review__error">No reviews</div>;
+    } else if (!isNoResults && !reviews.length) {
+      return [1, 2, 3, 4, 5, 6].map((item) => {
+        return (
+          <Skeleton
+            key={item}
+            variant="rounded"
+            height={220}
+            animation="wave"
+            style={{ borderRadius: '20px' }}
+          />
+        );
+      });
+    }
+  }
+
   useEffect(() => {
     getTags();
     getReviews();
@@ -85,41 +111,14 @@ export default function TagsPage() {
       <div className="tags__block">
         {tags.map((tag, index) => {
           return (
-            <button
-              key={index}
-              className="tags__item"
-              onClick={(e) => {
-                const target = e.target as HTMLButtonElement;
-                handleClick(target.textContent, target);
-              }}
-            >
+            <button key={index} className="tags__item" onClick={handleClick}>
               <p className="tags__item_text">{tag.tagName}</p>
             </button>
           );
         })}
       </div>
 
-      <div className="review__main_container">
-        {reviews.length ? (
-          reviews.map((item, index) => {
-            return <ReviewCard key={index} cardInfo={item} />;
-          })
-        ) : isNoResults ? (
-          <div className="review__error">No reviews</div>
-        ) : (
-          [1, 2, 3, 4, 5, 6].map((item) => {
-            return (
-              <Skeleton
-                key={item}
-                variant="rounded"
-                height={220}
-                animation="wave"
-                style={{ borderRadius: '20px' }}
-              />
-            );
-          })
-        )}
-      </div>
+      <div className="review__main_container">{generateCards()}</div>
     </section>
   );
 }
