@@ -6,7 +6,6 @@ export function checkAuth() {
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
     },
- 
     method: 'GET',
   })
     .then((res) => {
