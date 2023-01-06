@@ -122,7 +122,6 @@ export default function Profile() {
                 );
               })
             : [1, 2, 3, 4, 5, 6].map((item) => {
-                console.log('skeletonssss');
 
                 return (
                   <Skeleton

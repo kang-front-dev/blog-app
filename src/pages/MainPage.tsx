@@ -4,6 +4,8 @@ import { IReview } from '../components/classes/ReviewClass';
 import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
+import Skeleton from '@mui/material/Skeleton';
+
 export default function MainPage() {
   const { setProgress } = useContext(globalContext);
   const [recentReviews, setRecentReviews] = useState([]);
@@ -29,7 +31,6 @@ export default function MainPage() {
     const mostPopular = [
       ...reviews
         .sort((a: IReview, b: IReview) => {
-
           return a.views - b.views;
         })
         .reverse()
@@ -38,7 +39,6 @@ export default function MainPage() {
 
     setRecentReviews(recentSorted);
     setPopularReviews(mostPopular);
-
   };
 
   return (
@@ -49,9 +49,21 @@ export default function MainPage() {
       <div className="review__main_category_block">
         <h2 className="review__main_container_title">Recently added</h2>
         <div className="review__main_container">
-          {recentReviews.map((item, index) => {
-            return <ReviewCard key={index} cardInfo={{ ...item }} />;
-          })}
+          {recentReviews.length
+            ? recentReviews.map((item, index) => {
+                return <ReviewCard key={index} cardInfo={{ ...item }} />;
+              })
+            : [1, 2, 3, 4, 5, 6].map((item) => {
+                return (
+                  <Skeleton
+                    key={item}
+                    variant="rounded"
+                    height={220}
+                    animation="wave"
+                    style={{ borderRadius: '20px' }}
+                  />
+                );
+              })}
         </div>
         <a href="/category/recent" className="review__main_container_link">
           View more
@@ -60,9 +72,21 @@ export default function MainPage() {
       <div className="review__main_category_block">
         <h2 className="review__main_container_title">Most Popular</h2>
         <div className="review__main_container">
-          {popularReviews.map((item, index) => {
-            return <ReviewCard key={index} cardInfo={{ ...item }} />;
-          })}
+          {popularReviews.length
+            ? popularReviews.map((item, index) => {
+                return <ReviewCard key={index} cardInfo={{ ...item }} />;
+              })
+            : [1, 2, 3, 4, 5, 6].map((item) => {
+                return (
+                  <Skeleton
+                    key={item}
+                    variant="rounded"
+                    height={220}
+                    animation="wave"
+                    style={{ borderRadius: '20px' }}
+                  />
+                );
+              })}
         </div>
         <a href="/category/popular" className="review__main_container_link">
           View more
