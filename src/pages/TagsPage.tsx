@@ -5,9 +5,12 @@ import { IReview } from '../components/classes/ReviewClass';
 import { ITag } from '../components/classes/TagClass';
 import ReviewCard from '../components/ReviewCard';
 
+import Skeleton from '@mui/material/Skeleton';
+
 export default function TagsPage() {
   const [tags, setTags] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [isNoResults, setIsNoResults] = useState(false);
   const [activeTags, setActiveTags] = useState([]);
   const [dbReviews, setDbReviews] = useState([]);
 
@@ -31,18 +34,20 @@ export default function TagsPage() {
   }
 
   function updateReviews(tagsArr: Array<string>) {
-
     const filteredArr = dbReviews.filter((item: IReview) => {
       let isContains = true;
       tagsArr.forEach((tag) => {
-
         if (item.tags.indexOf(tag) < 0) {
           isContains = false;
-
         }
       });
       return isContains;
     });
+    if (filteredArr.length === 0) {
+      setIsNoResults(true);
+    } else {
+      setIsNoResults(false);
+    }
     setReviews(filteredArr);
   }
 
@@ -95,9 +100,25 @@ export default function TagsPage() {
       </div>
 
       <div className="review__main_container">
-        {reviews.map((item, index) => {
-          return <ReviewCard key={index} cardInfo={item} />;
-        })}
+        {reviews.length ? (
+          reviews.map((item, index) => {
+            return <ReviewCard key={index} cardInfo={item} />;
+          })
+        ) : isNoResults ? (
+          <div className="review__error">No reviews</div>
+        ) : (
+          [1, 2, 3, 4, 5, 6].map((item) => {
+            return (
+              <Skeleton
+                key={item}
+                variant="rounded"
+                height={220}
+                animation="wave"
+                style={{ borderRadius: '20px' }}
+              />
+            );
+          })
+        )}
       </div>
     </section>
   );
