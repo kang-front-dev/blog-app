@@ -36,7 +36,8 @@ export default function LogPage() {
         localStorage.setItem('avatarImgPath', response.userData.avatarImgPath);
         localStorage.setItem('username', response.userData.name);
         localStorage.setItem('email', email);
-
+        localStorage.setItem('token',response.accessToken)
+        
         handleSnackbarOpen('success', 'Welcome back!');
         navigate('/');
       } else {

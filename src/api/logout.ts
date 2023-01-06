@@ -4,7 +4,7 @@ import { IUser } from '../components/classes/userDataClass';
 export function logout(body: IUser) {
   return fetch(`${connectionUrl}/logout`, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
       
     },

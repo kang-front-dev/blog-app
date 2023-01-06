@@ -13,7 +13,7 @@ export function logUser(body: IUser) {
   })
     .then(async (res) => {
       const response = await res.json()
-      localStorage.setItem('token',response.accessToken)
+      
       return response;
     })
     .catch((err) => console.log(err));
