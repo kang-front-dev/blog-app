@@ -2,7 +2,7 @@ import { connectionUrl } from '../connection';
 import { IUser } from '../components/classes/userDataClass';
 
 export function logout(body: IUser) {
-  return fetch(`${connectionUrl}/logout`, {
+  return fetch(`${connectionUrl}/logOut`, {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
