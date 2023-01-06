@@ -23,6 +23,8 @@ export default function TagsPage() {
           return a.useAbility - b.useAbility;
         })
         .reverse();
+      console.log(sorted);
+
       setTags(sorted);
     }
   }
