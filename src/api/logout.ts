@@ -9,7 +9,7 @@ export function logout(body: IUser) {
       'Content-type': 'application/json',
       
     },
-    method: 'DELETE',
+    method: 'PATCH',
     body: JSON.stringify(body),
   })
     .then((res) => {
