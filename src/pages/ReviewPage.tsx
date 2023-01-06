@@ -14,6 +14,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Modal from '@mui/material/Modal';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { globalContext } from '../components/contexts/globalContext';
 import { addLike, removeLike } from '../components/api/addOrRemoveLike';
@@ -68,7 +69,6 @@ export default function ReviewPage() {
 
     let commentsData: Array<IComment> = [];
     if (response.reviewData.comments) {
-
       response.reviewData.comments.forEach(
         async (comment: IComment, index: number) => {
           const { userData } = await getUserInfo({ name: comment.author });
@@ -101,7 +101,6 @@ export default function ReviewPage() {
   }
 
   async function getAuthorAvatar(name: string) {
-
     const authorAvatarSrc = await getUserAvatar({ name: name });
     setAuthorAvatar(authorAvatarSrc.imgPath);
   }
@@ -116,10 +115,8 @@ export default function ReviewPage() {
     setDislikesAmount(reviewData.dislikes.length);
     if (hasMyLike) {
       setIsLiked(true);
-
     } else if (hasMyDislike) {
       setIsDisliked(true);
-
     }
     return;
   }
@@ -181,7 +178,7 @@ export default function ReviewPage() {
     const myData = await getUserInfo({ name: userName });
 
     addComment({ ...data, reviewId: id });
-    setCommentValue('')
+    setCommentValue('');
     setComments([...comments, { ...data, authorData: myData }]);
   };
   const handleCommentDelete = async (comment: IComment) => {
@@ -192,7 +189,6 @@ export default function ReviewPage() {
       }
       return item === comment ? false : true;
     });
-
 
     removeComment({ ...comment, reviewId: id, itemIndex });
     setComments([...newCommentsArr]);
@@ -219,6 +215,11 @@ export default function ReviewPage() {
   return (
     <section className="review">
       <div className="container">
+        <button className="review__btn-back" onClick={()=>{
+          navigate('/')
+        }}>
+          <ArrowBackIcon />
+        </button>
         <div className="review__title">
           <div className="review__title_content">
             {reviewData.title}
@@ -272,7 +273,6 @@ export default function ReviewPage() {
           </div>
         </div>
         <div className="review__about">
-          <p className="review__date">{reviewData.createDate.dayMonthYear}</p>
           <p className="review__author">
             <Link to={`/profiles/${reviewData.author}`}>
               {authorAvatar ? (
@@ -282,6 +282,11 @@ export default function ReviewPage() {
               )}
               <span>by {reviewData.author}</span>
             </Link>
+          </p>
+          <p className="review__date">
+            {reviewData.createDate.dayMonthYear} at{' '}
+            {reviewData.createDate.time.hours}:
+            {reviewData.createDate.time.minutes}
           </p>
         </div>
         <div className="review__img_wrapper">
@@ -345,8 +350,7 @@ export default function ReviewPage() {
         <div className="review__comments">
           <div className="container">
             <div className="review__comments_title">
-              {comments.length}{' '}
-              {comments.length === 1 ? 'Comment' : 'Comments'}
+              {comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
             </div>
             {isAuth ? (
               <div className="review__comments_input_block">

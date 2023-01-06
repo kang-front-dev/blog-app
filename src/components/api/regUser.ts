@@ -7,7 +7,6 @@ export function regUser(body: IUser) {
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
     },
-    credentials: 'include',
     method: 'POST',
     body: JSON.stringify(body),
   })
