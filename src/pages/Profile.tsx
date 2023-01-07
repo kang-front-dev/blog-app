@@ -127,9 +127,8 @@ export default function Profile() {
                   <Skeleton
                     key={item}
                     variant="rounded"
-                    height={220}
                     animation="wave"
-                    style={{ borderRadius: '20px' }}
+                    style={{ borderRadius: '20px',height: '100%' }}
                   />
                 );
               })}

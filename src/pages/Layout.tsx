@@ -17,7 +17,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 export default function Layout() {
   const { open, alertMessage, severity, handleSnackbarClose } =
     useContext(globalContext);
-
   const handleClose = () => {
     handleSnackbarClose();
   };
@@ -45,6 +44,7 @@ export default function Layout() {
         </Alert>
       </Snackbar>
       <BurgerMenu />
+
       <div className="background__wrapper">
         <Background />
         <Background />

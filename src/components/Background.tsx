@@ -45,11 +45,17 @@ export default function Background() {
   }
 
   useEffect(() => {
-    setBg();
-    window.addEventListener('resize', () => {
+    if (window.innerWidth > 1500) {
       setBg();
+    }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1500) {
+        setBg();
+      }else{
+        setBgArray([])
+      }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

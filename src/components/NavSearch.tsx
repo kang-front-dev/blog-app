@@ -5,6 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from './classes/ReviewClass';
 import NavSearchCard from './NavSearchCard';
+import { SearchReviews } from '../utils/Search';
 
 export default function NavSearch() {
   const [searchValue, setSearchValue] = useState('');
@@ -17,16 +18,7 @@ export default function NavSearch() {
     setSearchValue(searchValueTemp);
     const { reviews } = await getAllReviews();
     if (reviews && searchValueTemp) {
-      const cleanString = searchValueTemp.trim().toLowerCase();
-      const filteredArr = reviews.filter((review: IReview) => {
-        const isTitleIncludes = review.title
-          .toLowerCase()
-          .includes(cleanString);
-        const isDescrIncludes = review.descr
-          .toLowerCase()
-          .includes(cleanString);
-        return isTitleIncludes || isDescrIncludes ? true : false;
-      });
+      const filteredArr = SearchReviews(searchValueTemp,reviews)
       setCards(filteredArr);
     } else if (searchValueTemp === '') {
       setCards([]);

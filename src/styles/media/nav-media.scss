@@ -1,0 +1,109 @@
+@media (max-width: 800px) {
+  .nav {
+    &__logo {
+      &_text {
+        font-size: 25px;
+      }
+      & > img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    &_search {
+      
+      padding: 0;
+      & input {
+        max-width: 150px;
+      }
+      &_btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &_wrapper{
+        display: none;
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .nav {
+    padding: 6px 0;
+    &__left {
+      column-gap: 5px;
+    }
+    &__right {
+      & .MuiChip-root {
+        display: none;
+      }
+    }
+    &__burger {
+      & > svg {
+        font-size: 24px;
+      }
+    }
+    &__logo {
+      column-gap: 5px;
+      &_text {
+        font-size: 22px;
+      }
+      & > img {
+        width: 26px;
+        height: 26px;
+      }
+    }
+    &_search {
+      & input {
+        max-width: 120px;
+        font-size: 16px;
+      }
+    }
+    &__btn {
+      & svg {
+        font-size: 30px;
+      }
+    }
+    &__avatar {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+@media (max-width: 480px) {
+  .nav {
+    &__left {
+      column-gap: 0px;
+    }
+    &__right{
+      column-gap: 10px;
+    }
+    &__logo {
+      &_text {
+        font-size: 18px;
+      }
+      & > img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    &_search {
+      & input {
+        max-width: 100px;
+        font-size: 16px;
+        padding: 7px;
+      }
+      & svg {
+        font-size: 22px;
+      }
+    }
+    &__btn {
+      & svg {
+        font-size: 30px;
+      }
+    }
+    &__avatar {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { globalContext } from './contexts/globalContext';
 import NavSearch from './NavSearch';
+import { logout } from '../api/logout';
 
 import LinearProgress from '@mui/material/LinearProgress';
 import IconButton from '@mui/material/IconButton';
@@ -14,7 +15,7 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Chip from '@mui/material/Chip';
-import { logout } from '../api/logout';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Nav() {
   const {
@@ -47,7 +48,7 @@ export default function Nav() {
     <div className="nav">
       <div className="container">
         <div className="nav__left">
-          <IconButton onClick={handleClick}>
+          <IconButton onClick={handleClick} className="nav__burger">
             <MenuIcon />
           </IconButton>
           <Link to="/" className="nav__logo">
@@ -56,14 +57,24 @@ export default function Nav() {
           </Link>
         </div>
         <div className="nav__right">
+          <button
+            className="nav_search_btn"
+            onClick={() => {
+              navigate('/search');
+            }}
+          >
+            <SearchIcon />
+          </button>
+
           <NavSearch />
+
           {isAuth ? (
             <Chip
               label={userName}
               style={{ color: '#FFFFFF', background: '#444444' }}
             />
           ) : null}
-          <button className='nav__btn' onClick={setAnchor}>
+          <button className="nav__btn" onClick={setAnchor}>
             {localStorage.getItem('avatarImgPath') ? (
               <div
                 className="nav__avatar"
@@ -121,7 +132,7 @@ export default function Nav() {
                       isAuth: false,
                       userName: '',
                       userEmail: '',
-                    })
+                    });
                     localStorage.removeItem('username');
                     localStorage.removeItem('email');
                     localStorage.removeItem('token');

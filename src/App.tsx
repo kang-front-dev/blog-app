@@ -13,6 +13,7 @@ import { checkAuth } from './api/checkAuth';
 import TagsPage from './pages/TagsPage';
 import { useSnackbar } from './hooks/useSnackbar';
 import { useAuth } from './hooks/useAuth';
+import SearchPage from './pages/SearchPage';
 
 function App() {
 
@@ -89,6 +90,7 @@ function App() {
               element={<CategoryPage />}
             ></Route>
             <Route index path="/tags" element={<TagsPage />}></Route>
+            <Route index path="/search" element={<SearchPage />}></Route>
           </Route>
         </Routes>
       </globalContext.Provider>

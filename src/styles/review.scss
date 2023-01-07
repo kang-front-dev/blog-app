@@ -362,8 +362,8 @@ $lightwhite: #e1e1e1;
       width: 100%;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      column-gap: 20px;
-      row-gap: 20px;
+      grid-auto-rows: 220px;
+      gap: 20px;
       min-height: 280px;
       border-radius: 35px;
       padding: 30px;
@@ -428,7 +428,7 @@ $lightwhite: #e1e1e1;
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    height: 220px;
+    height: 100%;
     column-gap: 20px;
     animation: fade 0.3s ease-in-out;
     cursor: pointer;
@@ -490,13 +490,12 @@ $lightwhite: #e1e1e1;
       position: relative;
       z-index: 4;
     }
-
     &_author {
       color: $gray;
       font-size: 16px;
       display: flex;
       align-items: center;
-      margin-top: 10px;
+      
       & > span {
         font-weight: 700;
         font-size: 17px;
@@ -526,6 +525,7 @@ $lightwhite: #e1e1e1;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: 10px;
     }
     &_stats {
       display: flex;

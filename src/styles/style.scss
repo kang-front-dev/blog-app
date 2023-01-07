@@ -5,10 +5,12 @@
 @import url('./profile.scss');
 @import url('./tags.scss');
 @import url('./modal.scss');
+@import url('./searchPage.scss');
 
 $gray: #1e2224;
 $darkgray: #1e2224;
 $black: #161b1d;
+
 $white: #ffffff;
 
 * {
@@ -38,6 +40,7 @@ body {
 .global__wrapper {
   position: relative;
   min-height: 100vh;
+
 }
 
 .footer {
