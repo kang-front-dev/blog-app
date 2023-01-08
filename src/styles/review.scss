@@ -617,6 +617,11 @@ $lightwhite: #e1e1e1;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        max-width: 80%;
+        & label{
+          width: 100%;
+          min-width: 0;
+        }
       }
       &_note {
         font-size: 14px;

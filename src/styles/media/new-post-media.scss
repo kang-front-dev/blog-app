@@ -1,0 +1,52 @@
+@media (max-width: 930px) {
+  .review__new{
+    &_container{
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+}
+@media (max-width: 650px) {
+  .review__new{
+    padding: 15px;
+    &_title{
+      font-size: 44px;
+    }
+  }
+}
+@media (max-width: 530px) {
+  .review__new{
+    &_title{
+      font-size: 38px;
+      margin-bottom: 5px;
+    }
+    &_left{
+      min-height: 240px;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .review__new{
+    &_input{
+      &-file{
+        &_block{
+          max-width: 80%;
+        }
+      }
+    }
+    &_left{
+      min-height: 220px;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .review__new{
+    &_title{
+      font-size: 32px;
+    }
+    &_left{
+      min-height: 180px;
+    }
+  }
+}

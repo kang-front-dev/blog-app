@@ -70,7 +70,13 @@
       column-gap: 0px;
     }
     &__right{
-      column-gap: 10px;
+      column-gap: 5px;
+      & > .MuiChip-root{
+        height: 28px;
+        & > span{
+          padding: 0 8px;
+        }
+      }
     }
     &__logo {
       &_text {
