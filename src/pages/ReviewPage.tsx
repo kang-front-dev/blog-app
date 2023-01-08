@@ -22,7 +22,7 @@ import { addDislike, removeDislike } from '../api/addOrRemoveDislike';
 import { addView } from '../api/addView';
 import { getUserAvatar } from '../api/getUserAvatar';
 import { addComment, removeComment } from '../api/addOrRemoveComment';
-import { getTimeWeight, getToday } from '../utils/TimeFuncs';
+import { checkCommentDate, getTimeWeight, getToday } from '../utils/TimeFuncs';
 import { getUserInfo } from '../api/getUserInfo';
 import { deleteReview } from '../api/deleteReview';
 
@@ -94,6 +94,79 @@ export default function ReviewPage() {
     handleView();
   }
 
+  function generateCommentsInput() {
+    return isAuth ? (
+      <div className="review__comments_input_block">
+        <TextField
+          multiline={true}
+          className="review__comments_input"
+          id="review-comments-input"
+          placeholder="Comment text..."
+          value={commentValue}
+          onInput={(e) => {
+            const input = e.target as HTMLInputElement;
+            setCommentValue(input.value);
+          }}
+        />
+        <button className="review__comments_input_btn" onClick={handleComment}>
+          Upload
+        </button>
+      </div>
+    ) : (
+      <div className="review__comments_input_error">
+        You have to sign in to comment reviews
+      </div>
+    );
+  }
+
+  function generateComments() {
+    return comments.map((comment: IComment, index) => {
+      const resultDate = checkCommentDate(comment);
+
+      return (
+        <div className="review__comments_item" key={index}>
+          <div className="review__comments_item_header">
+            <Link to={`/profiles/${comment.author}`}>
+              <div className="review__comments_item_header_about">
+                {comment.authorData.avatarImgPath ? (
+                  <div
+                    className="review__comments_item_avatar"
+                    style={{
+                      backgroundImage: `url(${comment.authorData.avatarImgPath})`,
+                    }}
+                  ></div>
+                ) : (
+                  <AccountCircleIcon />
+                )}
+                <div className="review__comments_item_author">
+                  <div className="review__comments_item_name">
+                    {comment.author}
+                  </div>
+                  <div className="review__comments_item_date">
+                    {`${resultDate} at ${comment.date.time.hours}:${comment.date.time.minutes}`}
+                  </div>
+                </div>
+              </div>
+            </Link>
+            {userName === comment.author ? (
+              <div className="review__comments_item_header_controls">
+                <button
+                  onClick={() => {
+                    handleCommentDelete(comment);
+                  }}
+                  className="review__comments_item_btn-delete"
+                >
+                  <DeleteOutlineIcon />
+                </button>
+              </div>
+            ) : null}
+          </div>
+          <div className="review__comments_item_descr">{comment.content}</div>
+        </div>
+      );
+    });
+  }
+
   async function getAuthorAvatar(name: string) {
     const authorAvatarSrc = await getUserAvatar({ name: name });
     setAuthorAvatar(authorAvatarSrc.imgPath);
@@ -124,6 +197,10 @@ export default function ReviewPage() {
   };
 
   const handleLike = () => {
+    if (!isAuth) {
+      handleSnackbarOpen('error', 'You have to sign in to rate reviews');
+      return;
+    }
     if (!isLiked && !isDisliked) {
       addLike({ _id: id, username: userName });
       setIsLiked(true);
@@ -144,6 +221,10 @@ export default function ReviewPage() {
   };
 
   const handleDislike = () => {
+    if (!isAuth) {
+      handleSnackbarOpen('error', 'You have to sign in to rate reviews');
+      return;
+    }
     if (!isLiked && !isDisliked) {
       addDislike({ _id: id, username: userName });
       setIsDisliked(true);
@@ -263,7 +344,7 @@ export default function ReviewPage() {
         </div>
       </div>
       <div className="review__about">
-        <p className="review__author">
+        <div className="review__author">
           <Link to={`/profiles/${reviewData.author}`}>
             {authorAvatar ? (
               <div
@@ -275,7 +356,7 @@ export default function ReviewPage() {
             )}
             <span>by {reviewData.author}</span>
           </Link>
-        </p>
+        </div>
         <p className="review__date">
           {reviewData.createDate.dayMonthYear} at{' '}
           {reviewData.createDate.time.hours}:
@@ -299,37 +380,13 @@ export default function ReviewPage() {
         <div className="review__stats">
           <div className="review__stats_block">
             <div className="review__likes_block">
-              <Button
-                variant="text"
-                onClick={() => {
-                  if (isAuth) {
-                    handleLike();
-                  } else {
-                    handleSnackbarOpen(
-                      'error',
-                      'You have to sign in to rate reviews'
-                    );
-                  }
-                }}
-              >
+              <Button variant="text" onClick={handleLike}>
                 {isLiked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
                 <span className="review__likes_amount">{likesAmount}</span>
               </Button>
             </div>
             <div className="review__dislikes_block">
-              <Button
-                variant="text"
-                onClick={() => {
-                  if (isAuth) {
-                    handleDislike();
-                  } else {
-                    handleSnackbarOpen(
-                      'error',
-                      'You have to sign in to rate reviews'
-                    );
-                  }
-                }}
-              >
+              <Button variant="text" onClick={handleDislike}>
                 {isDisliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
                 <span className="review__likes_amount">{dislikesAmount}</span>
               </Button>
@@ -360,99 +417,8 @@ export default function ReviewPage() {
           <div className="review__comments_title">
             {comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
           </div>
-          {isAuth ? (
-            <div className="review__comments_input_block">
-              <TextField
-                multiline={true}
-                className="review__comments_input"
-                id="review-comments-input"
-                placeholder="Comment text..."
-                value={commentValue}
-                onInput={(e) => {
-                  const input = e.target as HTMLInputElement;
-                  setCommentValue(input.value);
-                }}
-              />
-              <button
-                className="review__comments_input_btn"
-                onClick={handleComment}
-              >
-                Upload
-              </button>
-            </div>
-          ) : (
-            <div className="review__comments_input_error">
-              You have to sign in to comment reviews
-            </div>
-          )}
-          <div className="review__comments_container">
-            {comments.map((comment: IComment, index) => {
-              const currentDate = getToday();
-              const currentDayWeight =
-                Number(currentDate.time.hours) * 60 * 60 +
-                Number(currentDate.time.minutes) * 60 +
-                Number(currentDate.time.seconds);
-
-              const currentDateWeight = getTimeWeight(currentDate);
-              const commentDateWeight = getTimeWeight(comment.date);
-              let resultDate =
-                currentDateWeight - commentDateWeight < currentDayWeight
-                  ? 'today'
-                  : 'yesterday';
-              if (
-                currentDateWeight - commentDateWeight >
-                currentDayWeight * 2
-              ) {
-                resultDate = comment.date.dayMonthYear;
-              }
-
-              return (
-                <div className="review__comments_item" key={index}>
-                  <div className="review__comments_item_header">
-                    <div className="review__comments_item_header_about">
-                      <div
-                        className="review__comments_item_avatar"
-                        style={{
-                          backgroundImage: `url(${
-                            comment.authorData.avatarImgPath
-                              ? comment.authorData.avatarImgPath
-                              : ''
-                          })`,
-                        }}
-                      >
-                        {!comment.authorData.avatarImgPath ? (
-                          <AccountCircleIcon />
-                        ) : null}
-                      </div>
-                      <div className="review__comments_item_author">
-                        <div className="review__comments_item_name">
-                          {comment.author}
-                        </div>
-                        <div className="review__comments_item_date">
-                          {`${resultDate} at ${comment.date.time.hours}:${comment.date.time.minutes}`}
-                        </div>
-                      </div>
-                    </div>
-                    {userName === comment.author ? (
-                      <div className="review__comments_item_header_controls">
-                        <button
-                          onClick={() => {
-                            handleCommentDelete(comment);
-                          }}
-                          className="review__comments_item_btn-delete"
-                        >
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="review__comments_item_descr">
-                    {comment.content}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {generateCommentsInput()}
+          <div className="review__comments_container">{generateComments()}</div>
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+import { IComment } from "../components/classes/ReviewClass";
+
 export interface ITime {
   time: {
     hours: string;
@@ -60,4 +62,26 @@ export function getTimeWeight(timeProps: ITime) {
     Number(time.minutes) * 60 +
     Number(time.seconds);
   return timeWeight;
+}
+
+export function checkCommentDate(commentInfo:IComment){
+  const currentDate = getToday();
+  const currentDayWeight =
+    Number(currentDate.time.hours) * 60 * 60 +
+    Number(currentDate.time.minutes) * 60 +
+    Number(currentDate.time.seconds);
+
+  const currentDateWeight = getTimeWeight(currentDate);
+  const commentDateWeight = getTimeWeight(commentInfo.date);
+  let resultDate =
+    currentDateWeight - commentDateWeight < currentDayWeight
+      ? 'today'
+      : 'yesterday';
+  if (
+    currentDateWeight - commentDateWeight >
+    currentDayWeight * 2
+  ) {
+    resultDate = commentInfo.date.dayMonthYear;
+  }
+  return resultDate
 }

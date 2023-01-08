@@ -272,6 +272,10 @@ $lightwhite: #e1e1e1;
           display: flex;
           align-items: center;
           column-gap: 10px;
+          & svg{
+            font-size: 40px;
+            color: $gray;
+          }
         }
       }
       &_avatar {
@@ -282,11 +286,7 @@ $lightwhite: #e1e1e1;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        & > svg {
-          width: 100%;
-          height: 100%;
-          color: $gray;
-        }
+
       }
       &_author {
         display: flex;

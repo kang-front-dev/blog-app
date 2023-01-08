@@ -70,6 +70,13 @@ $lightwhite: #e1e1e1;
     &__comments{
       &_item{
         row-gap: 10px;
+        &_header{
+          &_about{
+            & svg{
+              font-size: 30px;
+            }
+          }
+        }
         &_avatar{
           width: 30px;
           height: 30px;
