@@ -126,7 +126,6 @@ export default function ReviewPage() {
 
   function generateComments() {
     return comments.map((comment: IComment, index) => {
-
       const resultDate = checkCommentDate(comment);
 
       return (
@@ -301,50 +300,50 @@ export default function ReviewPage() {
         >
           <ArrowBackIcon />
         </button>
-        <div className="review__options">
-          <button
-            className="review__options_btn-delete"
-            onClick={handleModalOpen}
-          >
-            <DeleteOutlineIcon />
-          </button>
-          <Modal
-            open={modalOpen}
-            onClose={handleModalClose}
-            aria-labelledby="model-title"
-            aria-describedby="modal-controls"
-          >
-            <div className="modal">
-              <div className="modal__title" id="model-title">
-                Are you sure to delete review?
+        {isAuth && userName === reviewData.author ? (
+          <div className="review__options">
+            <button
+              className="review__options_btn-delete"
+              onClick={handleModalOpen}
+            >
+              <DeleteOutlineIcon />
+            </button>
+            <Modal
+              open={modalOpen}
+              onClose={handleModalClose}
+              aria-labelledby="model-title"
+              aria-describedby="modal-controls"
+            >
+              <div className="modal">
+                <div className="modal__title" id="model-title">
+                  Are you sure to delete review?
+                </div>
+                <div className="modal__controls" id="modal-controls">
+                  <Button
+                    variant="outlined"
+                    style={{ color: '#FFFFFF', borderColor: '#FFFFFF' }}
+                    onClick={handleModalClose}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      handleModalOpen();
+                      handleReviewDelete();
+                    }}
+                  >
+                    Yes, delete
+                  </Button>
+                </div>
               </div>
-              <div className="modal__controls" id="modal-controls">
-                <Button
-                  variant="outlined"
-                  style={{ color: '#FFFFFF', borderColor: '#FFFFFF' }}
-                  onClick={handleModalClose}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => {
-                    handleModalOpen();
-                    handleReviewDelete();
-                  }}
-                >
-                  Yes, delete
-                </Button>
-              </div>
-            </div>
-          </Modal>
-        </div>
+            </Modal>
+          </div>
+        ) : null}
       </div>
       <div className="review__title">
-        <div className="review__title_content">
-          {reviewData.title}
-        </div>
+        <div className="review__title_content">{reviewData.title}</div>
       </div>
       <div className="review__about">
         <div className="review__author">
