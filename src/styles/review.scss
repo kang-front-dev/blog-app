@@ -15,9 +15,6 @@ $lightwhite: #e1e1e1;
   }
   &__btn {
     &-back {
-      position: absolute;
-      top: 20px;
-      left: 10px;
       width: 40px;
       height: 40px;
       outline: none;
@@ -27,12 +24,18 @@ $lightwhite: #e1e1e1;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
+      margin-bottom: 20px;
       cursor: pointer;
       & svg {
         font-size: 22px;
         color: $white;
       }
     }
+  }
+  &__nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   &__title {
     width: 100%;
@@ -41,12 +44,15 @@ $lightwhite: #e1e1e1;
     justify-content: space-between;
     &_content {
       font-size: 40px;
-
+      
       font-weight: 700;
       margin-bottom: 10px;
       color: $white;
       display: flex;
       align-items: center;
+    }
+    &_text{
+      width: fit-content;
     }
   }
   &__about {
@@ -59,6 +65,14 @@ $lightwhite: #e1e1e1;
     color: $gray;
   }
   &__author {
+    &_img{
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+    }
     & > a {
       display: flex;
       align-items: center;
@@ -71,8 +85,7 @@ $lightwhite: #e1e1e1;
         color: $white;
         text-decoration: underline;
       }
-      & > svg,
-      & > img {
+      & > svg{
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -102,11 +115,11 @@ $lightwhite: #e1e1e1;
     }
   }
   &__rating {
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 15px;
-    margin-left: 20px;
+    margin-left: 10px;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     color: #f9f9f9;
   }
   &__date {
@@ -114,21 +127,15 @@ $lightwhite: #e1e1e1;
     color: $gray;
   }
   &__img {
-    max-width: 100%;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    &_wrapper {
-      width: 115%;
-      align-self: center;
-      position: relative;
-      height: 600px;
-      overflow: hidden;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
+    align-self: center;
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   &__descr {
     font-size: 18px;
@@ -139,11 +146,22 @@ $lightwhite: #e1e1e1;
     color: $white;
     white-space: pre-line;
   }
-
+  &__info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 20px;
+  }
   &__stats {
     display: flex;
     align-items: center;
+    column-gap: 20px;
+    &_block{
+      display: flex;
+      align-items: center;
+    }
   }
+  
   &__likes {
     &_block {
       border-top-left-radius: 20px;
@@ -176,35 +194,36 @@ $lightwhite: #e1e1e1;
     }
   }
   &__views {
-    margin-left: 20px;
+
     display: flex;
     align-items: center;
     column-gap: 10px;
     color: $white;
   }
   &__group {
-    margin-left: 20px;
+
     padding: 5px 12px;
     background: $white;
     font-weight: 500;
     border-radius: 10px;
     cursor: pointer;
     color: $darkgray;
+    &_block{
+      display: flex;
+      align-items: center;
+    }
   }
   &__tags {
-    margin-left: 20px;
     display: flex;
     align-items: center;
+    column-gap: 10px;
+    row-gap: 10px;
   }
   &__tag {
-    padding: 0px 10px;
-    color: $gray;
-    &:nth-of-type(n) {
-      border-right: 1px $gray solid;
-    }
-    &:nth-last-of-type(1) {
-      border: none;
-    }
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: $white;
+    background: $darkgray;
   }
   &__comments {
     width: 100%;
@@ -212,6 +231,7 @@ $lightwhite: #e1e1e1;
     & > .container {
       max-width: 600px;
       row-gap: 15px;
+      padding: 0;
     }
     &_container {
       display: flex;
@@ -272,6 +292,7 @@ $lightwhite: #e1e1e1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        row-gap: 5px;
       }
       &_name {
         color: $white;
@@ -495,7 +516,7 @@ $lightwhite: #e1e1e1;
       font-size: 16px;
       display: flex;
       align-items: center;
-      
+
       & > span {
         font-weight: 700;
         font-size: 17px;
