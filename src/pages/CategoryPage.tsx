@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from '../components/classes/ReviewClass';
 import ReviewCard from '../components/ReviewCard';
 
 import Skeleton from '@mui/material/Skeleton';
+import { globalContext } from '../components/contexts/globalContext';
 
 export default function CategoryPage() {
   const { category } = useParams();
+  const { startProgress, finishProgress } = useContext(globalContext);
   const [categoryReviews, setCategoryReviews] = useState<Array<IReview>>([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   async function getFilteredReviews(categoryParam: string) {
+    startProgress();
     const response = await getAllReviews();
 
     if (category !== 'popular' && category !== 'recent') {
@@ -34,6 +37,7 @@ export default function CategoryPage() {
       setCategoryReviews(result);
     }
     setIsDataLoaded(true);
+    finishProgress();
   }
 
   function generateCards() {
@@ -48,7 +52,7 @@ export default function CategoryPage() {
             key={item}
             variant="rounded"
             animation="wave"
-            style={{ borderRadius: '20px',height: '100%' }}
+            style={{ borderRadius: '20px', height: '100%' }}
           />
         );
       });

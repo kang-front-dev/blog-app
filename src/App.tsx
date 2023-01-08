@@ -14,11 +14,12 @@ import TagsPage from './pages/TagsPage';
 import { useSnackbar } from './hooks/useSnackbar';
 import { useAuth } from './hooks/useAuth';
 import SearchPage from './pages/SearchPage';
+import { useProgress } from './hooks/useProgress';
 
 function App() {
 
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const {progress,startProgress, finishProgress} = useProgress();
 
   const { isAuth, userName, userEmail, handleAuth } = useAuth();
 
@@ -28,7 +29,8 @@ function App() {
     isSideBarOpen,
     setIsSideBarOpen,
     progress,
-    setProgress,
+    startProgress,
+    finishProgress,
   };
   const contextValueSnackbar = {
     open,

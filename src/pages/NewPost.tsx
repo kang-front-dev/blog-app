@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { uploadFile } from '../api/firebase';
 
-import { TextField, Autocomplete, Button} from '@mui/material';
+import { TextField, Autocomplete, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -37,13 +37,16 @@ export default function NewPost() {
   };
 
   const handleClick = async () => {
+
     const newReview = new Review({
       title: title,
       descr: descr,
       imgPath: imgPath,
       group: group.label,
       tags: tags.map((item) => {
-        return typeof item == 'object' ? item.label.toLowerCase() : item.toLowerCase();
+        return typeof item == 'object'
+          ? item.label.toLowerCase()
+          : item.toLowerCase();
       }),
       rating: rating.toString(),
       author: userName,
@@ -73,7 +76,7 @@ export default function NewPost() {
         'You have to sign in to create your own posts'
       );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isAuth ? (

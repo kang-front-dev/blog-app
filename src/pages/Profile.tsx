@@ -20,13 +20,15 @@ const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
 export default function Profile() {
   const { name } = useParams();
-  const { handleSnackbarOpen, userName } = useContext(globalContext);
+  const { handleSnackbarOpen, userName, startProgress, finishProgress } =
+    useContext(globalContext);
 
   const [userInfo, setUserInfo] = useState<IUser>({});
   const [userReviews, setUserReviews] = useState<Array<IReview>>([]);
   const [userReviewsLoaded, setUserReviewsLoaded] = useState(false);
   const [avatarImgPath, setAvatarImgPath] = useState('');
   async function getUser() {
+    startProgress()
     getUserInfo({ name: name })
       .then((res) => {
         setUserInfo(res.userData);
@@ -40,6 +42,7 @@ export default function Profile() {
       .then((res) => {
         setUserReviews(res.reviews);
         setUserReviewsLoaded(true);
+        finishProgress()
       })
       .catch((err) => {
         console.log(err);

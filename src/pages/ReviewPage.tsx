@@ -28,8 +28,13 @@ import { deleteReview } from '../api/deleteReview';
 
 export default function ReviewPage() {
   const { id } = useParams();
-  const { userName, isAuth, setProgress, handleSnackbarOpen } =
-    useContext(globalContext);
+  const {
+    userName,
+    isAuth,
+    startProgress,
+    finishProgress,
+    handleSnackbarOpen,
+  } = useContext(globalContext);
 
   const navigate = useNavigate();
 
@@ -121,6 +126,7 @@ export default function ReviewPage() {
 
   function generateComments() {
     return comments.map((comment: IComment, index) => {
+
       const resultDate = checkCommentDate(comment);
 
       return (
@@ -250,11 +256,11 @@ export default function ReviewPage() {
 
   const handleComment = async () => {
     const data = { author: userName, date: getToday(), content: commentValue };
-    const myData = await getUserInfo({ name: userName });
+    const { userData } = await getUserInfo({ name: userName });
 
     addComment({ ...data, reviewId: id });
     setCommentValue('');
-    setComments([...comments, { ...data, authorData: myData }]);
+    setComments([...comments, { ...data, authorData: userData }]);
   };
   const handleCommentDelete = async (comment: IComment) => {
     let itemIndex;
@@ -270,12 +276,9 @@ export default function ReviewPage() {
   };
 
   useEffect(() => {
-    setProgress(20);
+    startProgress();
     getReviewData().then(() => {
-      setProgress(90);
-      setTimeout(() => {
-        setProgress(100);
-      }, 300);
+      finishProgress();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

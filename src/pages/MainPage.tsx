@@ -7,18 +7,14 @@ import ReviewCard from '../components/ReviewCard';
 import Skeleton from '@mui/material/Skeleton';
 
 export default function MainPage() {
-  const { setProgress } = useContext(globalContext);
+  const { startProgress,finishProgress } = useContext(globalContext);
   const [recentReviews, setRecentReviews] = useState([]);
   const [popularReviews, setPopularReviews] = useState([]);
 
   useEffect(() => {
-    setProgress(20);
+    startProgress()
     handleUpdate().then(() => {
-      setProgress(90);
-      setTimeout(() => {
-        setProgress(100);
-        setProgress(0);
-      }, 500);
+      finishProgress()
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

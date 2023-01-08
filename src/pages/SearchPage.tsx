@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from 'react';
+import React, { useState, FormEvent, useEffect, useContext } from 'react';
 import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from '../components/classes/ReviewClass';
 import { SearchReviews } from '../utils/Search';
@@ -6,8 +6,10 @@ import ReviewCard from '../components/ReviewCard';
 
 import Skeleton from '@mui/material/Skeleton';
 import CloseIcon from '@mui/icons-material/Close';
+import { globalContext } from '../components/contexts/globalContext';
 
 export default function SearchPage() {
+  const { startProgress, finishProgress } = useContext(globalContext);
   const [searchValue, setSearchValue] = useState('');
   const [cards, setCards] = useState<Array<IReview>>([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -55,10 +57,13 @@ export default function SearchPage() {
   }
 
   useEffect(() => {
+    startProgress()
     const getReviews = async () => {
       const { reviews } = await getAllReviews();
       setDbReviews(reviews);
       setIsDataLoaded(true);
+
+      finishProgress()
     };
     getReviews();
   }, []);
