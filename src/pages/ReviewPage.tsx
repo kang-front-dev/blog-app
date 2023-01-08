@@ -167,7 +167,7 @@ export default function ReviewPage() {
               </div>
             ) : null}
           </div>
-          <div className="review__comments_item_descr">{comment.content}</div>
+          <p className="review__comments_item_descr">{comment.content}</p>
         </div>
       );
     });
@@ -343,7 +343,7 @@ export default function ReviewPage() {
       </div>
       <div className="review__title">
         <div className="review__title_content">
-          <span className="review__title_text">{reviewData.title}</span>
+          {reviewData.title}
         </div>
       </div>
       <div className="review__about">

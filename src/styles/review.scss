@@ -307,6 +307,8 @@ $lightwhite: #e1e1e1;
         color: $white;
         font-size: 18px;
         font-weight: 400;
+        word-wrap: break-word;
+        max-width: 100%;
       }
       &_btn {
         &-delete {
