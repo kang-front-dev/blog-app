@@ -1,0 +1,14 @@
+@media(max-width: 650px){
+  .modal{
+    max-width: 80%;
+    &__title{
+      font-size: 26px;
+    }
+    &__controls{
+      & > button{
+        font-size: 14px;
+        white-space: nowrap;
+      }
+    }
+  }
+}

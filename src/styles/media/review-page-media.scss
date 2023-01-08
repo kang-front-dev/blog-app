@@ -68,6 +68,9 @@ $lightwhite: #e1e1e1;
       line-height: 22px;
     }
     &__comments{
+      &_title{
+        font-size: 26px;
+      }
       &_item{
         row-gap: 10px;
         &_header{

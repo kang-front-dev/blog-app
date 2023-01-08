@@ -53,6 +53,7 @@ function App() {
         userName: response.userData.name,
         userEmail: response.userData.email,
       });
+      handleSnackbarOpen('success','Welcome back!')
     } else {
       localStorage.removeItem('username');
       localStorage.removeItem('email');

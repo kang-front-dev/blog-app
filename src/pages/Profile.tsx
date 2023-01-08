@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Skeleton from '@mui/material/Skeleton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { getUserInfo } from '../api/getUserInfo';
 import { getUserReviews } from '../api/getUserReviews';
@@ -59,6 +60,27 @@ export default function Profile() {
     }
   };
 
+  function generateReviews() {
+    if (userReviewsLoaded && userReviews.length) {
+      return userReviews.map((review, index) => {
+        return <ReviewCard key={index} cardInfo={{ ...review }} />;
+      });
+    } else if (!userReviewsLoaded && !userReviews.length) {
+      return [1, 2, 3, 4, 5, 6].map((item) => {
+        return (
+          <Skeleton
+            key={item}
+            variant="rounded"
+            animation="wave"
+            style={{ borderRadius: '20px', height: '100%' }}
+          />
+        );
+      });
+    } else if (userReviewsLoaded && !userReviews.length) {
+      return <div className="review__error">No reviews</div>;
+    }
+  }
+
   useEffect(() => {
     getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,6 +106,7 @@ export default function Profile() {
               label={'Change avatar'}
             />
           ) : null}
+          {!avatarImgPath ? <AccountCircleIcon /> : null}
         </div>
         {userInfo.name ? (
           <h2 className="profile__about_name">{userInfo.name}</h2>
@@ -111,31 +134,7 @@ export default function Profile() {
           <MenuBookIcon />
           Reviews
         </h3>
-        <div className="profile__reviews_container">
-          {userReviews.length
-            ? userReviews.map((review, index) => {
-                return (
-                  <ReviewCard
-                    key={index}
-                    cardInfo={{ ...review, selectorId: 'profile-review-card' }}
-                  ></ReviewCard>
-                );
-              })
-            : [1, 2, 3, 4, 5, 6].map((item) => {
-
-                return (
-                  <Skeleton
-                    key={item}
-                    variant="rounded"
-                    animation="wave"
-                    style={{ borderRadius: '20px',height: '100%' }}
-                  />
-                );
-              })}
-          {!userReviews.length && userReviewsLoaded ? (
-            <div className="profile__reviews_error">No reviews</div>
-          ) : null}
-        </div>
+        <div className="profile__reviews_container">{generateReviews()}</div>
       </div>
     </div>
   );
