@@ -34,7 +34,7 @@ $white: #ffffff;
         transform: translate(-50%,-50%);
       }
       & > label {
-        z-index: 0;
+        z-index: 3;
         max-width: 80%;
         min-width: 0;
         background: $white;
