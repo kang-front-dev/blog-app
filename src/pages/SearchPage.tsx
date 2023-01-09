@@ -66,6 +66,7 @@ export default function SearchPage() {
       finishProgress()
     };
     getReviews();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
