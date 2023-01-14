@@ -40,6 +40,7 @@ export default function ReviewPage() {
 
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false)
   const [likesAmount, setLikesAmount] = useState(0);
   const [dislikesAmount, setDislikesAmount] = useState(0);
 
@@ -202,6 +203,7 @@ export default function ReviewPage() {
   };
 
   const handleLike = () => {
+    setIsBtnDisabled(true)
     if (!isAuth) {
       handleSnackbarOpen('error', 'You have to sign in to rate reviews');
       return;
@@ -223,9 +225,13 @@ export default function ReviewPage() {
       setIsLiked(false);
       setLikesAmount(likesAmount - 1);
     }
+    setTimeout(() => {
+      setIsBtnDisabled(false)
+    }, 300);
   };
 
   const handleDislike = () => {
+    setIsBtnDisabled(true)
     if (!isAuth) {
       handleSnackbarOpen('error', 'You have to sign in to rate reviews');
       return;
@@ -247,6 +253,9 @@ export default function ReviewPage() {
       setIsDisliked(false);
       setDislikesAmount(dislikesAmount - 1);
     }
+    setTimeout(() => {
+      setIsBtnDisabled(false)
+    }, 300);
   };
 
   const handleView = async () => {
@@ -291,7 +300,7 @@ export default function ReviewPage() {
 
   return (
     <section className="review">
-      <div className="review__nav">
+      <nav className="review__nav">
         <button
           className="review__btn-back"
           onClick={() => {
@@ -341,7 +350,7 @@ export default function ReviewPage() {
             </Modal>
           </div>
         ) : null}
-      </div>
+      </nav>
       <div className="review__title">
         <div className="review__title_content">{reviewData.title}</div>
       </div>
@@ -382,13 +391,13 @@ export default function ReviewPage() {
         <div className="review__stats">
           <div className="review__stats_block">
             <div className="review__likes_block">
-              <Button variant="text" onClick={handleLike}>
+              <Button variant="text" onClick={handleLike} disabled={isBtnDisabled}>
                 {isLiked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
                 <span className="review__likes_amount">{likesAmount}</span>
               </Button>
             </div>
             <div className="review__dislikes_block">
-              <Button variant="text" onClick={handleDislike}>
+              <Button variant="text" onClick={handleDislike} disabled={isBtnDisabled}>
                 {isDisliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
                 <span className="review__likes_amount">{dislikesAmount}</span>
               </Button>

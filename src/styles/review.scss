@@ -32,7 +32,7 @@ $lightwhite: #e1e1e1;
       }
     }
   }
-  &__nav{
+  &__nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,14 +44,14 @@ $lightwhite: #e1e1e1;
     justify-content: space-between;
     &_content {
       font-size: 40px;
-      
+
       font-weight: 700;
       margin-bottom: 10px;
       color: $white;
       display: flex;
       align-items: center;
     }
-    &_text{
+    &_text {
       width: fit-content;
     }
   }
@@ -65,7 +65,7 @@ $lightwhite: #e1e1e1;
     color: $gray;
   }
   &__author {
-    &_img{
+    &_img {
       width: 30px;
       height: 30px;
       background-size: cover;
@@ -85,7 +85,7 @@ $lightwhite: #e1e1e1;
         color: $white;
         text-decoration: underline;
       }
-      & > svg{
+      & > svg {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -146,7 +146,7 @@ $lightwhite: #e1e1e1;
     color: $white;
     white-space: pre-line;
   }
-  &__info{
+  &__info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -156,12 +156,19 @@ $lightwhite: #e1e1e1;
     display: flex;
     align-items: center;
     column-gap: 20px;
-    &_block{
+    &_block {
       display: flex;
       align-items: center;
     }
   }
-  
+  &__likes_block,
+  &__dislikes_block {
+    & > button:disabled {
+      & svg {
+        color: $gray;
+      }
+    }
+  }
   &__likes {
     &_block {
       border-top-left-radius: 20px;
@@ -169,6 +176,7 @@ $lightwhite: #e1e1e1;
       border: 1px $white solid;
       & svg {
         color: $white;
+        transition: 0.2s;
       }
     }
     &_amount {
@@ -185,6 +193,7 @@ $lightwhite: #e1e1e1;
       border-left: none;
       & svg {
         color: $white;
+        transition: 0.2s;
       }
     }
     &_amount {
@@ -194,21 +203,19 @@ $lightwhite: #e1e1e1;
     }
   }
   &__views {
-
     display: flex;
     align-items: center;
     column-gap: 10px;
     color: $white;
   }
   &__group {
-
     padding: 5px 12px;
     background: $white;
     font-weight: 500;
     border-radius: 10px;
     cursor: pointer;
     color: $darkgray;
-    &_block{
+    &_block {
       display: flex;
       align-items: center;
     }
@@ -272,7 +279,7 @@ $lightwhite: #e1e1e1;
           display: flex;
           align-items: center;
           column-gap: 10px;
-          & svg{
+          & svg {
             font-size: 40px;
             color: $gray;
           }
@@ -286,7 +293,6 @@ $lightwhite: #e1e1e1;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-
       }
       &_author {
         display: flex;
@@ -620,7 +626,7 @@ $lightwhite: #e1e1e1;
         left: 50%;
         transform: translate(-50%, -50%);
         max-width: 80%;
-        & label{
+        & label {
           width: 100%;
           min-width: 0;
         }
