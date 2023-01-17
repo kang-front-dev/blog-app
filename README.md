@@ -2,7 +2,7 @@
 
 Front-view is a blog type application with reviews, posts, profiles, etc..
 
-## Stack: React, Typescript, Material UI, Scss, MongoDB, Express
+## Stack: React, Typescript, Material UI, Scss, Node, MongoDB, Express
 
 
 
