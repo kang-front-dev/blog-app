@@ -1,11 +1,7 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
-$lightwhite: #e1e1e1;
+@use '_vars' as vars;
 
 .modal{
-  background: $darkgray;
+  background: vars.$darkgray;
   border-radius: 10px;
   padding: 30px;
   position: fixed;
@@ -16,7 +12,7 @@ $lightwhite: #e1e1e1;
   &__title{
     font-size: 30px;
     font-weight: 500;
-    color: $white;
+    color: vars.$white;
     margin-bottom: 24px;
     text-align: center;
   }

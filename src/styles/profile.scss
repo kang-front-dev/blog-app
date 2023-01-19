@@ -1,7 +1,4 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
+@use '_vars' as vars;
 
 .profile {
   padding: 50px 0;
@@ -19,7 +16,7 @@ $white: #ffffff;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      border: 4px $gray solid;
+      border: 4px vars.$gray solid;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -27,7 +24,7 @@ $white: #ffffff;
       & > svg{
         width: 100%;
         height: 100%;
-        color: $gray;
+        color: vars.$gray;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -37,7 +34,7 @@ $white: #ffffff;
         z-index: 3;
         max-width: 80%;
         min-width: 0;
-        background: $white;
+        background: vars.$white;
         border: none;
         transition: 0.2s;
         & span.file-types {
@@ -58,12 +55,12 @@ $white: #ffffff;
       font-size: 35px;
       line-height: 40px;
       
-      color: $white;
+      color: vars.$white;
     }
     &_email {
       font-size: 18px;
 
-      color: $gray;
+      color: vars.$gray;
     }
   }
   &__reviews {
@@ -75,9 +72,9 @@ $white: #ffffff;
       font-size: 25px;
       margin-bottom: 20px;
       padding: 5px 10px;
-      color: $white;
+      color: vars.$white;
       & > svg {
-        color: $white;
+        color: vars.$white;
       }
     }
     &_container {
@@ -87,7 +84,7 @@ $white: #ffffff;
       gap: 20px;
       padding: 20px;
       border-radius: 35px;
-      background-color: $darkgray;
+      background-color: vars.$darkgray;
     }
   }
 }

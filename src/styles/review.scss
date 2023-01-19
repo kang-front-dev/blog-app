@@ -1,8 +1,4 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
-$lightwhite: #e1e1e1;
+@use '_vars' as vars;
 /////////////////////////////REVIEW PAGE///////////////////////////
 .review {
   animation: fade 0.3s ease-in-out;
@@ -19,7 +15,7 @@ $lightwhite: #e1e1e1;
       height: 40px;
       outline: none;
       border: none;
-      background: $darkgray;
+      background: vars.$darkgray;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -28,7 +24,7 @@ $lightwhite: #e1e1e1;
       cursor: pointer;
       & svg {
         font-size: 22px;
-        color: $white;
+        color: vars.$white;
       }
     }
   }
@@ -47,7 +43,7 @@ $lightwhite: #e1e1e1;
 
       font-weight: 700;
       margin-bottom: 10px;
-      color: $white;
+      color: vars.$white;
       display: flex;
       align-items: center;
     }
@@ -62,7 +58,7 @@ $lightwhite: #e1e1e1;
     font-size: 20px;
     column-gap: 10px;
     margin-bottom: 40px;
-    color: $gray;
+    color: vars.$gray;
   }
   &__author {
     &_img {
@@ -82,19 +78,19 @@ $lightwhite: #e1e1e1;
         font-size: 16px;
         line-height: 16px;
 
-        color: $white;
+        color: vars.$white;
         text-decoration: underline;
       }
       & > svg {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        color: $gray;
+        color: vars.$gray;
       }
     }
   }
   &__options {
-    background: $darkgray;
+    background: vars.$darkgray;
     border-radius: 5px;
     &_btn {
       &-delete {
@@ -124,7 +120,7 @@ $lightwhite: #e1e1e1;
   }
   &__date {
     font-size: 16px;
-    color: $gray;
+    color: vars.$gray;
   }
   &__img {
     align-self: center;
@@ -143,7 +139,7 @@ $lightwhite: #e1e1e1;
     font-weight: 300;
     margin-bottom: 40px;
     letter-spacing: 0.3px;
-    color: $white;
+    color: vars.$white;
     white-space: pre-line;
   }
   &__info {
@@ -165,7 +161,7 @@ $lightwhite: #e1e1e1;
   &__dislikes_block {
     & > button:disabled {
       & svg {
-        color: $gray;
+        color: vars.$gray;
       }
     }
   }
@@ -173,15 +169,15 @@ $lightwhite: #e1e1e1;
     &_block {
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
-      border: 1px $white solid;
+      border: 1px vars.$white solid;
       & svg {
-        color: $white;
+        color: vars.$white;
         transition: 0.2s;
       }
     }
     &_amount {
       margin-left: 5px;
-      color: $white;
+      color: vars.$white;
       font-weight: 400;
     }
   }
@@ -189,16 +185,16 @@ $lightwhite: #e1e1e1;
     &_block {
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
-      border: 1px $white solid;
+      border: 1px vars.$white solid;
       border-left: none;
       & svg {
-        color: $white;
+        color: vars.$white;
         transition: 0.2s;
       }
     }
     &_amount {
       margin-left: 5px;
-      color: $white;
+      color: vars.$white;
       font-weight: 400;
     }
   }
@@ -206,15 +202,15 @@ $lightwhite: #e1e1e1;
     display: flex;
     align-items: center;
     column-gap: 10px;
-    color: $white;
+    color: vars.$white;
   }
   &__group {
     padding: 5px 12px;
-    background: $white;
+    background: vars.$white;
     font-weight: 500;
     border-radius: 10px;
     cursor: pointer;
-    color: $darkgray;
+    color: vars.$darkgray;
     &_block {
       display: flex;
       align-items: center;
@@ -229,8 +225,8 @@ $lightwhite: #e1e1e1;
   &__tag {
     padding: 5px 10px;
     border-radius: 10px;
-    color: $white;
-    background: $darkgray;
+    color: vars.$white;
+    background: vars.$darkgray;
   }
   &__comments {
     width: 100%;
@@ -247,7 +243,7 @@ $lightwhite: #e1e1e1;
     }
     &_title {
       font-size: 30px;
-      color: $white;
+      color: vars.$white;
       font-weight: 600;
       margin-bottom: 20px;
     }
@@ -258,7 +254,7 @@ $lightwhite: #e1e1e1;
       flex-direction: column;
       align-items: flex-start;
       padding: 20px;
-      background: $darkgray;
+      background: vars.$darkgray;
       animation: commentAppear 0.5s ease-in-out;
       row-gap: 20px;
       border-radius: 10px;
@@ -281,7 +277,7 @@ $lightwhite: #e1e1e1;
           column-gap: 10px;
           & svg {
             font-size: 40px;
-            color: $gray;
+            color: vars.$gray;
           }
         }
       }
@@ -301,16 +297,16 @@ $lightwhite: #e1e1e1;
         row-gap: 5px;
       }
       &_name {
-        color: $white;
+        color: vars.$white;
         font-size: 18px;
         font-weight: 500;
       }
       &_date {
-        color: $gray;
+        color: vars.$gray;
         font-size: 12px;
       }
       &_descr {
-        color: $white;
+        color: vars.$white;
         font-size: 18px;
         font-weight: 400;
         word-wrap: break-word;
@@ -325,7 +321,7 @@ $lightwhite: #e1e1e1;
           border: none;
           cursor: pointer;
           & svg {
-            color: $white;
+            color: vars.$white;
           }
         }
       }
@@ -336,7 +332,7 @@ $lightwhite: #e1e1e1;
 
       outline: none;
       border: none;
-      color: $white;
+      color: vars.$white;
 
       & > div {
         padding: 10px 0;
@@ -352,13 +348,13 @@ $lightwhite: #e1e1e1;
         border-radius: 10px;
         row-gap: 30px;
         font-size: 16px;
-        background: $darkgray;
+        background: vars.$darkgray;
         margin-bottom: 30px;
       }
       &_btn {
         border-radius: 7px;
-        border: 2px $white solid;
-        background: $white;
+        border: 2px vars.$white solid;
+        background: vars.$white;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -368,12 +364,12 @@ $lightwhite: #e1e1e1;
         cursor: pointer;
         transition: 0.15s;
         &:hover {
-          background: $darkgray;
-          color: $white;
+          background: vars.$darkgray;
+          color: vars.$white;
         }
       }
       &_error {
-        color: $white;
+        color: vars.$white;
         padding: 10px 10px;
         text-align: center;
         width: 100%;
@@ -396,14 +392,14 @@ $lightwhite: #e1e1e1;
       min-height: 280px;
       border-radius: 35px;
       padding: 30px;
-      background-color: $darkgray;
+      background-color: vars.$darkgray;
 
       &_wrapper {
         padding: 50px 0;
         width: 100%;
       }
       &_title {
-        color: $white;
+        color: vars.$white;
         font-size: 40px;
         padding: 10px 30px;
         font-weight: 700;
@@ -411,7 +407,7 @@ $lightwhite: #e1e1e1;
       }
       &_link {
         padding: 10px 30px;
-        color: $gray;
+        color: vars.$gray;
         font-size: 16px;
         align-self: flex-end;
         cursor: pointer;
@@ -433,7 +429,7 @@ $lightwhite: #e1e1e1;
     &-new {
       width: 40px;
       height: 40px;
-      color: $white;
+      color: vars.$white;
       background: rgb(35, 35, 255);
       border-radius: 50%;
       display: flex;
@@ -446,138 +442,17 @@ $lightwhite: #e1e1e1;
       cursor: pointer;
       &:hover {
         background: rgb(255, 255, 255);
-        color: $black;
+        color: vars.$black;
       }
     }
   }
 
-  ///////////////////////CARD///////////////////////////
-  &__card {
-    background-color: $darkgray;
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    height: 100%;
-    column-gap: 20px;
-    animation: fade 0.3s ease-in-out;
-    cursor: pointer;
-    transition: 0.15s ease-in-out;
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.85),
-        rgba(0, 0, 0, 0.3)
-      );
-      z-index: 3;
-      transition: 0.2s;
-      opacity: 0;
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
-      z-index: 3;
-    }
-    &:hover {
-      &::before {
-        opacity: 1;
-      }
-    }
-    &_img_block {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-    }
-
-    &_text {
-      padding: 15px;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-      z-index: 4;
-    }
-    &_author {
-      color: $gray;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-
-      & > span {
-        font-weight: 700;
-        font-size: 17px;
-        margin-left: 5px;
-      }
-      &_avatar {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-      }
-    }
-    &_title {
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: capitalize;
-
-      color: #ffffff;
-
-      & > .review__rating {
-        margin-left: 10px;
-        padding: 3px 6px;
-        font-size: 12px;
-      }
-    }
-
-    &_bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-    &_stats {
-      display: flex;
-      align-items: center;
-      color: $gray;
-      column-gap: 10px;
-      & > span {
-        display: flex;
-        align-items: center;
-        column-gap: 7px;
-        font-size: 14px;
-        & > svg {
-          font-size: 16px;
-        }
-      }
-    }
-  }
   /////////////////////////////////////////////////////
   &__new {
     margin: 50px 0;
     padding: 30px;
     border-radius: 15px;
-    background: $white;
+    background: vars.$white;
     &_container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -587,7 +462,7 @@ $lightwhite: #e1e1e1;
       font-weight: 700;
       font-size: 50px;
       line-height: 50px;
-      color: $darkgray;
+      color: vars.$darkgray;
       margin-bottom: 15px;
     }
     &_left {
@@ -599,10 +474,10 @@ $lightwhite: #e1e1e1;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $gray;
+      background-color: vars.$gray;
       border-radius: 10px;
       overflow: hidden;
-      border: 2px $white solid;
+      border: 2px vars.$white solid;
 
       position: relative;
     }
@@ -620,7 +495,7 @@ $lightwhite: #e1e1e1;
     }
     &_input {
       &-file_block {
-        background-color: $white;
+        background-color: vars.$white;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -633,7 +508,7 @@ $lightwhite: #e1e1e1;
       }
       &_note {
         font-size: 14px;
-        color: $gray;
+        color: vars.$gray;
         grid-column: 2 span;
       }
     }
@@ -644,7 +519,7 @@ $lightwhite: #e1e1e1;
     }
   }
   &__error {
-    color: $white;
+    color: vars.$white;
     font-size: 27px;
     font-weight: 500;
     height: 100%;

@@ -1,13 +1,10 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
+@use '_vars' as vars;
 
 .review__search {
   &_input {
     flex-grow: 1;
     background: none;
-    color: $white;
+    color: vars.$white;
     font-size: 18px;
     font-weight: 500;
     border: none;
@@ -17,7 +14,7 @@ $white: #ffffff;
       width: 100%;
       padding: 12px;
       border-radius: 10px;
-      background-color: $darkgray;
+      background-color: vars.$darkgray;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
@@ -32,7 +29,7 @@ $white: #ffffff;
       background: none;
       & > svg{
         font-size: 22px;
-        color: $white;
+        color: vars.$white;
       }
     }
   }

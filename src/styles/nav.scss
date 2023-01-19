@@ -1,7 +1,4 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
+@use '_vars' as vars;
 
 .nav {
   position: fixed;
@@ -10,7 +7,7 @@ $white: #ffffff;
   left: 0;
   z-index: 10;
   padding: 10px 0;
-  background: $darkgray;
+  background: vars.$darkgray;
   box-shadow: 0px 0px 2px 2px #25252525;
   &__progress {
     position: fixed;
@@ -38,7 +35,7 @@ $white: #ffffff;
     &_text {
       font-family: 'Peace-Sans';
       font-weight: 700;
-      color: $white;
+      color: vars.$white;
       font-size: 35px;
     }
   }
@@ -49,7 +46,7 @@ $white: #ffffff;
     cursor: pointer;
     & svg{
       font-size: 35px;
-      color: $white;
+      color: vars.$white;
     }
   }
   &__avatar{
@@ -66,7 +63,7 @@ $white: #ffffff;
     column-gap: 10px;
     & svg {
       font-size: 30px;
-      color: $white;
+      color: vars.$white;
     }
   }
   &__right {
@@ -89,7 +86,7 @@ $white: #ffffff;
   &_title {
     font-size: 30px;
     font-weight: 500;
-    color: $white;
+    color: vars.$white;
 
     font-weight: 400;
   }
@@ -100,9 +97,9 @@ $white: #ffffff;
     align-items: center;
 
     padding: 5px 10px;
-    color: $white;
-    background: $darkgray;
-    border-bottom: 1px $gray solid;
+    color: vars.$white;
+    background: vars.$darkgray;
+    border-bottom: 1px vars.$gray solid;
     cursor: pointer;
 
     position: relative;
@@ -118,7 +115,7 @@ $white: #ffffff;
       outline: none;
       font-size: 18px;
       font-weight: 400;
-      color: $white;
+      color: vars.$white;
     }
     &_backplate{
       position: fixed;
@@ -140,7 +137,7 @@ $white: #ffffff;
       cursor: pointer;
       & > svg{
         font-size: 26px;
-        color: $white;
+        color: vars.$white;
       }
     }
     &_results {
@@ -163,10 +160,10 @@ $white: #ffffff;
         width: 10px;
       }
       &::-webkit-scrollbar-track{
-        background: $darkgray;
+        background: vars.$darkgray;
       }
       &::-webkit-scrollbar-thumb{
-        background: $gray;
+        background: vars.$gray;
         width: 10px;
         border-radius: 5px;
       }
@@ -225,7 +222,7 @@ $white: #ffffff;
       }
       &_title {
         font-size: 16px;
-        color: $white;
+        color: vars.$white;
 
       }
     }
@@ -238,7 +235,7 @@ $white: #ffffff;
     height: 100%;
     transition: 0.3s;
     transform: translateX(-100%);
-    background: $white;
+    background: vars.$white;
     &_wrapper {
       position: fixed;
       top: 0;

@@ -1,8 +1,4 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
-$lightwhite: #e1e1e1;
+@use '_vars' as vars;
 
 .tags {
   &__wrapper {
@@ -16,13 +12,13 @@ $lightwhite: #e1e1e1;
     margin-bottom: 20px;
   }
   &__item {
-    color: $white;
+    color: vars.$white;
     font-size: 14px;
     padding: 8px 16px;
 
     position: relative;
 
-    background: $darkgray;
+    background: vars.$darkgray;
     border-radius: 8px;
 
     cursor: pointer;
@@ -56,7 +52,7 @@ $lightwhite: #e1e1e1;
     }
     &.active {
       background-color: rgb(239 232 232 / 20%);
-      box-shadow: inset 0px 1px 2px $white;
+      box-shadow: inset 0px 1px 2px vars.$white;
 
       transform: translateY(-7px);
     }

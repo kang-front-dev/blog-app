@@ -1,7 +1,4 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
+@use '_vars' as vars;
 
 .form{
   &__wrapper{
@@ -13,24 +10,24 @@ $white: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
     position: relative;
-    background: $white;
-    color: $darkgray;
+    background: vars.$white;
+    color: vars.$darkgray;
     & > button.form__btn-back{
-      color: $darkgray;
+      color: vars.$darkgray;
     }
     & > div{
       & > label{
-        color: $darkgray;
+        color: vars.$darkgray;
       }
       & fieldset{
-        border-color: $darkgray;
+        border-color: vars.$darkgray;
       }
     }
     
   }
   &__title{
     margin-bottom: 14px;
-    color: $darkgray;
+    color: vars.$darkgray;
     font-size: 30px;
     text-align: center;
 

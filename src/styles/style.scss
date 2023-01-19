@@ -1,17 +1,16 @@
+@use '_vars' as vars;
+
 @import url('./background.scss');
 @import url('./nav.scss');
 @import url('./review.scss');
+@import url('./review-card.scss');
 @import url('./form.scss');
 @import url('./profile.scss');
 @import url('./tags.scss');
 @import url('./modal.scss');
 @import url('./searchPage.scss');
 
-$gray: #1e2224;
-$darkgray: #1e2224;
-$black: #161b1d;
 
-$white: #ffffff;
 
 * {
   margin: 0;
@@ -48,10 +47,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $darkgray;
+  background-color: vars.$darkgray;
   &__text,
   &__link {
-    color: $white;
+    color: vars.$white;
   }
   &__link {
     text-decoration: underline;
@@ -63,15 +62,15 @@ body {
 .page__content {
   min-height: 100vh;
   padding-top: 67px;
-  background: $black;
+  background: vars.$black;
 }
 
 .auth_error {
   padding: 7px 14px 7px 7px;
 
-  border: 1px $gray solid;
+  border: 1px vars.$gray solid;
   border-radius: 10px;
-  background: $white;
+  background: vars.$white;
   &_block {
     display: flex;
     align-items: center;

@@ -1,8 +1,4 @@
-$gray: #828081;
-$darkgray: #1e2224;
-$black: #161b1d;
-$white: #ffffff;
-$lightwhite: #e1e1e1;
+@use '../_vars' as vars;
 
 @media (max-width: 1270px) {
   .review {
@@ -44,7 +40,7 @@ $lightwhite: #e1e1e1;
     &__dislikes {
       &_block {
         border: none;
-        background: $darkgray;
+        background: vars.$darkgray;
         & > button {
           min-width: 0;
           padding: 8px 12px;
