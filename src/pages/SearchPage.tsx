@@ -39,7 +39,7 @@ export default function SearchPage() {
         return <ReviewCard key={index} cardInfo={{ ...review }} />;
       });
     } else if (!isDataLoaded && !cards.length) {
-      return [1, 2, 3, 4, 5, 6].map((item) => {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
         return (
           <Skeleton
             key={item}

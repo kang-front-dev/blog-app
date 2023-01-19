@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { getAllReviews } from '../api/getAllReviews';
-import { IReview} from '../components/classes/ReviewClass';
+import { IReview } from '../components/classes/ReviewClass';
 import { globalContext } from '../components/contexts/globalContext';
 import ReviewCard from '../components/ReviewCard';
 
 import Skeleton from '@mui/material/Skeleton';
 
 export default function MainPage() {
-  const { startProgress,finishProgress } = useContext(globalContext);
+  const { startProgress, finishProgress } = useContext(globalContext);
   const [recentReviews, setRecentReviews] = useState([]);
   const [popularReviews, setPopularReviews] = useState([]);
 
   useEffect(() => {
-    startProgress()
+    startProgress();
     handleUpdate().then(() => {
-      finishProgress()
+      finishProgress();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,13 +43,13 @@ export default function MainPage() {
         return <ReviewCard key={index} cardInfo={{ ...item }} />;
       });
     } else {
-      return [1, 2, 3, 4, 5, 6].map((item) => {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
         return (
           <Skeleton
             key={item}
             variant="rounded"
             animation="wave"
-            style={{ borderRadius: '20px',height: '100%' }}
+            style={{ borderRadius: '20px', height: '100%' }}
           />
         );
       });

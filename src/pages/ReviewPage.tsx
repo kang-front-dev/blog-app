@@ -56,7 +56,7 @@ export default function ReviewPage() {
     likes: [],
     dislikes: [],
     views: 0,
-    group: '',
+    group: 'Group',
     tags: [],
     comments: [],
   });

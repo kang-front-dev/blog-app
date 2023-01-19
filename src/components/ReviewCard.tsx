@@ -3,6 +3,7 @@ import React from 'react';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import CommentIcon from '@mui/icons-material/Comment';
 
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { Link } from 'react-router-dom';
@@ -42,17 +43,21 @@ export default function ReviewCard({ cardInfo }: ICardProps) {
             <div className="review__card_bottom">
               <div className="review__card_author">{cardInfo.author}</div>
               <div className="review__card_stats">
-                <span className="review__card_stats_views">
+                <span className="review__card_stats_likes">
                   <ThumbUpAltIcon style={{ color: '#626262' }} />
                   {cardInfo.likes.length}
                 </span>
-                <span className="review__card_stats_likes">
+                <span className="review__card_stats_dislikes">
                   <ThumbDownAltIcon style={{ color: '#626262' }} />
                   {cardInfo.dislikes.length}
                 </span>
-                <span className="review__card_stats_dislikes">
+                <span className="review__card_stats_views">
                   <RemoveRedEyeIcon style={{ color: '#626262' }} />
                   {cardInfo.views}
+                </span>
+                <span className="review__card_stats_comments">
+                  <CommentIcon style={{ color: '#626262' }} />
+                  {cardInfo.comments.length}
                 </span>
               </div>
             </div>

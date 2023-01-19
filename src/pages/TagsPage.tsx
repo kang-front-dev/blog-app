@@ -87,7 +87,7 @@ export default function TagsPage() {
     } else if (isNoResults) {
       return <div className="review__error">No reviews</div>;
     } else if (!isNoResults && !reviews.length) {
-      return [1, 2, 3, 4, 5, 6].map((item) => {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
         return (
           <Skeleton
             key={item}
