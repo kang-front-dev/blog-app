@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -19,8 +19,8 @@ import StyleIcon from '@mui/icons-material/Style';
 import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 
-import { globalContext } from './contexts/globalContext';
 import { useNavigate } from 'react-router-dom';
+import { useSideBar } from '../hooks/useSidebar';
 
 const categories = [
   {
@@ -46,20 +46,21 @@ const categories = [
 ];
 
 export default function SideBar() {
-  const { isSideBarOpen, setIsSideBarOpen } = useContext(globalContext);
+  const { isSideBarOpen, handleSideBarClose } = useSideBar();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-
+  
   const handleClick = () => {
     setOpen(!open);
   };
+
   return (
     <div
       className={
         isSideBarOpen ? 'sidebar__menu_wrapper active' : 'sidebar__menu_wrapper'
       }
       onClick={() => {
-        setIsSideBarOpen(false);
+        handleSideBarClose();
       }}
     >
       <div
@@ -72,7 +73,7 @@ export default function SideBar() {
           <ListItemButton
             onClick={() => {
               navigate('/category/popular');
-              setIsSideBarOpen(false);
+              handleSideBarClose();
             }}
             style={{ color: '#252525' }}
           >
@@ -85,7 +86,7 @@ export default function SideBar() {
           <ListItemButton
             onClick={() => {
               navigate('/category/recent');
-              setIsSideBarOpen(false);
+              handleSideBarClose();
             }}
             style={{ color: '#252525' }}
           >
@@ -109,10 +110,8 @@ export default function SideBar() {
                   <ListItemButton
                     key={index}
                     onClick={() => {
-                      navigate(
-                        `/category/${category.content.toLowerCase()}`
-                      );
-                      setIsSideBarOpen(false);
+                      navigate(`/category/${category.content.toLowerCase()}`);
+                      handleSideBarClose();
                     }}
                     sx={{ pl: 4 }}
                     style={{ color: '#252525' }}
@@ -128,7 +127,7 @@ export default function SideBar() {
           <ListItemButton
             onClick={() => {
               navigate('/tags');
-              setIsSideBarOpen(false);
+              handleSideBarClose();
             }}
             style={{ color: '#252525' }}
           >
@@ -141,7 +140,7 @@ export default function SideBar() {
           <ListItemButton
             onClick={() => {
               navigate('/new');
-              setIsSideBarOpen(false);
+              handleSideBarClose();
             }}
             style={{ color: '#252525' }}
           >

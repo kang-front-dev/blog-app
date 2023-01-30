@@ -1,50 +1,26 @@
 import { Route, Routes } from 'react-router-dom';
+
+import { useEffect } from 'react';
+
 import Layout from './pages/Layout';
 import MainPage from './pages/MainPage';
 import ReviewPage from './pages/ReviewPage';
 import NewPost from './pages/NewPost';
-import { globalContext } from './components/contexts/globalContext';
-import { useState, useEffect } from 'react';
 import LogPage from './pages/LogPage';
 import RegPage from './pages/RegPage';
 import Profile from './pages/Profile';
 import CategoryPage from './pages/CategoryPage';
-import { checkAuth } from './api/checkAuth';
 import TagsPage from './pages/TagsPage';
+import SearchPage from './pages/SearchPage';
+
+import { checkAuth } from './api/checkAuth';
+
 import { useSnackbar } from './hooks/useSnackbar';
 import { useAuth } from './hooks/useAuth';
-import SearchPage from './pages/SearchPage';
-import { useProgress } from './hooks/useProgress';
 
 function App() {
-
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const {progress,startProgress, finishProgress} = useProgress();
-
-  const { isAuth, userName, userEmail, handleAuth } = useAuth();
-
-  const { open, severity, alertMessage, handleSnackbarOpen,handleSnackbarClose } = useSnackbar();
-
-  const contextValueNav = {
-    isSideBarOpen,
-    setIsSideBarOpen,
-    progress,
-    startProgress,
-    finishProgress,
-  };
-  const contextValueSnackbar = {
-    open,
-    severity,
-    alertMessage,
-    handleSnackbarOpen,
-    handleSnackbarClose,
-  };
-  const contextValueUser = {
-    isAuth,
-    userEmail,
-    userName,
-    handleAuth,
-  };
+  const { handleAuth } = useAuth();
+  const { handleSnackbarOpen } = useSnackbar();
 
   async function checkToken() {
     const response = await checkAuth();
@@ -55,7 +31,7 @@ function App() {
         userName: response.userData.name,
         userEmail: response.userData.email,
       });
-      handleSnackbarOpen('success','Welcome back!')
+      handleSnackbarOpen('success', 'Welcome back!');
     } else {
       localStorage.removeItem('username');
       localStorage.removeItem('email');
@@ -67,18 +43,11 @@ function App() {
     if (localStorage.getItem('token')) {
       checkToken();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="App">
-      <globalContext.Provider
-        value={{
-          ...contextValueNav,
-          ...contextValueUser,
-          ...contextValueSnackbar,
-        }}
-      >
         <Routes>
           <Route element={<Layout />}>
             <Route index path="/" element={<MainPage />}></Route>
@@ -96,7 +65,6 @@ function App() {
             <Route index path="/search" element={<SearchPage />}></Route>
           </Route>
         </Routes>
-      </globalContext.Provider>
     </div>
   );
 }

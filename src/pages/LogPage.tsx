@@ -3,11 +3,13 @@ import Button from '@mui/material/Button/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logUser } from '../api/logUser';
-import { globalContext } from '../components/contexts/globalContext';
+
 import { validateEmail } from '../utils/ValidateEmail';
+import { useAuth } from '../hooks/useAuth';
+import { useSnackbar } from '../hooks/useSnackbar';
 export const formStyles = {
   input: {
     width: '100%',
@@ -15,10 +17,9 @@ export const formStyles = {
   },
 };
 export default function LogPage() {
-  const {
-    handleAuth,
-    handleSnackbarOpen,
-  } = useContext(globalContext);
+  const { handleAuth } = useAuth();
+
+  const { handleSnackbarOpen } = useSnackbar();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,12 +33,12 @@ export default function LogPage() {
           isAuth: true,
           userName: response.userData.name,
           userEmail: response.userData.email,
-        })
+        });
         localStorage.setItem('avatarImgPath', response.userData.avatarImgPath);
         localStorage.setItem('username', response.userData.name);
         localStorage.setItem('email', email);
-        localStorage.setItem('token',response.accessToken)
-        
+        localStorage.setItem('token', response.accessToken);
+
         handleSnackbarOpen('success', 'Welcome back!');
         navigate('/');
       } else {
