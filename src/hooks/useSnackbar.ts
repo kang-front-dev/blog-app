@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface IUseSnackBar {
   open: boolean;
@@ -10,21 +10,35 @@ interface IUseSnackBar {
   ) => void;
   handleSnackbarClose: () => void;
 }
+interface IReducerSnackBar {
+  snackbarReducer: {
+    open: boolean;
+    severity: string;
+    alertMessage: string;
+  };
+}
 
 export const useSnackbar = (): IUseSnackBar => {
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
+  const dispatch = useDispatch();
+  const open = useSelector(
+    (state: IReducerSnackBar) => state.snackbarReducer.open
+  );
+  const severity = useSelector(
+    (state: IReducerSnackBar) => state.snackbarReducer.severity
+  );
+  const alertMessage = useSelector(
+    (state: IReducerSnackBar) => state.snackbarReducer.alertMessage
+  );
   const handleSnackbarOpen = (
     severityState: string,
     alertMessageValue: string
   ) => {
-    setOpen(true);
-    setSeverity(severityState);
-    setAlertMessage(alertMessageValue);
+    dispatch({ type: 'SET_OPEN', payload: true });
+    dispatch({ type: 'SET_SEVERITY', payload: severityState });
+    dispatch({ type: 'SET_MESSAGE', payload: alertMessageValue });
   };
   const handleSnackbarClose = () => {
-    setOpen(false);
+    dispatch({ type: 'SET_OPEN', payload: false });
   };
   return {
     open,

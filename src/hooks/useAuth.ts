@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 interface IUseAuth {
   isAuth: boolean;
   userName: string;
@@ -12,15 +11,23 @@ interface IAuth {
   userName: string;
   userEmail: string;
 }
+interface IReducerAuth {
+  userReducer: {
+    isAuth: boolean;
+    userName: string;
+    userEmail: string;
+  };
+}
 
 export const useAuth = (): IUseAuth => {
-  const [isAuth, setIsAuth] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state: IReducerAuth) => state.userReducer.isAuth);
+  const userName = useSelector((state: IReducerAuth) => state.userReducer.userName);
+  const userEmail = useSelector((state: IReducerAuth) => state.userReducer.userEmail);
   const handleAuth = (options: IAuth) => {
-    setIsAuth(options.isAuth);
-    setUserName(options.userName);
-    setUserEmail(options.userEmail);
+    dispatch({ type: 'SET_AUTH', payload: options.isAuth });
+    dispatch({ type: 'SET_NAME', payload: options.userName });
+    dispatch({ type: 'SET_EMAIL', payload: options.userEmail });
   };
   return { isAuth, userName, userEmail, handleAuth };
 };

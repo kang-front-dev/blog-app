@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { uploadFile } from '../api/firebase';
@@ -10,19 +10,19 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { FileUploader } from 'react-drag-drop-files';
 import { Review } from '../components/classes/ReviewClass';
 import { insertReview } from '../api/insertReview';
-import { globalContext } from '../components/contexts/globalContext';
+
 import { getToday } from '../utils/TimeFuncs';
 import { groupsValues, tagsValues } from '../utils/GroupsAndTags';
 import { updateTags } from '../api/updateTags';
+import { useAuth } from '../hooks/useAuth';
+import { useSnackbar } from '../hooks/useSnackbar';
 
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
 export default function NewPost() {
-  const {
-    userName,
-    isAuth,
-    handleSnackbarOpen,
-  } = useContext(globalContext);
+  const { isAuth, userName } = useAuth();
+
+  const { handleSnackbarOpen } = useSnackbar();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -37,7 +37,6 @@ export default function NewPost() {
   };
 
   const handleClick = async () => {
-
     const newReview = new Review({
       title: title,
       descr: descr,

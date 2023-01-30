@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from '../components/classes/ReviewClass';
-import { globalContext } from '../components/contexts/globalContext';
+
 import ReviewCard from '../components/ReviewCard';
 
 import Skeleton from '@mui/material/Skeleton';
+import { useProgress } from '../hooks/useProgress';
 
 export default function MainPage() {
-  const { startProgress, finishProgress } = useContext(globalContext);
+  const { startProgress, finishProgress } = useProgress();
   const [recentReviews, setRecentReviews] = useState([]);
   const [popularReviews, setPopularReviews] = useState([]);
 

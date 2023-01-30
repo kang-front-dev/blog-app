@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -15,20 +15,24 @@ import { uploadFile } from '../api/firebase';
 
 import { FileUploader } from 'react-drag-drop-files';
 import { updateUserInfo } from '../api/updateUserInfo';
-import { globalContext } from '../components/contexts/globalContext';
+import { useAuth } from '../hooks/useAuth';
+import { useSnackbar } from '../hooks/useSnackbar';
+import { useProgress } from '../hooks/useProgress';
+
 const fileTypes = ['JPG', 'PNG', 'JPEG'];
 
 export default function Profile() {
   const { name } = useParams();
-  const { handleSnackbarOpen, userName, startProgress, finishProgress } =
-    useContext(globalContext);
+  const { userName } = useAuth();
+  const { handleSnackbarOpen } = useSnackbar();
+  const { startProgress, finishProgress } = useProgress();
 
   const [userInfo, setUserInfo] = useState<IUser>({});
   const [userReviews, setUserReviews] = useState<Array<IReview>>([]);
   const [userReviewsLoaded, setUserReviewsLoaded] = useState(false);
   const [avatarImgPath, setAvatarImgPath] = useState('');
   async function getUser() {
-    startProgress()
+    startProgress();
     getUserInfo({ name: name })
       .then((res) => {
         setUserInfo(res.userData);
@@ -42,7 +46,7 @@ export default function Profile() {
       .then((res) => {
         setUserReviews(res.reviews);
         setUserReviewsLoaded(true);
-        finishProgress()
+        finishProgress();
       })
       .catch((err) => {
         console.log(err);
