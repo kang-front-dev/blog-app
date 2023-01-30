@@ -226,7 +226,7 @@ export default function ReviewPage() {
       // removeDislike({ _id: id, username: userName });
       // setIsDisliked(false);
       // setDislikesAmount(dislikesAmount - 1);
-      deleteDislike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
+      deleteDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
     } else if (isLiked && !isDisliked) {
       // removeLike({ _id: id, username: userName });
       // setIsLiked(false);
@@ -249,12 +249,12 @@ export default function ReviewPage() {
       // setIsDisliked(true);
       // setDislikesAmount(dislikesAmount + 1);
 
-      setDislike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
+      setDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
     } else if (isLiked && !isDisliked) {
       // addDislike({ _id: id, username: userName });
       // setIsDisliked(true);
       // setDislikesAmount(dislikesAmount + 1);
-      setDislike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
+      setDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
       // removeLike({ _id: id, username: userName });
       // setIsLiked(false);
       // setLikesAmount(likesAmount - 1);
@@ -263,7 +263,7 @@ export default function ReviewPage() {
       // removeDislike({ _id: id, username: userName });
       // setIsDisliked(false);
       // setDislikesAmount(dislikesAmount - 1);
-      deleteDislike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
+      deleteDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
     }
     setTimeout(() => {
       setIsBtnDisabled(false);
