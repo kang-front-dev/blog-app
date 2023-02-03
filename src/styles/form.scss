@@ -10,24 +10,24 @@
     border-radius: 10px;
     box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
     position: relative;
-    background: vars.$white;
-    color: vars.$darkgray;
+    background: vars.$secColor;
+    color: vars.$mainColorExtra;
     & > button.form__btn-back{
-      color: vars.$darkgray;
+      color: vars.$mainColorExtra;
     }
     & > div{
       & > label{
-        color: vars.$darkgray;
+        color: vars.$mainColorExtra;
       }
       & fieldset{
-        border-color: vars.$darkgray;
+        border-color: vars.$mainColorExtra;
       }
     }
     
   }
   &__title{
     margin-bottom: 14px;
-    color: vars.$darkgray;
+    color: vars.$mainColorExtra;
     font-size: 30px;
     text-align: center;
 

@@ -1,22 +1,30 @@
-import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 interface IProgress {
   progress: number;
   startProgress: () => void;
   finishProgress: () => void;
 }
+interface IReducerProgress {
+  progressReducer: {
+    progress: number;
+  };
+}
 
 export const useProgress = (): IProgress => {
-  const [progress, setProgress] = useState(0);
+  const dispatch = useDispatch();
+  const progress = useSelector(
+    (state: IReducerProgress) => state.progressReducer.progress
+  );
   const startProgress = () => {
-    setProgress(20)
-  }
+    dispatch({ type: 'SET_PROGRESS', payload: 20 });
+  };
   const finishProgress = () => {
-    setProgress(90);
+    dispatch({ type: 'SET_PROGRESS', payload: 90 });
     setTimeout(() => {
-      setProgress(100);
+      dispatch({ type: 'SET_PROGRESS', payload: 100 });
+
       setTimeout(() => {
-        setProgress(0);
+        dispatch({ type: 'SET_PROGRESS', payload: 0 });
       }, 100);
     }, 500);
   };

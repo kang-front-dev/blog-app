@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Gilroy';
+  font-family: 'Kanit';
 }
 a {
   text-decoration: none;
@@ -47,10 +47,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: vars.$darkgray;
+  background-color: vars.$mainColorExtra;
   &__text,
   &__link {
-    color: vars.$white;
+    color: vars.$secColor;
   }
   &__link {
     text-decoration: underline;
@@ -62,15 +62,17 @@ body {
 .page__content {
   min-height: 100vh;
   padding-top: 67px;
-  background: vars.$black;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.1);
 }
 
 .auth_error {
   padding: 7px 14px 7px 7px;
 
-  border: 1px vars.$gray solid;
+  border: 1px vars.$secColorSolid solid;
   border-radius: 10px;
-  background: vars.$white;
+  background: vars.$secColor;
   &_block {
     display: flex;
     align-items: center;

@@ -1,0 +1,135 @@
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-ExtraBoldItalic.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-ExtraLightItalic.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kanit-Italic';
+  src:
+      url('Kanit-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kanit';
+  src:
+      url('Kanit-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+

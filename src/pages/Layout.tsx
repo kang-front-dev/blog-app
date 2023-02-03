@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Nav from '../components/Nav';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { globalContext } from '../components/contexts/globalContext';
+import MuiAlert, { AlertProps, AlertColor } from '@mui/material/Alert';
 import BurgerMenu from '../components/SideBar';
 import Background from '../components/Background';
+import { useSnackbar } from '../hooks/useSnackbar';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -15,8 +15,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Layout() {
-  const { open, alertMessage, severity, handleSnackbarClose } =
-    useContext(globalContext);
+  const { open, alertMessage, severity, handleSnackbarClose } = useSnackbar();
   const handleClose = () => {
     handleSnackbarClose();
   };
@@ -24,9 +23,11 @@ export default function Layout() {
   return (
     <div className="global__wrapper">
       <Nav />
+      
       <div className="container page__content">
         <Outlet />
       </div>
+
       <footer className="footer">
         <p className="footer__text">© 2022 - Created by</p>
         <a
@@ -38,17 +39,23 @@ export default function Layout() {
           kang
         </a>
       </footer>
+
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+        <Alert
+          onClose={handleClose}
+          severity={severity as AlertColor}
+          sx={{ width: '100%' }}
+        >
           {alertMessage}
         </Alert>
       </Snackbar>
+
       <BurgerMenu />
 
       <div className="background__wrapper">
         <Background />
-        <Background />
       </div>
+
     </div>
   );
 }

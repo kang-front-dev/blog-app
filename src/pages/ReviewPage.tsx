@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getReview } from '../api/getReview';
 import { IComment, IReview } from '../components/classes/ReviewClass';
@@ -16,31 +16,34 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Modal from '@mui/material/Modal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import { globalContext } from '../components/contexts/globalContext';
-import { addLike, removeLike } from '../api/addOrRemoveLike';
-import { addDislike, removeDislike } from '../api/addOrRemoveDislike';
 import { addView } from '../api/addView';
 import { getUserAvatar } from '../api/getUserAvatar';
 import { addComment, removeComment } from '../api/addOrRemoveComment';
 import { checkCommentDate, getTimeWeight, getToday } from '../utils/TimeFuncs';
 import { getUserInfo } from '../api/getUserInfo';
 import { deleteReview } from '../api/deleteReview';
+import { useAuth } from '../hooks/useAuth';
+import { useProgress } from '../hooks/useProgress';
+import { useSnackbar } from '../hooks/useSnackbar';
+import {
+  deleteDislike,
+  deleteLike,
+  setDislike,
+  setLike,
+} from './ReviewPage-utils';
 
 export default function ReviewPage() {
+  const { isAuth, userName } = useAuth();
+
   const { id } = useParams();
-  const {
-    userName,
-    isAuth,
-    startProgress,
-    finishProgress,
-    handleSnackbarOpen,
-  } = useContext(globalContext);
+  const { handleSnackbarOpen } = useSnackbar();
+  const { startProgress, finishProgress } = useProgress();
 
   const navigate = useNavigate();
 
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
-  const [isBtnDisabled, setIsBtnDisabled] = useState(false)
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
   const [likesAmount, setLikesAmount] = useState(0);
   const [dislikesAmount, setDislikesAmount] = useState(0);
 
@@ -203,58 +206,67 @@ export default function ReviewPage() {
   };
 
   const handleLike = () => {
-    setIsBtnDisabled(true)
+    setIsBtnDisabled(true);
     if (!isAuth) {
       handleSnackbarOpen('error', 'You have to sign in to rate reviews');
       return;
     }
     if (!isLiked && !isDisliked) {
-      addLike({ _id: id, username: userName });
-      setIsLiked(true);
-      setLikesAmount(likesAmount + 1);
-    } else if (!isLiked && isDisliked) {
-      addLike({ _id: id, username: userName });
-      setIsLiked(true);
-      setLikesAmount(likesAmount + 1);
+      // addLike({ _id: id, username: userName });
+      // setIsLiked(true);
+      // setLikesAmount(likesAmount + 1);
 
-      removeDislike({ _id: id, username: userName });
-      setIsDisliked(false);
-      setDislikesAmount(dislikesAmount - 1);
+      setLike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
+    } else if (!isLiked && isDisliked) {
+      // addLike({ _id: id, username: userName });
+      // setIsLiked(true);
+      // setLikesAmount(likesAmount + 1);
+      setLike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
+
+      // removeDislike({ _id: id, username: userName });
+      // setIsDisliked(false);
+      // setDislikesAmount(dislikesAmount - 1);
+      deleteDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
     } else if (isLiked && !isDisliked) {
-      removeLike({ _id: id, username: userName });
-      setIsLiked(false);
-      setLikesAmount(likesAmount - 1);
+      // removeLike({ _id: id, username: userName });
+      // setIsLiked(false);
+      // setLikesAmount(likesAmount - 1);
+      deleteLike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
     }
     setTimeout(() => {
-      setIsBtnDisabled(false)
+      setIsBtnDisabled(false);
     }, 300);
   };
 
   const handleDislike = () => {
-    setIsBtnDisabled(true)
+    setIsBtnDisabled(true);
     if (!isAuth) {
       handleSnackbarOpen('error', 'You have to sign in to rate reviews');
       return;
     }
     if (!isLiked && !isDisliked) {
-      addDislike({ _id: id, username: userName });
-      setIsDisliked(true);
-      setDislikesAmount(dislikesAmount + 1);
-    } else if (isLiked && !isDisliked) {
-      addDislike({ _id: id, username: userName });
-      setIsDisliked(true);
-      setDislikesAmount(dislikesAmount + 1);
+      // addDislike({ _id: id, username: userName });
+      // setIsDisliked(true);
+      // setDislikesAmount(dislikesAmount + 1);
 
-      removeLike({ _id: id, username: userName });
-      setIsLiked(false);
-      setLikesAmount(likesAmount - 1);
+      setDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
+    } else if (isLiked && !isDisliked) {
+      // addDislike({ _id: id, username: userName });
+      // setIsDisliked(true);
+      // setDislikesAmount(dislikesAmount + 1);
+      setDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
+      // removeLike({ _id: id, username: userName });
+      // setIsLiked(false);
+      // setLikesAmount(likesAmount - 1);
+      deleteLike({ id, userName, setIsLiked, likesAmount, setLikesAmount });
     } else if (isDisliked && !isLiked) {
-      removeDislike({ _id: id, username: userName });
-      setIsDisliked(false);
-      setDislikesAmount(dislikesAmount - 1);
+      // removeDislike({ _id: id, username: userName });
+      // setIsDisliked(false);
+      // setDislikesAmount(dislikesAmount - 1);
+      deleteDislike({ id, userName, setIsDisliked, dislikesAmount, setDislikesAmount });
     }
     setTimeout(() => {
-      setIsBtnDisabled(false)
+      setIsBtnDisabled(false);
     }, 300);
   };
 
@@ -391,13 +403,21 @@ export default function ReviewPage() {
         <div className="review__stats">
           <div className="review__stats_block">
             <div className="review__likes_block">
-              <Button variant="text" onClick={handleLike} disabled={isBtnDisabled}>
+              <Button
+                variant="text"
+                onClick={handleLike}
+                disabled={isBtnDisabled}
+              >
                 {isLiked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
                 <span className="review__likes_amount">{likesAmount}</span>
               </Button>
             </div>
             <div className="review__dislikes_block">
-              <Button variant="text" onClick={handleDislike} disabled={isBtnDisabled}>
+              <Button
+                variant="text"
+                onClick={handleDislike}
+                disabled={isBtnDisabled}
+              >
                 {isDisliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
                 <span className="review__likes_amount">{dislikesAmount}</span>
               </Button>

@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { globalContext } from './contexts/globalContext';
 import NavSearch from './NavSearch';
 import { logout } from '../api/logout';
 
@@ -16,18 +15,16 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Chip from '@mui/material/Chip';
 import SearchIcon from '@mui/icons-material/Search';
+import { useAuth } from '../hooks/useAuth';
+import { useProgress } from '../hooks/useProgress';
+import { useSnackbar } from '../hooks/useSnackbar';
+import { useSideBar } from '../hooks/useSidebar';
 
 export default function Nav() {
-  const {
-    isAuth,
-    userName,
-    handleAuth,
-    setIsSideBarOpen,
-    isSideBarOpen,
-    progress,
-    handleSnackbarOpen,
-  } = useContext(globalContext);
-
+  const { isAuth, userName, handleAuth } = useAuth();
+  const { progress } = useProgress();
+  const { handleSnackbarOpen } = useSnackbar();
+  const { isSideBarOpen, handleSideBarOpen, handleSideBarClose } = useSideBar();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,7 +39,11 @@ export default function Nav() {
   };
 
   const handleClick = () => {
-    setIsSideBarOpen(!isSideBarOpen);
+    if (isSideBarOpen) {
+      handleSideBarClose();
+    } else {
+      handleSideBarOpen();
+    }
   };
   return (
     <div className="nav">

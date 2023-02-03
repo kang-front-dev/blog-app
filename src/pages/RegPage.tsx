@@ -3,12 +3,14 @@ import Button from '@mui/material/Button/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { regUser } from '../api/regUser';
-import { globalContext } from '../components/contexts/globalContext';
+
 import { validateEmail } from '../utils/ValidateEmail';
+import { useAuth } from '../hooks/useAuth';
+import { useSnackbar } from '../hooks/useSnackbar';
 
 export const formStyles = {
   input: {
@@ -18,8 +20,9 @@ export const formStyles = {
 };
 
 export default function RegPage() {
-  const { handleAuth, handleSnackbarOpen } =
-    useContext(globalContext);
+  const { handleAuth } = useAuth();
+
+  const { handleSnackbarOpen } = useSnackbar();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,13 +37,12 @@ export default function RegPage() {
         password: password,
       });
 
-
       if (response.success) {
         handleAuth({
           isAuth: true,
           userName: name,
           userEmail: email,
-        })
+        });
         localStorage.setItem('username', name);
         localStorage.setItem('email', email);
 
@@ -53,7 +55,7 @@ export default function RegPage() {
       handleSnackbarOpen('error', 'Please enter a valid email address');
     } else if (password.length < 6) {
       handleSnackbarOpen('error', 'Minimum password length is 6 characters');
-    } else{
+    } else {
       handleSnackbarOpen('error', 'Please fill in all fields');
     }
   };

@@ -1,7 +1,7 @@
 @use '_vars' as vars;
 
 .review__card {
-  background-color: vars.$darkgray;
+  background-color: vars.$mainColorExtra;
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -13,7 +13,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.5);
   
   &::before {
     content: '';
@@ -70,7 +70,7 @@
     z-index: 4;
   }
   &_author {
-    color: vars.$gray;
+    color: vars.$mainColorSolid;
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@
   &_stats {
     display: flex;
     align-items: center;
-    color: vars.$gray;
+    color: vars.$mainColorSolid;
     column-gap: 10px;
     & > span {
       display: flex;

@@ -16,7 +16,7 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      border: 4px vars.$gray solid;
+      border: 4px vars.$secColorSolid solid;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,7 +24,7 @@
       & > svg{
         width: 100%;
         height: 100%;
-        color: vars.$gray;
+        color: vars.$secColorSolid;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -34,7 +34,7 @@
         z-index: 3;
         max-width: 80%;
         min-width: 0;
-        background: vars.$white;
+        background: vars.$secColor;
         border: none;
         transition: 0.2s;
         & span.file-types {
@@ -55,12 +55,12 @@
       font-size: 35px;
       line-height: 40px;
       
-      color: vars.$white;
+      color: vars.$secColor;
     }
     &_email {
       font-size: 18px;
 
-      color: vars.$gray;
+      color: vars.$secColorSolid;
     }
   }
   &__reviews {
@@ -72,9 +72,9 @@
       font-size: 25px;
       margin-bottom: 20px;
       padding: 5px 10px;
-      color: vars.$white;
+      color: vars.$secColor;
       & > svg {
-        color: vars.$white;
+        color: vars.$secColor;
       }
     }
     &_container {
@@ -84,7 +84,7 @@
       gap: 20px;
       padding: 20px;
       border-radius: 35px;
-      background-color: vars.$darkgray;
+      background-color: vars.$mainColorExtra;
     }
   }
 }

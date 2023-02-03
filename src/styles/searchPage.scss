@@ -4,7 +4,7 @@
   &_input {
     flex-grow: 1;
     background: none;
-    color: vars.$white;
+    color: vars.$secColor;
     font-size: 18px;
     font-weight: 500;
     border: none;
@@ -14,7 +14,7 @@
       width: 100%;
       padding: 12px;
       border-radius: 10px;
-      background-color: vars.$darkgray;
+      background-color: vars.$mainColorExtra;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
@@ -29,7 +29,7 @@
       background: none;
       & > svg{
         font-size: 22px;
-        color: vars.$white;
+        color: vars.$secColor;
       }
     }
   }

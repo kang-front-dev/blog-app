@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getAllReviews } from '../api/getAllReviews';
 import { IReview } from '../components/classes/ReviewClass';
 import ReviewCard from '../components/ReviewCard';
 
 import Skeleton from '@mui/material/Skeleton';
-import { globalContext } from '../components/contexts/globalContext';
+import { useProgress } from '../hooks/useProgress';
 
 export default function CategoryPage() {
   const { category } = useParams();
-  const { startProgress, finishProgress } = useContext(globalContext);
+  const { startProgress, finishProgress } = useProgress();
   const [categoryReviews, setCategoryReviews] = useState<Array<IReview>>([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   async function getFilteredReviews(categoryParam: string) {

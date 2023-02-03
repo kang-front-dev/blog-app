@@ -1,7 +1,7 @@
 @use '_vars' as vars;
 
 .modal{
-  background: vars.$darkgray;
+  background: vars.$mainColorExtra;
   border-radius: 10px;
   padding: 30px;
   position: fixed;
@@ -12,7 +12,7 @@
   &__title{
     font-size: 30px;
     font-weight: 500;
-    color: vars.$white;
+    color: vars.$secColor;
     margin-bottom: 24px;
     text-align: center;
   }

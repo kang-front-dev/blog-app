@@ -7,8 +7,9 @@
   left: 0;
   z-index: 10;
   padding: 10px 0;
-  background: vars.$darkgray;
-  box-shadow: 0px 0px 2px 2px #25252525;
+  background: vars.$mainColorExtra;
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.1);
+
   &__progress {
     position: fixed;
     top: 0;
@@ -33,23 +34,22 @@
       height: 40px;
     }
     &_text {
-      font-family: 'Peace-Sans';
       font-weight: 700;
-      color: vars.$white;
+      color: vars.$secColor;
       font-size: 35px;
     }
   }
-  &__btn{
+  &__btn {
     outline: none;
     border: none;
     background: none;
     cursor: pointer;
-    & svg{
+    & svg {
       font-size: 35px;
-      color: vars.$white;
+      color: vars.$secColor;
     }
   }
-  &__avatar{
+  &__avatar {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -63,7 +63,7 @@
     column-gap: 10px;
     & svg {
       font-size: 30px;
-      color: vars.$white;
+      color: vars.$secColor;
     }
   }
   &__right {
@@ -86,7 +86,7 @@
   &_title {
     font-size: 30px;
     font-weight: 500;
-    color: vars.$white;
+    color: vars.$secColor;
 
     font-weight: 400;
   }
@@ -97,9 +97,9 @@
     align-items: center;
 
     padding: 5px 10px;
-    color: vars.$white;
-    background: vars.$darkgray;
-    border-bottom: 1px vars.$gray solid;
+    color: vars.$secColor;
+    background: vars.$mainColorExtra;
+    border-bottom: 1px vars.$secColorSolid solid;
     cursor: pointer;
 
     position: relative;
@@ -115,29 +115,28 @@
       outline: none;
       font-size: 18px;
       font-weight: 400;
-      color: vars.$white;
+      color: vars.$secColor;
     }
-    &_backplate{
+    &_backplate {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
       display: none;
-      &.active{
+      &.active {
         display: block;
       }
     }
-    &_btn{
-
+    &_btn {
       display: none;
       background: none;
       outline: none;
       border: none;
       cursor: pointer;
-      & > svg{
+      & > svg {
         font-size: 26px;
-        color: vars.$white;
+        color: vars.$secColor;
       }
     }
     &_results {
@@ -153,17 +152,17 @@
       opacity: 0;
       overflow-y: scroll;
       transition: 0.2s;
-      &.active{
+      &.active {
         opacity: 1;
       }
-      &::-webkit-scrollbar{
+      &::-webkit-scrollbar {
         width: 10px;
       }
-      &::-webkit-scrollbar-track{
-        background: vars.$darkgray;
+      &::-webkit-scrollbar-track {
+        background: vars.$mainColor;
       }
-      &::-webkit-scrollbar-thumb{
-        background: vars.$gray;
+      &::-webkit-scrollbar-thumb {
+        background: vars.$mainColorSolid;
         width: 10px;
         border-radius: 5px;
       }
@@ -211,19 +210,18 @@
           rgba(0, 0, 0, 0.1)
         );
       }
-      &:hover{
-        &::before{
+      &:hover {
+        &::before {
           opacity: 1;
         }
       }
-      &_content{
+      &_content {
         position: relative;
         z-index: 2;
       }
       &_title {
         font-size: 16px;
-        color: vars.$white;
-
+        color: vars.$mainColor;
       }
     }
   }
@@ -235,7 +233,15 @@
     height: 100%;
     transition: 0.3s;
     transform: translateX(-100%);
-    background: vars.$white;
+    background: vars.$secColorSolid;
+    & > ul {
+      & > div {
+        color: vars.$mainColor;
+      }
+      & svg {
+        color: vars.$mainColor;
+      }
+    }
     &_wrapper {
       position: fixed;
       top: 0;
